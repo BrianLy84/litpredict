@@ -7,28 +7,29 @@
 <meta name="description" content="OPNBillionaire — Weekly On-Chain Lottery on OPN Chain (IOPn)."/>
 <meta property="og:title" content="OPNBillionaire — On-Chain OPN Lottery"/>
 <meta property="og:description" content="Fully on-chain lottery on OPN Chain. Buy tickets, win big. 85% of revenue goes to players."/>
-<meta property="og:image" content="https://litlottery.xyz/og-image.png"/>
+<meta property="og:image" content="https://i.postimg.cc/8cZ6rz50/logo-png.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 <meta property="og:type" content="website"/>
+  
 <meta property="og:url" content="https://litlottery.xyz"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="OPNBillionaire — On-Chain OPN Lottery"/>
 <meta name="twitter:description" content="Fully on-chain lottery on OPN Chain. Buy tickets, win big."/>
-<meta name="twitter:image" content="https://litlottery.xyz/og-image.png"/>
+<meta name="twitter:image" content="https://i.postimg.cc/8cZ6rz50/logo-png.png"/>
 <meta name="theme-color" content="#0052FF"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#FAF7F0;--surface:#FFFFFF;--surface2:#FFFCF0;--surface3:#FFF8E3;
-  --border:#D4B840;--border2:#C8A820;
+  --bg:#FDF5EC;--surface:linear-gradient(145deg,#FBF0E4 0%,#F5E6D2 30%,#EDD8BC 55%,#E4C9A8 100%);--surface2:linear-gradient(145deg,#F8EBD8 0%,#F0DEC4 50%,#E6CEB0 100%);--surface3:linear-gradient(145deg,#F4E4CC 0%,#EAD6B4 50%,#DEC49C 100%);
+  --border:#C8860A;--border2:#A86E00;
   --blue:#0052FF;--blue2:#3378FF;--blue3:#6699FF;--cyan:#00C2FF;
   --gold:#F0B429;--gold2:#FFD060;
   --green:#00C896;--green2:#00E6A8;
-  --red:#FF4466;--orange:#FF8C00;
-  --text:#050200;--text2:#2A1800;--text3:#4A3000;
+  --red:#FF4466;--orange:#E8650A;
+  --text:#1A0800;--text2:#3D1A00;--text3:#6B3A10;
   --mono:"Roboto Mono","IBM Plex Mono",monospace;--sans:"IBM Plex Sans",sans-serif;
 }
 body{background:var(--bg);font-family:var(--sans);color:var(--text);font-size:13px;min-height:100vh;overflow-x:hidden}
@@ -75,18 +76,22 @@ body:not(.dark) .tb-name .gold{animation:none;color:#D4940A;-webkit-text-fill-co
 .live-dot{width:5px;height:5px;border-radius:50%;background:#00E87A;box-shadow:0 0 6px rgba(0,232,122,.8);animation:pulse-dot 2s infinite;flex-shrink:0}
 .tb-time{font-family:var(--mono);font-size:11px;color:var(--text3);letter-spacing:1px;padding:4px 10px;border:1px solid var(--border);border-radius:4px;background:var(--surface)}
 /* TICKER */
-.ticker-wrap{background:#FFFFFF;border:1px solid var(--border);border-radius:6px;overflow:hidden;padding:6px 0;margin-bottom:10px;position:relative}
+.ticker-wrap{background:linear-gradient(135deg,#FFF4D6 0%,#FFD060 25%,#F0B429 50%,#D4940A 75%,#FFE9A8 100%);border:1px solid var(--border);border-radius:6px;overflow:hidden;padding:6px 0;margin-bottom:10px;position:relative}
 @keyframes tickerShimmer{0%{transform:translateX(-150%) skewX(-15deg);opacity:0}10%{opacity:.5}80%{opacity:.3}100%{transform:translateX(250%) skewX(-15deg);opacity:0}}
 .ticker-wrap .ticker-shim{display:none}
 .ticker-wrap::before,.ticker-wrap::after{content:"";position:absolute;top:0;bottom:0;width:40px;z-index:2;pointer-events:none}
-.ticker-wrap::before{left:0;background:linear-gradient(90deg,#FFFFFF,transparent)}
-.ticker-wrap::after{right:0;background:linear-gradient(-90deg,#FFFFFF,transparent)}
+.ticker-wrap::before{left:0;background:linear-gradient(90deg,#FFE9A8,transparent)}
+.ticker-wrap::after{right:0;background:linear-gradient(-90deg,#FFE9A8,transparent)}
 .ticker-inner{display:flex;animation:ticker 30s linear infinite;width:max-content;will-change:transform;transform:translateZ(0);backface-visibility:hidden}
 .tick-item{display:inline-flex;align-items:center;gap:6px;padding:0 24px;font-family:var(--mono);font-size:10px;color:var(--text2);white-space:nowrap;border-right:1px solid var(--border);font-weight:600}
 .tick-lbl{color:var(--blue2);letter-spacing:1px;font-weight:700}
 .tick-val{color:var(--text);font-weight:800}
-.tick-val.gold{color:var(--gold)}
+.tick-val.gold{color:#0A1A40;font-weight:900}
 .tick-val.green{color:var(--green)}
+body:not(.dark) .ticker-wrap .tick-item{color:#1A0F00;border-right-color:rgba(10,26,64,.2)}
+body:not(.dark) .ticker-wrap .tick-lbl{color:#0A1A40;font-weight:800}
+body:not(.dark) .ticker-wrap .tick-val{color:#000000;text-shadow:0 1px 1px rgba(255,255,255,.5)}
+body:not(.dark) .ticker-wrap .tick-val.green{color:#0A5C3C}
 /* WALLET BAR */
 .wallet-bar{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:10px;display:flex;flex-direction:column;gap:0}
 .wb-left{display:flex;align-items:center;gap:10px}
@@ -134,13 +139,16 @@ body:not(.dark) .stat-card.green{background:var(--surface)}
 body:not(.dark) .stat-card.gold{background:var(--surface)}
 .sc-lbl{font-size:9px;letter-spacing:2px;font-weight:700;color:#9A7010;text-transform:uppercase;font-family:var(--mono);margin-bottom:6px}
 body.dark .sc-lbl{color:var(--blue2)}
+body:not(.dark) .sc-lbl{color:#8A5A00;font-weight:800}
 .sc-val{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--gold);line-height:1;letter-spacing:-0.5px}
 body:not(.dark) .sc-val{background:linear-gradient(135deg,#B8860B,#DAA520,#F0B429,#C8920C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:800}
 @keyframes goldShimmerVal{0%,100%{color:#DAA520;text-shadow:0 0 8px rgba(255,215,0,.4)}50%{color:#FFD700;text-shadow:0 0 20px rgba(255,215,0,.9),0 0 40px rgba(255,255,255,.5)}}
 @keyframes neonShimmer{0%{color:#0052FF}33%{color:#7B2FFF}66%{color:#00C850}100%{color:#0052FF}}
 .sc-val.has-data{color:#00C850;-webkit-text-fill-color:currentColor;background:none;font-weight:500;font-family:var(--sans);animation:neonShimmer 2.5s ease-in-out infinite}
-body:not(.dark) .sc-val.has-data{background:linear-gradient(135deg,#0066FF,#9B30FF,#00E87A,#9B30FF,#0066FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:none;font-weight:800;font-family:var(--mono)}
-.jc-val.has-data{color:#00C850;-webkit-text-fill-color:currentColor;background:none;animation:neonShimmer 2.5s ease-in-out infinite}
+@keyframes goldPulseVal{0%,100%{color:#D4940A;-webkit-text-fill-color:#D4940A;text-shadow:0 0 6px rgba(240,180,41,.3)}50%{color:#FFF6C8;-webkit-text-fill-color:#FFF6C8;text-shadow:0 0 14px rgba(255,224,140,.7),0 0 28px rgba(255,255,255,.4)}}
+@keyframes darkGoldPulse{0%,100%{color:#D4940A;-webkit-text-fill-color:#D4940A;text-shadow:0 0 6px rgba(240,180,41,.3)}50%{color:#FFF6C8;-webkit-text-fill-color:#FFF6C8;text-shadow:0 0 14px rgba(255,224,140,.7),0 0 28px rgba(255,255,255,.4)}}
+body:not(.dark) .sc-val.has-data{background:none;-webkit-background-clip:initial;color:#D4940A;-webkit-text-fill-color:#D4940A;animation:goldPulseVal 2.5s ease-in-out infinite;font-weight:800;font-family:var(--mono)}
+.jc-val.has-data{color:#00C850;-webkit-text-fill-color:currentColor;background:none}
 .sc-unit{font-size:9px;color:var(--text2);margin-top:3px;font-family:var(--mono);font-weight:600;letter-spacing:.5px}
 .sc-note{font-size:9px;color:var(--green);margin-top:3px;font-family:var(--mono);font-weight:700}
 /* JACKPOT CARD */
@@ -149,7 +157,11 @@ body:not(.dark) .sc-val.has-data{background:linear-gradient(135deg,#0066FF,#9B30
 .jc-lbl{font-size:9px;letter-spacing:2px;font-weight:700;color:var(--text2);text-transform:uppercase;font-family:var(--mono);margin-bottom:8px;display:flex;align-items:center;gap:8px}
 .jc-lbl::after{content:"";flex:1;height:1px;background:var(--border)}
 .jc-val{font-family:var(--sans);font-size:32px;font-weight:500;color:#E8B820;line-height:1;letter-spacing:-0.5px;margin-bottom:4px}
-body:not(.dark) .jc-val{background:linear-gradient(135deg,#0066FF,#9B30FF,#00E87A,#9B30FF,#0066FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:800}
+body:not(.dark) .jackpot-card::before{background:radial-gradient(ellipse at 50% -20%,rgba(240,180,41,.08),transparent 70%)}
+body:not(.dark) .jc-bar-wrap{background:linear-gradient(90deg,transparent,#C8960A,#FFD700,#C8960A,transparent)}
+body:not(.dark) .jc-note{color:#444}
+body:not(.dark) .jc-note span{color:#7A4E00}
+body:not(.dark) .jc-val.has-data{background:none;-webkit-background-clip:initial;background-clip:initial;color:#D4940A;-webkit-text-fill-color:#D4940A;animation:goldPulseVal 2.5s ease-in-out infinite;font-weight:800}
 .jc-unit{font-size:10px;color:var(--text2);font-family:var(--mono);font-weight:600;letter-spacing:.5px;margin-bottom:10px}
 .jc-bar-wrap{height:1px;background:linear-gradient(90deg,transparent,#0052FF,#00C850,#7B2FFF,#0052FF,transparent);border-radius:2px;overflow:hidden;margin-bottom:8px;opacity:.7}
 .jc-bar{height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:2px;transition:width 1s}
@@ -166,7 +178,7 @@ body:not(.dark) .cd-sub{color:#9A7010}
 .cd-digs{display:flex;gap:6px;align-items:center}
 .cd-block{text-align:center;flex:1}
 .cd-num{font-family:var(--mono);font-size:22px;font-weight:700;color:#00C850;background:var(--surface2);border:1px solid var(--border2);border-radius:6px;padding:6px 4px;display:block;line-height:1;letter-spacing:-1px;animation:neonShimmer 2.5s ease-in-out infinite}
-body:not(.dark) .cd-num{background:linear-gradient(135deg,#FFFBEF,#FFF3CC);border:1px solid rgba(240,180,41,.45);border-radius:10px;padding:8px 6px;font-size:20px;box-shadow:0 2px 10px rgba(240,180,41,.18);animation:none;color:#B8860B}
+body:not(.dark) .cd-num{background:linear-gradient(135deg,#F4F2EE,#E8E5DE,#FFE9A8,#F4F2EE);border:1px solid rgba(240,180,41,.45);border-radius:10px;padding:8px 6px;font-size:20px;box-shadow:0 2px 10px rgba(240,180,41,.18);animation:goldPulseVal 2.5s ease-in-out infinite;color:#D4940A;-webkit-text-fill-color:#D4940A}
 .cd-sub{font-size:8px;letter-spacing:2px;color:var(--text2);text-transform:uppercase;font-family:var(--mono);margin-top:4px;display:block;font-weight:700}
 .cd-sep{font-family:var(--mono);font-size:20px;color:var(--border2);font-weight:300;padding-bottom:16px}
 .cd-prog{height:1px;background:linear-gradient(90deg,transparent,#0052FF,#00C850,#7B2FFF,#0052FF,transparent);border-radius:1px;overflow:hidden;margin-top:10px;opacity:.7}
@@ -186,19 +198,41 @@ body:not(.dark) .cd-num{background:linear-gradient(135deg,#FFFBEF,#FFF3CC);borde
 .tier-row:last-child{border-bottom:none}
 .tier-rank{font-family:var(--mono);font-size:10px;font-weight:700;width:20px;text-align:center;flex-shrink:0}
 .tier-name{font-size:11px;font-weight:800;color:var(--text);flex:1;font-family:var(--mono)}
+body:not(.dark) .tier-name{color:#0A0A0A;font-weight:900}
 .tier-match{font-size:9px;color:var(--text2);font-family:var(--mono);margin-top:1px}
+body:not(.dark) .tier-match{color:#444}
 .tier-bar-wrap{flex:2;height:2px;background:var(--border);border-radius:2px;overflow:hidden}
+body:not(.dark) .tier-bar-wrap{background:rgba(0,0,0,.08)}
 .tier-bar{height:100%;border-radius:2px}
 .tier-pct{font-family:var(--mono);font-size:11px;font-weight:700;min-width:36px;text-align:right}
+/* tier-pct và badge % light mode — đậm, rõ */
+body:not(.dark) [style*="color:var(--gold)"].tier-pct,
+body:not(.dark) .tier-pct[style*="color:var(--gold)"]{color:#8A6000!important;font-weight:900}
+body:not(.dark) [style*="color:var(--text2)"].tier-pct,
+body:not(.dark) .tier-pct[style*="color:var(--text2)"]{color:#333!important;font-weight:900}
+body:not(.dark) [style*="color:var(--blue2)"].tier-pct,
+body:not(.dark) .tier-pct[style*="color:var(--blue2)"]{color:#0044AA!important;font-weight:900}
+body:not(.dark) [style*="color:#A070E8"].tier-pct{color:#6020B0!important;font-weight:900}
+/* Match sub-label */
+body:not(.dark) .tier-name span[style*="color:var(--text2)"]{color:#666!important}
+/* Badge 85%/5%/10% light mode */
+body:not(.dark) [style*="color:var(--green)"][style*="font-size:13px"]{color:#005A28!important;font-weight:900!important}
+body:not(.dark) [style*="color:var(--gold)"][style*="font-size:13px"]{color:#7A4E00!important;font-weight:900!important}
+body:not(.dark) [style*="color:#A070E8"][style*="font-size:13px"]{color:#5010A0!important;font-weight:900!important}
+body:not(.dark) [style*="Players"],[style*="Rollover"],[style*="Treasury"]{color:#333}
+/* Section head light mode */
+body:not(.dark) .accounting-above .section-head{color:#0A1A40;font-weight:800}
+body:not(.dark) .accounting-above .section-head::after{background:rgba(10,26,64,.2)}
 .tier-rev{font-family:var(--mono);font-size:9px;color:var(--blue2);min-width:44px;text-align:right;font-weight:700}body:not(.dark) .tier-rev{color:#0066FF}
 body:not(.dark) .tier-hl{color:#0066FF!important}
 /* BUY PANEL */
 .buy-panel{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:10px;position:relative}
 .tab-row{display:flex;gap:4px;margin-bottom:14px;background:var(--bg);border-radius:6px;padding:3px}
 body:not(.dark) .tab-row{background:rgba(240,180,41,.08)}
-.tab-btn{flex:1;padding:6px;border-radius:4px;border:none;background:transparent;color:var(--text3);font-family:var(--mono);font-size:10px;font-weight:600;cursor:pointer;letter-spacing:1px;text-transform:uppercase;transition:all .18s}
+.tab-btn{flex:1;padding:6px;border-radius:4px;border:1px solid transparent;background:transparent;color:var(--text2);font-family:var(--mono);font-size:10px;font-weight:700;cursor:pointer;letter-spacing:1px;text-transform:uppercase;transition:all .18s}
 .tab-btn.on{background:var(--surface2);color:var(--blue);border:1px solid var(--blue);box-shadow:0 0 0 1px rgba(0,82,255,.1)}
-body:not(.dark) .tab-btn.on{background:rgba(240,180,41,.18);color:#B8700A;border-color:rgba(200,150,10,.4)}
+body:not(.dark) .tab-btn{border-color:rgba(0,0,0,.2);color:#3D2800}
+body:not(.dark) .tab-btn.on{background:rgba(240,180,41,.18);color:#3D2000;border-color:#3D2000;font-weight:800}
 body:not(.dark) .ball input{color:#1A0A00;text-shadow:none}
 
 
@@ -291,9 +325,9 @@ body:not(.dark) .qp-tip{color:#6B7280}
 .t-badge.full{background:rgba(255,68,102,.08);border-color:rgba(255,68,102,.25);color:var(--red)}
 .t-badge.neutral{background:#C8E000;border-color:#A0B800;color:#1A2000;font-weight:700}
 .t-badge.dup{background:rgba(0,200,80,.08);border-color:rgba(0,200,80,.25);color:var(--orange)}
-.t-price{font-family:var(--mono);font-size:10px;color:var(--blue);font-weight:700}
-.t-price-ticket{color:#0066FF;font-weight:800}
-.t-price span{color:var(--gold);font-weight:700}
+.t-price{font-family:var(--mono);font-size:10px;color:var(--text);font-weight:700}
+.t-price-ticket{color:var(--text);font-weight:800}
+.t-price span{color:var(--text2);font-weight:700}
 /* PROGRESS */
 .tp-wrap{display:none;margin-bottom:10px;padding:10px 12px;border-radius:6px;border:1px solid;font-family:var(--mono)}
 .tp-wrap.tp-1{background:rgba(0,82,255,.10);border-color:rgba(0,82,255,.35);color:#0044CC}
@@ -332,17 +366,29 @@ body:not(.dark) .tp-wrap.tp-3{color:#A00028}
 .main-grid{display:grid;grid-template-columns:1fr 320px;gap:10px;align-items:start}
 .right-col{display:flex;flex-direction:column;gap:10px}
 .panel{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;position:relative}
+/* Last Draw Result — Hermès luxury in light mode */
+body:not(.dark) .panel.accent-gold{background:linear-gradient(160deg,#FBF6ED 0%,#F5EDD8 60%,#EDE0C4 100%);border:1px solid rgba(160,120,40,.35);box-shadow:0 4px 20px rgba(100,70,10,.12)}
+body:not(.dark) .panel.accent-gold .section-head{color:#3D2800;text-shadow:none;border-color:rgba(140,100,30,.25);font-weight:800;letter-spacing:2px}
+body:not(.dark) .panel.accent-gold #winning-round-label{color:#2A1800;font-weight:700}
+body:not(.dark) .panel.accent-gold .wball{background:radial-gradient(circle at 30% 25%,#FFFDE0,#F5E090,#C88A00);border:2.5px solid #A07010;color:rgba(80,50,0,.15);box-shadow:0 6px 16px rgba(160,112,0,.25),inset 0 3px 6px rgba(255,250,200,.8),inset 0 -2px 4px rgba(100,60,0,.15)}
+body:not(.dark) .panel.accent-gold .wball.revealed{background:radial-gradient(circle at 30% 25%,#FFFFFF,#FFE860,#C89010);border:2.5px solid #8B6000;color:#3D2000;font-weight:900;font-size:17px;box-shadow:0 6px 20px rgba(160,112,0,.35),inset 0 3px 8px rgba(255,250,180,.9),inset 0 -2px 5px rgba(100,60,0,.25),0 0 0 4px rgba(200,144,16,.15)}
+body:not(.dark) .panel.accent-gold [style*="color:var(--text2)"][style*="No."]{color:#7A5A20!important;font-weight:700}
+body:not(.dark) .panel.accent-gold .tier-row{border-bottom-color:rgba(140,100,30,.2)}
+body:not(.dark) .panel.accent-gold .tier-name{color:#2A1800;font-weight:800}
+body:not(.dark) .panel.accent-gold .deadline-card.open{background:rgba(0,60,180,.07);border-color:rgba(0,60,180,.25);color:#003AB0;font-weight:700}
+body:not(.dark) .panel.accent-gold #winning-content{color:rgba(60,40,10,.4)}
 /* WIN BALLS */
 .win-balls{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin:10px 0}
-.wball{width:38px;height:38px;border-radius:6px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:15px;font-weight:700;color:var(--gold);transition:all .3s}
-.wball.revealed{border-color:var(--gold);background:rgba(240,180,41,.1);box-shadow:0 0 10px rgba(240,180,41,.15)}
+.wball{width:42px;height:42px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:15px;font-weight:700;color:var(--gold);transition:all .3s}
+.wball.revealed{border-color:#D4A017;background:rgba(240,180,41,.12);box-shadow:none}
+body:not(.dark) .wball.revealed{background:linear-gradient(135deg,#FFF0C0,#FFD860);border-color:#C8960A;color:#3A2000;font-weight:800;box-shadow:0 2px 8px rgba(200,150,10,.25)}
 /* HISTORY */
 .hist-item{padding:8px 10px;border-radius:6px;border:1px solid var(--border);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;background:var(--bg);transition:border-color .2s}
 .hist-item:hover{border-color:var(--border2)}
 .hist-round{font-family:var(--mono);font-size:10px;color:var(--text3);font-weight:600;min-width:60px}
 .mini-balls{display:flex;gap:3px;flex-wrap:wrap}
 .mball{width:22px;height:22px;border-radius:4px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;color:var(--text2);font-weight:600}
-.badge-ft{font-size:9px;padding:3px 7px;border-radius:3px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;font-family:var(--mono)}
+.badge-ft{font-size:9px;padding:3px 7px;border-radius:3px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;font-family:var(--mono);white-space:nowrap;flex-shrink:0}
 .b1{background:rgba(240,180,41,.1);color:var(--gold);border:1px solid rgba(240,180,41,.25)}
 .b2{background:rgba(0,200,150,.1);color:var(--green);border:1px solid rgba(0,200,150,.25)}
 .b3{background:rgba(0,82,255,.1);color:var(--blue2);border:1px solid rgba(0,82,255,.25)}
@@ -357,7 +403,9 @@ body:not(.dark) .tp-wrap.tp-3{color:#A00028}
 .cb-warn{font-size:9px;color:var(--orange);font-family:var(--mono);margin-bottom:6px;padding:3px 8px;background:rgba(0,200,80,.08);border-radius:4px;border:1px solid rgba(0,200,80,.2)}
 .cb-expired{font-size:9px;color:var(--red);font-family:var(--mono);padding:3px 8px;background:rgba(255,68,102,.08);border-radius:4px;border:1px solid rgba(255,68,102,.2)}
 .deadline-card{padding:8px 10px;border-radius:6px;font-size:10px;font-family:var(--mono);display:flex;gap:6px;align-items:flex-start;margin-top:6px}
-.deadline-card.open{background:rgba(240,180,41,.06);border:1px solid rgba(240,180,41,.2);color:var(--gold)}
+.deadline-card.open{background:rgba(0,82,255,.05);border:1px solid rgba(0,82,255,.25);color:var(--blue2);font-weight:700}
+body:not(.dark) .deadline-card.open{background:rgba(0,40,120,.08);border:1px solid rgba(0,40,120,.3);color:#002880;font-weight:700}
+body.dark .deadline-card.open{background:rgba(0,82,255,.1);border:1px solid rgba(0,180,255,.4);color:#00CFFF;font-weight:700}
 .deadline-card.expired{background:rgba(255,68,102,.06);border:1px solid rgba(255,68,102,.2);color:var(--red)}
 /* ACTIVITY */
 .act-item-ft{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--border)}
@@ -432,6 +480,14 @@ body:not(.dark) .tp-wrap.tp-3{color:#A00028}
 .ai-scroll-item .ai-lbl{color:#00E87A;font-size:9px;text-transform:uppercase;letter-spacing:2px;font-weight:800;text-shadow:0 0 8px rgba(0,232,122,.8),0 0 16px rgba(0,232,122,.4)}
 .ai-scroll-sep{color:rgba(0,200,80,.3);padding:0 8px;font-size:12px;flex-shrink:0}
 @keyframes aiScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+/* AI board — light mode: gold metallic shimmer bg + black neon text */
+body:not(.dark) .ai-board{background:#0A0D08;border-color:rgba(240,180,41,.2)}
+body:not(.dark) .ai-board::before{background:linear-gradient(90deg,#0A0D08,transparent)}
+body:not(.dark) .ai-board::after{background:linear-gradient(-90deg,#0A0D08,transparent)}
+body:not(.dark) .ai-dot{background:#F0B429;box-shadow:0 0 6px rgba(240,180,41,.8)}
+body:not(.dark) .ai-scroll-item{color:#00C850;text-shadow:0 0 8px rgba(0,200,80,.6)}
+body:not(.dark) .ai-scroll-item .ai-lbl{color:#00E87A;font-weight:800;text-shadow:0 0 8px rgba(0,232,122,.8),0 0 16px rgba(0,232,122,.4)}
+body:not(.dark) .ai-scroll-sep{color:rgba(0,200,80,.3)}
 /* NUMBER PAD MODAL — premium */
 @keyframes npSlideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
 #numpad-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:20000;align-items:flex-end;justify-content:center}
@@ -635,7 +691,7 @@ footer a:hover{-webkit-text-fill-color:#F0C840}
   .btn-buy{font-size:12px;padding:12px;letter-spacing:1px}
 
   /* History */
-  .hist-item{flex-direction:column;align-items:flex-start;gap:5px}
+  .hist-item{flex-direction:row;align-items:center;justify-content:space-between;gap:6px}
   .hist-round{font-size:9px}
   .mball{width:20px;height:20px;font-size:8px}
 
@@ -713,7 +769,7 @@ body:not(.dark) .right-col-standalone{display:flex}
 #theme-toggle:hover{opacity:.75}
 
 /* DARK MODE VARS */
-body.dark{--bg:#0A0A0A;--surface:#141414;--surface2:#1A1A1A;--surface3:#202020;--border:#2A2A2A;--border2:#333333;--text:#F0EDE8;--text2:#B0A898;--text3:#6A6258}
+body.dark{--bg:#0A0A0A;--surface:#1C1C1C;--surface2:#242424;--surface3:#2C2C2C;--border:#333333;--border2:#3D3D3D;--text:#F0EDE8;--text2:#B0A898;--text3:#6A6258}
 body.dark body,body.dark{background:radial-gradient(ellipse at 20% 0%,rgba(255,255,255,.04) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(200,224,0,.03) 0%,transparent 50%),#0A0A0A}
 
 /* animated border property */
@@ -751,11 +807,37 @@ body.dark .tb-time::after{content:"";position:absolute;inset:-1px;border-radius:
 /* ticker */
 body.dark .ticker-wrap{background:var(--surface2);border-color:transparent}
 body.dark .ticker-outer::after{display:none}
-body.dark .ticker-outer{border:1px solid #2A2A2A}
+body.dark .ticker-outer{border:none}
 body.dark .fair-play-wrap::after,body.dark .summary-breakdown-wrap::after{content:"";position:absolute;inset:-1px;border-radius:7px;background:conic-gradient(from var(--angle,0deg),#00E87A,#7B00FF,#C8E000,#5500FF,#00E87A);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:1px;opacity:.8;pointer-events:none;z-index:2;animation:borderRotate 4s linear infinite}
+body:not(.dark) .fair-play-wrap{background:none;padding:0}
+body:not(.dark) .fp-num{background:#F0B429!important;color:#2A1400!important}
+body.dark .fp-num{background:rgba(0,82,255,.1)!important;color:var(--blue2)!important}
 body.dark .snap-box::after{content:"";position:absolute;inset:-1px;border-radius:6px;background:conic-gradient(from var(--angle),#00E87A,#7B00FF,#C8E000,#5500FF,#00E87A);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:1px;opacity:.7;animation:borderRotate 4s linear infinite;pointer-events:none;z-index:2}
 body.dark #public-ledger-content div[style*="font-size:14px"]{color:#FFD87A!important}
 body.dark #public-ledger-content div[style*="font-size:9px;color:var(--text2)"]{color:#A0A0A0!important}
+/* Round Accounting ledger — light mode contrast fix */
+body:not(.dark) #ledger-content span[style*="color:var(--text2)"],
+body:not(.dark) #public-ledger-content span[style*="color:var(--text2)"],
+body:not(.dark) #public-ledger-content-above span[style*="color:var(--text2)"]{color:#1A1A1A!important;font-weight:700!important}
+body:not(.dark) #ledger-content span[style*="color:var(--blue2)"],
+body:not(.dark) #public-ledger-content span[style*="color:var(--blue2)"],
+body:not(.dark) #public-ledger-content-above span[style*="color:var(--blue2)"]{color:#0044AA!important;font-weight:700!important}
+body:not(.dark) #ledger-content span[style*="color:var(--gold)"],
+body:not(.dark) #public-ledger-content span[style*="color:var(--gold)"],
+body:not(.dark) #public-ledger-content-above span[style*="color:var(--gold)"]{color:#7A4E00!important;font-weight:800!important}
+body:not(.dark) #ledger-content span[style*="color:var(--green)"],
+body:not(.dark) #public-ledger-content span[style*="color:var(--green)"],
+body:not(.dark) #public-ledger-content-above span[style*="color:var(--green)"]{color:#005A28!important;font-weight:800!important}
+body:not(.dark) #ledger-content div[style*="color:var(--text3)"],
+body:not(.dark) #public-ledger-content-above div[style*="color:var(--text3)"]{color:#444!important;font-weight:700!important}
+body:not(.dark) #ledger-content div[style*="color:var(--blue2)"],
+body:not(.dark) #public-ledger-content-above div[style*="color:var(--blue2)"]{color:#0044AA!important;font-weight:700!important}
+body:not(.dark) #ledger-content div[style*="font-size:14px"],
+body:not(.dark) #public-ledger-content-above div[style*="font-size:14px"]{color:#7A4E00!important;font-weight:900!important}
+body:not(.dark) #ledger-content div[style*="font-size:8px"],
+body:not(.dark) #public-ledger-content-above div[style*="font-size:8px"]{color:#0044AA!important;font-weight:800!important}
+body:not(.dark) #ledger-content div[style*="background:var(--surface2)"],
+body:not(.dark) #public-ledger-content-above div[style*="background:var(--surface2)"]{background:rgba(0,40,120,.06)!important;border-color:#0044AA!important}
 body.dark #public-ledger-content div[style*="letter-spacing:1.5px"]{color:#C8E000!important}
 #public-ledger-content,#public-ledger-content-above,#public-ledger-content-lm{overflow:hidden;min-width:0;word-break:break-word}
 body.dark .ball-wrap::after,body.dark .cd-num::after{content:"";position:absolute;inset:-1px;border-radius:7px;background:conic-gradient(from var(--angle),#00E87A,#7B00FF,#C8E000,#5500FF,#00E87A);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:1px;opacity:.7;animation:borderRotate 4s linear infinite;pointer-events:none;z-index:2}
@@ -763,7 +845,7 @@ body.dark .ticker-wrap .ticker-shim{background:linear-gradient(105deg,transparen
 body.dark .ticker-wrap::before{background:linear-gradient(90deg,var(--surface2),transparent)}
 body.dark .ticker-wrap::after{background:linear-gradient(-90deg,var(--surface2),transparent)}
 body.dark .tick-item{color:#E0E0E0;border-right-color:rgba(255,255,255,.1)}
-body.dark .tick-lbl{color:#0099FF;letter-spacing:1.5px;font-weight:800;text-shadow:0 0 6px rgba(0,153,255,.4)}
+body.dark .tick-lbl{color:#00EEFF;letter-spacing:1.5px;font-weight:800;text-shadow:0 0 6px rgba(0,238,255,.6)}
 body.dark .tick-val{color:#fff;text-shadow:0 0 8px rgba(255,255,255,.3)}
 body.dark .tick-val.gold{color:#FFD700;text-shadow:0 0 8px rgba(255,215,0,.4)}
 body.dark .tick-val.green{color:#00E87A;text-shadow:0 0 8px rgba(0,232,122,.4)}
@@ -784,12 +866,13 @@ body.dark .sb-val-ft{color:#C8E000}
 /* animated gradient borders on cards */
 body.dark .stat-card,body.dark .panel,body.dark .countdown-card,body.dark .tiers-card,body.dark .buy-panel,body.dark .wallet-bar,body.dark .social-bar,body.dark .ticker-wrap{border-color:transparent}
 body.dark .stat-card::after,body.dark .panel::after,body.dark .countdown-card::after,body.dark .tiers-card::after,body.dark .buy-panel::after,body.dark .wallet-bar::after,body.dark .social-bar::after{content:"";position:absolute;inset:-1px;border-radius:9px;background:conic-gradient(from 45deg,#00E87A,#7B00FF,#C8E000,#5500FF,#00E87A);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:1px;opacity:.7;pointer-events:none;z-index:2}
+body.dark .ticker-outer::before{content:"";position:absolute;inset:-1px;border-radius:8px;background:conic-gradient(from 90deg,#00E87A,#0052FF,#C8E000,#7B00FF,#00E87A);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:1px;opacity:1;pointer-events:none;z-index:0}
 
 /* stat cards */
 body.dark .sc-lbl{color:#C8E000}
 body.dark .sc-val{color:#fff}
 body.dark .sc-val.has-data{color:#FFD87A!important;-webkit-text-fill-color:#FFD87A!important;background:none!important;font-weight:700;font-family:var(--sans)}
-body.dark .jc-val.has-data{color:#FFD87A;-webkit-text-fill-color:#FFD87A}
+body.dark .jc-val.has-data{color:#D4940A;-webkit-text-fill-color:#D4940A;animation:darkGoldPulse 2.5s ease-in-out infinite}
 body.dark .sc-unit{color:#fff}
 
 /* jackpot */
@@ -883,6 +966,34 @@ body:not(.dark) .accent-blue::before{background:linear-gradient(180deg,var(--blu
 body:not(.dark) .accent-green::before{background:linear-gradient(180deg,var(--green),#00C8A0)}
 body:not(.dark) .accent-gold::before{background:linear-gradient(180deg,var(--gold),#FF8C00)}
 body:not(.dark) .accent-purple::before{background:linear-gradient(180deg,#A070E8,var(--blue))}
+body.dark .tiers-card.accent-purple,body.dark .panel.accent-purple{background:#242424;border-color:rgba(160,100,240,.25)}
+body.dark .tiers-card.accent-purple .tier-name,body.dark .panel.accent-purple .tier-name{color:#FFFFFF!important}
+body.dark .tiers-card.accent-purple .tier-pct,body.dark .panel.accent-purple .tier-pct{color:#FFD87A!important;font-weight:900!important}
+body.dark .tiers-card.accent-purple .tier-name span,body.dark .panel.accent-purple .tier-name span{color:#C8C0B8!important}
+body.dark .tiers-card.accent-purple .bps-label,body.dark .panel.accent-purple .bps-label{color:#C8C0B8!important}
+body.dark .tiers-card.accent-purple .bps-val,body.dark .panel.accent-purple .bps-val{color:#FFFFFF!important;font-weight:900!important}
+body.dark .bps-val{color:#FFFFFF!important;font-weight:900!important}
+body.dark .bps-green{color:#00E87A!important}
+body.dark .bps-amber{color:#FFD700!important}
+body.dark .bps-purple{color:#C080FF!important}
+body.dark .bps-label{color:#C8C0B8!important}
+body.dark div:has(> .bps-val:first-child){}
+body.dark .tiers-card.accent-purple div:nth-of-type(1) .bps-val{color:#00E87A!important}
+body.dark .tiers-card.accent-purple div:nth-of-type(2) .bps-val{color:#FFD700!important}
+body.dark .tiers-card.accent-purple div:nth-of-type(3) .bps-val{color:#C080FF!important}
+body.dark .tiers-card.accent-purple::after,body.dark .panel.accent-purple::after{opacity:1}
+body.dark .tiers-card.accent-purple .section-head,body.dark .panel.accent-purple .section-head{color:#FFFFFF!important}
+body.dark .dm-white{color:#FFFFFF!important}
+body.dark .tier-row:nth-child(1) .dm-white{color:#FFD700!important}
+body.dark .tier-row:nth-child(2) .dm-white{color:#E0E0E0!important}
+body.dark .tier-row:nth-child(3) .dm-white{color:#4DA6FF!important}
+body.dark .tier-row:nth-child(4) .dm-white{color:#CC88FF!important}
+body.dark .tier-row:nth-child(1) .dm-gold{color:#FFD700!important}
+body.dark .tier-row:nth-child(2) .dm-gold{color:#E0E0E0!important}
+body.dark .tier-row:nth-child(3) .dm-gold{color:#4DA6FF!important}
+body.dark .tier-row:nth-child(4) .dm-gold{color:#CC88FF!important}
+body.dark .dm-gold{color:#FFD87A!important}
+body.dark .dm-muted{color:#C8C0B8!important}
 body:not(.dark) .accent-cyan::before{background:linear-gradient(180deg,var(--cyan),var(--green))}
 body:not(.dark) .wallet-bar::before{background:linear-gradient(180deg,#00E87A,#00C850)}
 body:not(.dark) .wallet-bar{background:var(--surface)}
@@ -918,9 +1029,9 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
 <!-- TOPBAR -->
 <div class="topbar">
   <div class="tb-left">
-    <div class="tb-logo"><img src="data:image/png;base64,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" alt="OPNBillionaire"/></div>
+    <div class="tb-logo"><img src="data:image/png;base64,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" alt="LitBillionaire"/></div>
     <div>
-      <div class="tb-name"><span class="gold">LITBillionaire</span></div>
+      <div class="tb-name"><span class="gold">OPNBillionaire</span></div>
       <div class="tb-sub">On-Chain Lottery Terminal</div>
       <div class="tagline-sub" style="font-family:var(--mono);font-size:8px;font-weight:800;letter-spacing:1.5px;color:#A07810;text-transform:uppercase;margin-top:5px">Where fortunes are made on-chain</div>
     </div>
@@ -941,6 +1052,7 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
   <div class="ticker-shim"></div>
   <div class="ticker-inner">
     <div class="tick-item"><span class="tick-lbl">JACKPOT</span>&nbsp;<span class="tick-val gold" id="tick-jp">— OPN</span></div>
+    <div class="tick-item"><span class="tick-lbl">LTC/USD</span>&nbsp;<span class="tick-val green" id="tick-ltcusd">$—</span></div>
     <div class="tick-item"><span class="tick-lbl">ROUND</span>&nbsp;<span class="tick-val" id="tick-rnd">#—</span></div>
     <div class="tick-item"><span class="tick-lbl">TICKETS</span>&nbsp;<span class="tick-val" id="tick-tix">—</span></div>
     <div class="tick-item"><span class="tick-lbl">PLAYERS</span>&nbsp;<span class="tick-val" id="tick-pls">—</span></div>
@@ -951,6 +1063,7 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
     <div class="tick-item"><span class="tick-lbl">TREASURY</span>&nbsp;<span class="tick-val">10% AUTO</span></div>
     <div class="tick-item"><span class="tick-lbl">ROLLOVER</span>&nbsp;<span class="tick-val">5% SEED</span></div>
     <div class="tick-item"><span class="tick-lbl">JACKPOT</span>&nbsp;<span class="tick-val gold" id="tick-jp2-b">— OPN</span></div>
+    <div class="tick-item"><span class="tick-lbl">LTC/USD</span>&nbsp;<span class="tick-val green" id="tick-ltcusd2-b">$—</span></div>
     <div class="tick-item"><span class="tick-lbl">ROUND</span>&nbsp;<span class="tick-val" id="tick-rnd2-b">#—</span></div>
     <div class="tick-item"><span class="tick-lbl">TICKETS</span>&nbsp;<span class="tick-val" id="tick-tix2-b">—</span></div>
     <div class="tick-item"><span class="tick-lbl">PLAYERS</span>&nbsp;<span class="tick-val" id="tick-pls2-b">—</span></div>
@@ -965,13 +1078,7 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
 
 <!-- WALLET BAR -->
 <div class="wallet-bar">
-  <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding-bottom:8px;margin-bottom:6px;border-bottom:1px solid transparent;border-image:linear-gradient(90deg,transparent,#0099FF,#00E87A,#F0B429,#0099FF,transparent) 1">
-    <div class="sb-item-ft"><span class="live-dot" style="width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse-dot 2s infinite;flex-shrink:0"></span>&nbsp;Round&nbsp;<span class="sb-val-ft" id="sp-round2">—</span></div>
-    <div class="sb-div-ft"></div>
-    <div class="sb-item-ft">Last:&nbsp;<span class="sb-val-ft" id="sp-last2">—</span></div>
-    <div class="sb-div-ft"></div>
-    <div class="sb-item-ft">Draw&nbsp;<span style="color:var(--gold);font-weight:700;font-family:var(--mono)">FRIDAY</span></div>
-  </div>
+
   <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
     <div class="wb-left">
       <div class="wb-avatar" id="wb-av">◈</div>
@@ -1031,7 +1138,7 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
   <div class="stat-card gold">
     <div class="sc-lbl">🎯 Total Winners</div>
     <div class="sc-val" id="stat-winners">—</div>
-    <div class="sc-unit">all rounds</div>
+    <div class="sc-unit" id="stat-winners-unit">last draw</div>
   </div>
 </div>
 
@@ -1039,9 +1146,10 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
 <div class="jackpot-wrap">
 <div class="jackpot-card" style="display:flex;gap:16px;align-items:stretch">
   <div style="flex:1;min-width:0">
-  <div class="jc-lbl"><span style="font-size:18px;line-height:1">🏆</span> Current Jackpot Pool</div>
+  <div class="jc-lbl"><span style="font-size:18px;line-height:1">🏆</span> Current Prize Pool</div>
   <div class="jc-val" id="jc-val">—</div>
   <div class="jc-unit">OPN · OPN Testnet</div>
+  <div class="jc-unit" id="jc-usd" style="font-size:11px;color:var(--green);font-weight:700;min-height:14px"></div>
   <div class="jc-bar-wrap"><div class="jc-bar" id="jc-bar" style="width:0%"></div></div>
   <div class="jc-note">Round progress · Next draw <span>Friday 13:00 UTC</span></div>
   <!-- AI LED board embedded in jackpot card -->
@@ -1076,22 +1184,22 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
   <!-- ROLLOVER EXPLANATION -->
   <div class="rollover-panel" style="width:220px;flex-shrink:0;padding-left:16px;display:flex;flex-direction:column;gap:8px;position:relative">
   <div class="rp-divider"></div>
-    <div class="rollover-title" style="font-family:var(--mono);font-size:9px;font-weight:800;letter-spacing:2px;color:#0052FF;text-transform:uppercase;margin-bottom:2px">🔄 Rollover Mechanism</div>
+    <div class="rollover-title" style="font-family:var(--mono);font-size:9px;font-weight:800;letter-spacing:2px;color:var(--text);text-transform:uppercase;margin-bottom:2px">🔄 Rollover Mechanism</div>
     <div style="font-size:10px;color:var(--text);font-family:var(--mono);line-height:1.7;font-weight:600">
-      Every round locks <span style="color:var(--gold);font-weight:700">5% of revenue</span> as a <span style="color:var(--blue2);font-weight:700">fixed seed</span> — guaranteeing the next jackpot never starts from zero.
+      Every round locks <span style="color:var(--green);font-weight:800">5% of revenue</span> as a <span style="color:var(--blue2);font-weight:800">fixed seed</span> — guaranteeing the next prize pool never starts from zero.
     </div>
-    <div style="border-top:1px solid var(--border);padding-top:8px;display:flex;flex-direction:column;gap:6px">
+    <div style="border-top:1px solid var(--border);padding-top:12px;display:flex;flex-direction:column;gap:18px">
       <div style="display:flex;align-items:center;gap:8px">
-        <div style="width:28px;height:28px;border-radius:6px;background:rgba(240,180,41,.12);border:1px solid rgba(240,180,41,.5);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">🏆</div>
-        <div style="font-family:var(--mono);font-size:9px;color:var(--text);line-height:1.5;font-weight:600">Tier with <span style="color:var(--gold);font-weight:700">no winner</span> → that tier's prize rolls <span style="color:var(--green);font-weight:700">100%</span> to next round</div>
+        <div style="width:28px;height:28px;border-radius:6px;background:rgba(0,82,255,.08);border:1px solid rgba(0,82,255,.3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">🏆</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--text);line-height:1.5;font-weight:600">Tier with <span style="color:#FF6B35;font-weight:800">no winner</span> → prize rolls <span style="color:var(--green);font-weight:800">100%</span> to next round</div>
       </div>
       <div style="display:flex;align-items:center;gap:8px">
-        <div style="width:28px;height:28px;border-radius:6px;background:rgba(0,82,255,.1);border:1px solid rgba(0,82,255,.4);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">⏳</div>
-        <div style="font-family:var(--mono);font-size:9px;color:var(--text);line-height:1.5;font-weight:600">Prize unclaimed after <span style="color:var(--blue2);font-weight:700">7 days</span> → auto rollover to next round</div>
+        <div style="width:28px;height:28px;border-radius:6px;background:rgba(0,82,255,.08);border:1px solid rgba(0,82,255,.3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">⏳</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--text);line-height:1.5;font-weight:600">Unclaimed after <span style="color:var(--blue2);font-weight:800">7 days</span> → auto rollover to next round</div>
       </div>
       <div style="display:flex;align-items:center;gap:8px">
-        <div style="width:28px;height:28px;border-radius:6px;background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.4);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">📈</div>
-        <div style="font-family:var(--mono);font-size:9px;color:var(--text);line-height:1.5;font-weight:600">Jackpot = <span style="color:var(--green);font-weight:700">5% seed</span> + <span style="color:var(--blue2);font-weight:700">85% ticket revenue</span> + unclaimed prizes + empty tier rollovers</div>
+        <div style="width:28px;height:28px;border-radius:6px;background:rgba(0,82,255,.08);border:1px solid rgba(0,82,255,.3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">📈</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--text);line-height:1.5;font-weight:600">Pool Funding = <span style="color:var(--blue2);font-weight:800">85% ticket revenue</span> + <span style="color:var(--green);font-weight:800">5% seed rollover</span> + <span style="color:#C080FF;font-weight:800">empty-tier rollovers</span> + <span style="color:#F0A500;font-weight:800">unclaimed prizes</span></div>
       </div>
     </div>
   </div>
@@ -1120,7 +1228,7 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
 <div class="accounting-above" style="background:var(--surface);border-radius:8px;display:flex;margin-bottom:10px;align-items:stretch;padding:1px;background:linear-gradient(135deg,#00E87A,#0099FF,#7B00FF,#C8E000,#00E87A);position:relative"><div class="accounting-inner" style="display:flex;width:100%;background:var(--surface);border-radius:6px;overflow:hidden">
   <!-- LEFT: Full Breakdown -->
   <div style="flex:1;min-width:0;padding:12px 14px;border-right:1px solid;border-image:linear-gradient(180deg,#00E87A,#7B00FF,#C8E000,#5500FF,#00E87A) 1;display:flex;flex-direction:column;justify-content:space-between">
-    <div class="section-head">Prize Distribution · Per Ticket Revenue</div>
+    <div class="section-head">Prize Distribution · Tier Breakdown</div>
     <div style="display:flex;height:3px;border-radius:4px;overflow:hidden;margin-bottom:12px;gap:1px">
       <div style="flex:51;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:3px 0 0 3px"></div>
       <div style="flex:17;background:linear-gradient(90deg,#B0B0B0,#D0D0D0)"></div>
@@ -1129,14 +1237,14 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
       <div style="flex:5;background:rgba(0,200,120,.6)"></div>
       <div style="flex:10;background:rgba(160,112,232,.4);border-radius:0 3px 3px 0"></div>
     </div>
-    <div class="tier-row"><span class="tier-rank" style="color:var(--gold)">🏆</span><div style="flex:1"><div class="tier-name">Jackpot <span style="font-size:9px;color:var(--text2);font-weight:600">Match 6</span></div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:51%;background:linear-gradient(90deg,var(--gold),var(--gold2))"></div></div><span class="tier-pct" style="color:var(--gold)">51%</span></div>
-    <div class="tier-row"><span class="tier-rank" style="color:var(--text2)">🥈</span><div style="flex:1"><div class="tier-name">2nd Prize <span style="font-size:9px;color:var(--text2);font-weight:600">Match 5</span></div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:17%;background:linear-gradient(90deg,#B0B0B0,#D0D0D0)"></div></div><span class="tier-pct" style="color:var(--text2)">17%</span></div>
-    <div class="tier-row"><span class="tier-rank" style="color:var(--blue2)">🥉</span><div style="flex:1"><div class="tier-name">3rd Prize <span style="font-size:9px;color:var(--text2);font-weight:600">Match 4</span></div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:10.6%;background:linear-gradient(90deg,var(--blue),var(--blue2))"></div></div><span class="tier-pct" style="color:var(--blue2)">10.6%</span></div>
-    <div class="tier-row"><span class="tier-rank" style="color:#A070E8">🎖️</span><div style="flex:1"><div class="tier-name">4th Prize <span style="font-size:9px;color:var(--text2);font-weight:600">Match 3</span></div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:6.4%;background:linear-gradient(90deg,#6030C0,#A070E8)"></div></div><span class="tier-pct" style="color:#A070E8">6.4%</span></div>
+    <div class="tier-row"><span class="tier-rank">🏆</span><div style="flex:1"><div class="tier-name dm-white" style="color:#6A4000;font-weight:900">Jackpot <span class="dm-muted" style="font-size:9px;color:#888;font-weight:600">Match 6</span></div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:51%;background:linear-gradient(90deg,#E8A800,#FFD700)"></div></div><span class="tier-pct dm-gold" style="color:#6A4000;font-weight:900">51%</span></div>
+    <div class="tier-row"><span class="tier-rank">🥈</span><div style="flex:1"><div class="tier-name dm-white" style="color:#1A1A2E;font-weight:900">2nd Prize <span class="dm-muted" style="font-size:9px;color:#888;font-weight:600">Match 5</span></div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:17%;background:linear-gradient(90deg,#AAA,#EEE)"></div></div><span class="tier-pct dm-gold" style="color:#1A1A2E;font-weight:900">17%</span></div>
+    <div class="tier-row"><span class="tier-rank">🥉</span><div style="flex:1"><div class="tier-name dm-white" style="color:#003880;font-weight:900">3rd Prize <span class="dm-muted" style="font-size:9px;color:#888;font-weight:600">Match 4</span></div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:10.6%;background:linear-gradient(90deg,#0055CC,#0088FF)"></div></div><span class="tier-pct dm-gold" style="color:#003880;font-weight:900">10.6%</span></div>
+    <div class="tier-row"><span class="tier-rank">🎖️</span><div style="flex:1"><div class="tier-name dm-white" style="color:#4A1080;font-weight:900">4th Prize <span class="dm-muted" style="font-size:9px;color:#888;font-weight:600">Match 3</span></div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:6.4%;background:linear-gradient(90deg,#6630C0,#9955EE)"></div></div><span class="tier-pct dm-gold" style="color:#4A1080;font-weight:900">6.4%</span></div>
     <div style="display:flex;gap:6px;margin-top:10px">
-      <div style="flex:1;text-align:center;background:rgba(0,200,120,.08);border:1px solid rgba(0,200,120,.25);border-radius:6px;padding:6px 4px;font-family:var(--mono)"><div style="font-size:13px;font-weight:800;color:var(--green)">85%</div><div style="font-size:8px;color:var(--text2);font-weight:600;margin-top:1px">Players</div></div>
-      <div style="flex:1;text-align:center;background:rgba(240,180,41,.08);border:1px solid rgba(240,180,41,.35);border-radius:6px;padding:6px 4px;font-family:var(--mono)"><div style="font-size:13px;font-weight:800;color:var(--gold)">5%</div><div style="font-size:8px;color:var(--text2);font-weight:600;margin-top:1px">Rollover</div></div>
-      <div style="flex:1;text-align:center;background:rgba(160,112,232,.07);border:1px solid rgba(160,112,232,.2);border-radius:6px;padding:6px 4px;font-family:var(--mono)"><div style="font-size:13px;font-weight:800;color:#A070E8">10%</div><div style="font-size:8px;color:var(--text2);font-weight:600;margin-top:1px">Treasury</div></div>
+      <div style="flex:1;text-align:center;background:rgba(0,200,100,.12);border:1px solid rgba(0,200,100,.4);border-radius:6px;padding:6px 4px;font-family:var(--mono)"><div class="bps-val bps-green" style="font-size:13px;font-weight:900;color:#004A20">85%</div><div class="bps-label" style="font-size:8px;color:#004A20;font-weight:800;margin-top:1px">Players</div></div>
+      <div style="flex:1;text-align:center;background:rgba(240,160,0,.12);border:1px solid rgba(240,160,0,.4);border-radius:6px;padding:6px 4px;font-family:var(--mono)"><div class="bps-val bps-amber" style="font-size:13px;font-weight:900;color:#6A3E00">5%</div><div class="bps-label" style="font-size:8px;color:#6A3E00;font-weight:800;margin-top:1px">Rollover</div></div>
+      <div style="flex:1;text-align:center;background:rgba(140,60,240,.12);border:1px solid rgba(140,60,240,.4);border-radius:6px;padding:6px 4px;font-family:var(--mono)"><div class="bps-val bps-purple" style="font-size:13px;font-weight:900;color:#3A0870">10%</div><div class="bps-label" style="font-size:8px;color:#3A0870;font-weight:800;margin-top:1px">Treasury</div></div>
     </div>
   </div>
   <!-- RIGHT: Round Accounting -->
@@ -1153,7 +1261,7 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
 
 <!-- TIERS -->
 <div class="tiers-card accent-purple tiers-card-standalone">
-  <div class="section-head">Prize Distribution · Per Ticket Revenue</div>
+  <div class="section-head">Prize Distribution · Tier Breakdown</div>
   <div style="display:flex;height:3px;border-radius:4px;overflow:hidden;margin-bottom:12px;gap:1px">
     <div style="flex:51;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:3px 0 0 3px"></div>
     <div style="flex:17;background:linear-gradient(90deg,#B0B0B0,#D0D0D0)"></div>
@@ -1162,14 +1270,14 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
     <div style="flex:5;background:rgba(0,200,120,.6)"></div>
     <div style="flex:10;background:rgba(160,112,232,.4);border-radius:0 3px 3px 0"></div>
   </div>
-  <div class="tier-row"><span class="tier-rank" style="color:var(--gold)">🏆</span><div style="flex:1"><div class="tier-name">Jackpot <span style="font-size:9px;color:var(--text2);font-weight:600">Match 6</span></div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:51%;background:linear-gradient(90deg,var(--gold),var(--gold2))"></div></div><span class="tier-pct" style="color:var(--gold)">51%</span></div>
-  <div class="tier-row"><span class="tier-rank" style="color:var(--text2)">🥈</span><div style="flex:1"><div class="tier-name">2nd Prize <span style="font-size:9px;color:var(--text2);font-weight:600">Match 5</span></div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:17%;background:linear-gradient(90deg,#B0B0B0,#D0D0D0)"></div></div><span class="tier-pct" style="color:var(--text2)">17%</span></div>
-  <div class="tier-row"><span class="tier-rank" style="color:var(--blue2)">🥉</span><div style="flex:1"><div class="tier-name">3rd Prize <span style="font-size:9px;color:var(--text2);font-weight:600">Match 4</span></div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:10.6%;background:linear-gradient(90deg,var(--blue),var(--blue2))"></div></div><span class="tier-pct" style="color:var(--blue2)">10.6%</span></div>
-  <div class="tier-row"><span class="tier-rank" style="color:#A070E8">🎖️</span><div style="flex:1"><div class="tier-name">4th Prize <span style="font-size:9px;color:var(--text2);font-weight:600">Match 3</span></div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:6.4%;background:linear-gradient(90deg,#6030C0,#A070E8)"></div></div><span class="tier-pct" style="color:#A070E8">6.4%</span></div>
+  <div class="tier-row"><span class="tier-rank">🏆</span><div style="flex:1"><div class="tier-name dm-white" style="color:#6A4000;font-weight:900">Jackpot <span class="dm-muted" style="font-size:9px;color:#888;font-weight:600">Match 6</span></div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:51%;background:linear-gradient(90deg,#E8A800,#FFD700)"></div></div><span class="tier-pct dm-gold" style="color:#6A4000;font-weight:900">51%</span></div>
+  <div class="tier-row"><span class="tier-rank">🥈</span><div style="flex:1"><div class="tier-name dm-white" style="color:#1A1A2E;font-weight:900">2nd Prize <span class="dm-muted" style="font-size:9px;color:#888;font-weight:600">Match 5</span></div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:17%;background:linear-gradient(90deg,#AAA,#EEE)"></div></div><span class="tier-pct dm-gold" style="color:#1A1A2E;font-weight:900">17%</span></div>
+  <div class="tier-row"><span class="tier-rank">🥉</span><div style="flex:1"><div class="tier-name dm-white" style="color:#003880;font-weight:900">3rd Prize <span class="dm-muted" style="font-size:9px;color:#888;font-weight:600">Match 4</span></div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:10.6%;background:linear-gradient(90deg,#0055CC,#0088FF)"></div></div><span class="tier-pct dm-gold" style="color:#003880;font-weight:900">10.6%</span></div>
+  <div class="tier-row"><span class="tier-rank">🎖️</span><div style="flex:1"><div class="tier-name dm-white" style="color:#4A1080;font-weight:900">4th Prize <span class="dm-muted" style="font-size:9px;color:#888;font-weight:600">Match 3</span></div></div><div class="tier-bar-wrap"><div class="tier-bar" style="width:6.4%;background:linear-gradient(90deg,#6630C0,#9955EE)"></div></div><span class="tier-pct dm-gold" style="color:#4A1080;font-weight:900">6.4%</span></div>
   <div style="display:flex;gap:6px;margin-top:10px">
-    <div style="flex:1;text-align:center;background:rgba(0,200,120,.08);border:1px solid rgba(0,200,120,.25);border-radius:6px;padding:6px 4px;font-family:var(--mono)"><div style="font-size:13px;font-weight:800;color:var(--green)">85%</div><div style="font-size:8px;color:var(--text2);font-weight:600;margin-top:1px">Players</div></div>
-    <div style="flex:1;text-align:center;background:rgba(240,180,41,.08);border:1px solid rgba(240,180,41,.35);border-radius:6px;padding:6px 4px;font-family:var(--mono)"><div style="font-size:13px;font-weight:800;color:var(--gold)">5%</div><div style="font-size:8px;color:var(--text2);font-weight:600;margin-top:1px">Rollover</div></div>
-    <div style="flex:1;text-align:center;background:rgba(160,112,232,.07);border:1px solid rgba(160,112,232,.2);border-radius:6px;padding:6px 4px;font-family:var(--mono)"><div style="font-size:13px;font-weight:800;color:#A070E8">10%</div><div style="font-size:8px;color:var(--text2);font-weight:600;margin-top:1px">Treasury</div></div>
+    <div style="flex:1;text-align:center;background:rgba(0,90,40,.18);border:1px solid rgba(0,90,40,.6);border-radius:6px;padding:6px 4px;font-family:var(--mono)"><div class="bps-val bps-green" style="font-size:13px;font-weight:900;color:#004A20">85%</div><div class="bps-label" style="font-size:8px;color:#004A20;font-weight:800;margin-top:1px">Players</div></div>
+    <div style="flex:1;text-align:center;background:rgba(180,120,0,.18);border:1px solid rgba(180,120,0,.6);border-radius:6px;padding:6px 4px;font-family:var(--mono)"><div class="bps-val bps-amber" style="font-size:13px;font-weight:900;color:#6A3E00">5%</div><div class="bps-label" style="font-size:8px;color:#6A3E00;font-weight:800;margin-top:1px">Rollover</div></div>
+    <div style="flex:1;text-align:center;background:rgba(80,20,160,.14);border:1px solid rgba(80,20,160,.55);border-radius:6px;padding:6px 4px;font-family:var(--mono)"><div class="bps-val bps-purple" style="font-size:13px;font-weight:900;color:#3A0870">10%</div><div class="bps-label" style="font-size:8px;color:#3A0870;font-weight:800;margin-top:1px">Treasury</div></div>
   </div>
 </div><!-- /tiers-card -->
 
@@ -1181,28 +1289,28 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
   </div>
 
   <!-- Fair Play -->
-  <div class="fair-play-wrap" style="position:relative;border-radius:7px;margin-bottom:12px;padding:1.5px;background:linear-gradient(135deg,#0055FF,#7B00FF,#00C878,#7B00FF,#0055FF)">
+  <div class="fair-play-wrap" style="position:relative;border-radius:7px;margin-bottom:12px">
   <div style="background:var(--surface);border-radius:6px;padding:10px 12px;font-family:var(--mono)">
     <div style="font-size:8px;font-weight:800;letter-spacing:2px;color:var(--blue2);text-transform:uppercase;margin-bottom:8px">⚖️ Fair Play Rules</div>
     <div style="display:flex;flex-direction:column;gap:5px">
       <div style="display:flex;align-items:center;gap:8px">
-        <span style="font-size:8px;font-weight:800;color:var(--blue2);background:rgba(0,82,255,.1);border-radius:4px;padding:2px 5px;min-width:18px;text-align:center;flex-shrink:0">01</span>
+        <span class="fp-num" style="font-size:8px;font-weight:800;border-radius:4px;padding:2px 6px;min-width:20px;text-align:center;flex-shrink:0;letter-spacing:.5px">01</span>
         <span style="font-size:9px;color:var(--text);font-weight:600">Max <b style="color:var(--gold)">3 tickets</b> per wallet per round</span>
       </div>
       <div style="display:flex;align-items:center;gap:8px">
-        <span style="font-size:8px;font-weight:800;color:var(--blue2);background:rgba(0,82,255,.1);border-radius:4px;padding:2px 5px;min-width:18px;text-align:center;flex-shrink:0">02</span>
+        <span class="fp-num" style="font-size:8px;font-weight:800;border-radius:4px;padding:2px 6px;min-width:20px;text-align:center;flex-shrink:0;letter-spacing:.5px">02</span>
         <span style="font-size:9px;color:var(--text);font-weight:600"><b style="color:var(--gold)">30s cooldown</b> between purchases · enforced on-chain</span>
       </div>
       <div style="display:flex;align-items:center;gap:8px">
-        <span style="font-size:8px;font-weight:800;color:var(--blue2);background:rgba(0,82,255,.1);border-radius:4px;padding:2px 5px;min-width:18px;text-align:center;flex-shrink:0">03</span>
+        <span class="fp-num" style="font-size:8px;font-weight:800;border-radius:4px;padding:2px 6px;min-width:20px;text-align:center;flex-shrink:0;letter-spacing:.5px">03</span>
         <span style="font-size:9px;color:var(--text);font-weight:600">Fully on-chain randomness · <b style="color:var(--green)">no admin can alter outcomes</b></span>
       </div>
       <div style="display:flex;align-items:center;gap:8px">
-        <span style="font-size:8px;font-weight:800;color:var(--blue2);background:rgba(0,82,255,.1);border-radius:4px;padding:2px 5px;min-width:18px;text-align:center;flex-shrink:0">04</span>
+        <span class="fp-num" style="font-size:8px;font-weight:800;border-radius:4px;padding:2px 6px;min-width:20px;text-align:center;flex-shrink:0;letter-spacing:.5px">04</span>
         <span style="font-size:9px;color:var(--text);font-weight:600">Claim within <b style="color:var(--gold)">7 days</b> of draw</span>
       </div>
       <div style="display:flex;align-items:center;gap:8px">
-        <span style="font-size:8px;font-weight:800;color:var(--blue2);background:rgba(0,82,255,.1);border-radius:4px;padding:2px 5px;min-width:18px;text-align:center;flex-shrink:0">05</span>
+        <span class="fp-num" style="font-size:8px;font-weight:800;border-radius:4px;padding:2px 6px;min-width:20px;text-align:center;flex-shrink:0;letter-spacing:.5px">05</span>
         <span style="font-size:9px;color:var(--text);font-weight:600">Unclaimed prizes <b style="color:var(--green)">roll over</b> to the next round</span>
       </div>
     </div>
@@ -1223,8 +1331,8 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
       <div class="ball-wrap"><span class="ball-lbl">No.5</span><div class="ball" onclick="tapBall(5)" style="cursor:pointer"><span class="ball-display" id="bd5">34</span></div><input type="number" inputmode="numeric" id="n5" min="1" max="45" value="34" oninput="onBallInput(5)" style="position:absolute;opacity:0;width:1px;height:1px;pointer-events:none" autocomplete="off"/></div>
       <div class="ball-wrap"><span class="ball-lbl">No.6</span><div class="ball" onclick="tapBall(6)" style="cursor:pointer"><span class="ball-display" id="bd6">42</span></div><input type="number" inputmode="numeric" id="n6" min="1" max="45" value="42" oninput="onBallInput(6)" style="position:absolute;opacity:0;width:1px;height:1px;pointer-events:none" autocomplete="off"/></div>
     </div>
-    <div style="text-align:center;font-family:var(--mono);font-size:9px;color:var(--text2);padding:8px 0 10px;letter-spacing:.5px">
-      👆 Tap a ball · enter 1–45 · 6 unique numbers
+    <div style="text-align:center;font-family:var(--mono);font-size:9px;color:var(--text2);margin-bottom:10px">
+      👆 <b style="color:var(--blue2)">Tap a ball</b> · enter 1–45 · <b style="color:var(--text)">6 unique numbers</b>
     </div>
   </div>
 
@@ -1270,7 +1378,7 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
 
 <!-- MY TICKET HISTORY — cột trái, dưới buy panel -->
 <div class="panel accent-green" style="overflow:visible">
-  <div class="section-head sh-blue">My Ticket History</div>
+  <div class="section-head sh-blue" style="display:flex;align-items:center;justify-content:space-between">My Ticket History<button id="btn-hide-nomatch" onclick="toggleHideNoMatch()" style="font-family:var(--mono);font-size:8px;padding:2px 8px;border-radius:3px;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;letter-spacing:.5px">HIDE NO MATCH</button></div>
   <div id="history-list"><div class="act-empty-ft">Connect wallet to view history</div></div>
 </div>
 
@@ -1281,16 +1389,16 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
 
 <!-- LAST DRAW -->
 <div class="panel accent-gold">
-  <div class="section-head sh-blue">Last Draw Result</div>
-  <div id="winning-content" style="text-align:center;padding:12px 0;color:var(--text3);font-size:10px;font-family:var(--mono)">Connect wallet to view</div>
+  <div class="section-head sh-blue" style="justify-content:center;font-size:11px;letter-spacing:3px;font-weight:800">Last Draw Result</div>
+  <div id="winning-content" style="text-align:center;padding:12px 0;color:var(--text3);font-size:10px;font-family:var(--mono)">Loading draw result...</div>
   <div id="winning-round-label" style="display:none;text-align:center;margin-bottom:8px"></div>
   <div class="win-balls" id="winning-balls" style="display:none">
-    <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="wball" id="wb1">?</div><div style="font-size:7px;color:var(--text3);font-family:var(--mono)">No.1</div></div>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="wball" id="wb2">?</div><div style="font-size:7px;color:var(--text3);font-family:var(--mono)">No.2</div></div>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="wball" id="wb3">?</div><div style="font-size:7px;color:var(--text3);font-family:var(--mono)">No.3</div></div>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="wball" id="wb4">?</div><div style="font-size:7px;color:var(--text3);font-family:var(--mono)">No.4</div></div>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="wball" id="wb5">?</div><div style="font-size:7px;color:var(--text3);font-family:var(--mono)">No.5</div></div>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="wball" id="wb6">?</div><div style="font-size:7px;color:var(--text3);font-family:var(--mono)">No.6</div></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="wball" id="wb1">?</div><div style="font-size:7px;color:var(--text2);font-family:var(--mono);font-weight:700;letter-spacing:.5px">No.1</div></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="wball" id="wb2">?</div><div style="font-size:7px;color:var(--text2);font-family:var(--mono);font-weight:700;letter-spacing:.5px">No.2</div></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="wball" id="wb3">?</div><div style="font-size:7px;color:var(--text2);font-family:var(--mono);font-weight:700;letter-spacing:.5px">No.3</div></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="wball" id="wb4">?</div><div style="font-size:7px;color:var(--text2);font-family:var(--mono);font-weight:700;letter-spacing:.5px">No.4</div></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="wball" id="wb5">?</div><div style="font-size:7px;color:var(--text2);font-family:var(--mono);font-weight:700;letter-spacing:.5px">No.5</div></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="wball" id="wb6">?</div><div style="font-size:7px;color:var(--text2);font-family:var(--mono);font-weight:700;letter-spacing:.5px">No.6</div></div>
   </div>
   <div id="prize-tiers" style="display:none;margin-top:10px;border-top:1px solid var(--border);padding-top:10px"></div>
   <div id="claim-deadline" style="display:none"></div>
@@ -1313,7 +1421,7 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
 </div>
 </div><!-- /main-grid -->
 
-<footer><p>OPNBillionaire Terminal &nbsp;·&nbsp; OPN Testnet &nbsp;·&nbsp; <a href="https://testnet.iopn.tech" target="_blank">OPN Explorer ↗</a></p></footer>
+<footer><p>LitBillionaire Terminal &nbsp;·&nbsp; LiteForge Testnet &nbsp;·&nbsp; <a href="https://litvm.com" target="_blank">LitVM ↗</a> &nbsp;·&nbsp; <a href="https://x.com/litlotteryxyz" target="_blank" rel="noopener" class="footer-x"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 18 18"><rect width="18" height="18" rx="4" fill="#000"/><path d="M10.18 8.34L13.64 4h-.97L9.75 7.76 7.4 4H4.5l3.63 5.28L4.5 14h.97l3.17-3.68L11.1 14H14L10.18 8.34zm-1.12 1.3l-.37-.52L5.8 4.66h1.26l2.36 3.38.37.52 3.07 4.4h-1.26L9.06 9.64z" fill="#fff"/></svg></a></p></footer>
 
 </div><!-- /wrap -->
 
@@ -1419,9 +1527,63 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
 
 <script>
 const CONTRACT_ADDRESS="0x630F3d14a11736808dA13649966361F5637e0672";
+const TICKET_BOUGHT_TOPIC="0x5825b714aca8e2542b07071bc79c3adb436949c0a2cfcdac8ff3172a9900309f";
+// _rpcId already declared above
+
+function fetchWithTimeout(url,options,ms){
+  const fp=fetch(url,options);
+  const tp=new Promise((_,rej)=>setTimeout(()=>rej(new Error("RPC timeout")),ms));
+  return Promise.race([fp,tp]);
+}
+
+async function smartRpcRequest(method,params,timeoutMs=12000){
+  const eth=window.ethereum;
+  if(eth){try{const r=await Promise.race([eth.request({method,params}),new Promise((_,rej)=>setTimeout(()=>rej(new Error("wallet timeout")),timeoutMs))]);if(r!==undefined&&r!==null)return r;}catch(e){}}
+  try{
+    const res=await fetchWithTimeout("https://testnet-rpc.iopn.tech",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:_rpcId++,method,params})},timeoutMs);
+    const json=await res.json();
+    if(json.result!==undefined)return json.result;
+  }catch(e){}
+  return null;
+}
+
+async function getBlockNumber(){
+  const r=await smartRpcRequest("eth_blockNumber",[],8000);
+  return r?parseInt(r,16):null;
+}
+
+// LocalStorage persistent ticket cache
+const LS_TICKETS_KEY="lb_tickets_v2";
+const _ticketsCacheLS={};
+(function(){try{const raw=localStorage.getItem(LS_TICKETS_KEY);if(raw){const p=JSON.parse(raw);for(const[rid,val]of Object.entries(p)){_ticketsCacheLS[rid]={tickets:val.tickets||[],lastBlock:val.lastBlock||0};}}}catch(e){}})();
+
+function lsSaveTickets(){try{const s={};for(const[rid,val]of Object.entries(_ticketsCacheLS)){s[rid]={tickets:val.tickets,lastBlock:val.lastBlock};}localStorage.setItem(LS_TICKETS_KEY,JSON.stringify(s));}catch(e){}}
+
+async function fetchTicketsDirect(roundId){
+  const rid=Number(roundId);
+  // Return from localStorage cache if available (past rounds never change)
+  if(_ticketsCacheLS[rid]){
+    console.log("[cache] Round",rid,"from localStorage:",_ticketsCacheLS[rid].tickets.length,"tickets");
+    return _ticketsCacheLS[rid].tickets;
+  }
+  // Fetch from contract
+  try{
+    const c=contract||new ethers.Contract(CONTRACT_ADDRESS,ABI,new ethers.JsonRpcProvider("https://testnet-rpc.iopn.tech"));
+    const raw=await c.getRoundTickets(rid);
+    const tickets=Array.from(raw).map(t=>({player:t.player,numbers:Array.from(t.numbers).map(n=>Number(n)),isCustom:t.isCustom}));
+    // Cache to localStorage — past rounds are static
+    _ticketsCacheLS[rid]={tickets};
+    lsSaveTickets();
+    console.log("[fetchTicketsDirect] Round",rid,"fetched:",tickets.length,"tickets → cached");
+    return tickets;
+  }catch(e){
+    console.warn("[fetchTicketsDirect] failed:",e.message);
+    return [];
+  }
+}
 const CHAIN_ID="0x3D8";
 const NETWORK={chainId:CHAIN_ID,chainName:"OPN Testnet",nativeCurrency:{name:"OPN",symbol:"OPN",decimals:18},rpcUrls:["https://testnet-rpc.iopn.tech"],blockExplorerUrls:["https://testnet.iopn.tech"]};
-const ABI=["function buyCustomTicket(uint256[6] calldata numbers) external payable","function buyQuickPickTicket() external payable","function checkUpkeep() external view returns (bool)","function performUpkeep() external","function forceUpkeep() external","function finalizeRound(uint256 roundId) external","function claimReward(uint256 roundId) external","function getRoundSummary(uint256 roundId) external view returns (uint256 jackpot,uint256 ticketRevenue,uint256 totalTickets,uint256 uniquePlayers,uint256 endTime,uint256 startTime,uint8 state,uint256[6] winningNumbers,uint256 claimDeadline)","function getRecentTickets(uint256 roundId,uint256 count) external view returns (tuple(address player,uint256[6] numbers)[])","function currentRoundId() external view returns (uint256)","function getRoundTickets(uint256 roundId) external view returns (tuple(address player,uint256[6] numbers)[])","function getTicketsRemaining(address player) external view returns (uint256)","function hasClaimed(uint256 roundId,address player) external view returns (bool)","function lastPurchaseTime(address player) external view returns (uint256)","function uniquePlayerCount(uint256 roundId) external view returns (uint256)","function owner() external view returns (address)","function pendingOwner() external view returns (address)","function treasuryWallet() external view returns (address)","function lockedFunds() external view returns (uint256)","function emergencyWithdraw() external","function transferOwnership(address newOwner) external","function acceptOwnership() external","function setTreasuryWallet(address wallet) external","function tierPrizePerWinner(uint256 roundId,uint256 matchCount) external view returns (uint256)","function previewPrize(uint256 roundId,address player) external view returns (uint256)","function submitTierPrizes(uint256 roundId,uint256[4] calldata prizePerWinner,uint256[4] calldata winnerCounts) external","function nextDrawTime() external view returns (uint256)","function getPlayerTickets(uint256 roundId,address player) external view returns (uint256[])"];
+const ABI=["function buyCustomTicket(uint256[6] calldata numbers) external payable","function buyQuickPickTicket() external payable","function checkUpkeep() external view returns (bool)","function performUpkeep() external","function forceUpkeep() external","function finalizeRound(uint256 roundId) external","function claimReward(uint256 roundId) external","function getRoundSummary(uint256 roundId) external view returns (uint256 jackpot,uint256 ticketRevenue,uint256 totalTickets,uint256 uniquePlayers,uint256 endTime,uint256 startTime,uint8 state,uint256[6] winningNumbers,uint256 claimDeadline)","function getRecentTickets(uint256 roundId,uint256 count) external view returns (tuple(address player,uint256[6] numbers)[])","function currentRoundId() external view returns (uint256)","function getRoundTickets(uint256 roundId) external view returns (tuple(address player,uint256[6] numbers)[])","function getTicketsRemaining(address player) external view returns (uint256)","function hasClaimed(uint256 roundId,address player) external view returns (bool)","function lastPurchaseTime(address player) external view returns (uint256)","function uniquePlayerCount(uint256 roundId) external view returns (uint256)","function owner() external view returns (address)","function pendingOwner() external view returns (address)","function treasuryWallet() external view returns (address)","function lockedFunds() external view returns (uint256)","function emergencyWithdraw() external","function transferOwnership(address newOwner) external","function acceptOwnership() external","function setTreasuryWallet(address wallet) external","function tierPrizePerWinner(uint256 roundId,uint256 matchCount) external view returns (uint256)","function previewPrize(uint256 roundId,address player) external view returns (uint256)","function submitTierPrizes(uint256 roundId,uint256[4] calldata prizePerWinner,uint256[4] calldata winnerCounts) external","function getLtcUsdPrice() external pure returns (uint128,uint128)","function nextDrawTime() external view returns (uint256)","function getPlayerTickets(uint256 roundId,address player) external view returns (uint256[])"];
 
 let provider,signer,contract,wallet=null;
 let roundEndTime=0,roundDuration=604800;
@@ -1435,9 +1597,29 @@ const RPC_URLS=["https://testnet-rpc.iopn.tech"];
 let _rpcId=1;
 const _iface=new ethers.Interface(ABI);
 
+/* ── DIA Oracle (LTC/USD live price feed) ───────────────── */
+const DIA_LTC_FEED="0x45dDa5d881BD2C917976CCfde74fFd6f6412da29";
+const DIA_ABI=["function latestRoundData() view returns (uint80,int256,uint256,uint256,uint80)"];
+let _ltcUsdCache={price:null,ts:0};
+async function fetchLtcUsd(){
+  const now=Date.now();
+  if(_ltcUsdCache.price&&now-_ltcUsdCache.ts<120000)return _ltcUsdCache.price;
+  try{
+    const p=provider||new ethers.JsonRpcProvider(RPC_URLS[0]);
+    const feed=new ethers.Contract(DIA_LTC_FEED,DIA_ABI,p);
+    const [,price,,,]=await feed.latestRoundData();
+    const raw=price<0n?-price:price;
+    // DIA on LitVM uses 18 decimals (not standard 8)
+    const usd=Number(raw/10000000000n)/1e8;
+    _ltcUsdCache={price:usd,ts:now};
+    return usd;
+  }catch(e){return _ltcUsdCache.price||null;}
+}
+
 /* ── RPC Cache (read-only, 20s TTL) ─────────────────────── */
 const _rpcCache={};
-const RPC_CACHE_TTL=20000; // 20s
+const RPC_CACHE_TTL=60000; // 60s — reduce RPC calls
+const _ticketsCache={}; // persistent — drawn round tickets never change
 function _cacheKey(fn,args){return fn+JSON.stringify(args);}
 function _cacheGet(key){const c=_rpcCache[key];if(c&&Date.now()-c.ts<RPC_CACHE_TTL)return c.val;return null;}
 function _cacheSet(key,val){_rpcCache[key]={val,ts:Date.now()};}
@@ -1505,21 +1687,32 @@ async function refreshPublic(){
       rid=Number(await c.currentRoundId());
       // [OPT-2] single batch call replaces 5-6 separate RPC calls
       const s=await c.getRoundSummary(rid);
-      summary={jackpot:s.jackpot,ticketRevenue:s.ticketRevenue,totalTickets:s.totalTickets,
+      summary={prizePool:s.jackpot,ticketRevenue:s.ticketRevenue,totalTickets:s.totalTickets,
                uniquePlayers:Number(s.uniquePlayers),endTime:s.endTime,startTime:s.startTime,
                state:s.state,winningNumbers:s.winningNumbers,claimDeadline:s.claimDeadline};
     }else{
       try{
         const rr=await callContract("currentRoundId",[]);rid=Number(rr[0]);
         const s=await callContract("getRoundSummary",[rid]);
-        summary={jackpot:s[0],ticketRevenue:s[1],totalTickets:s[2],uniquePlayers:Number(s[3]),
+        summary={prizePool:s[0],ticketRevenue:s[1],totalTickets:s[2],uniquePlayers:Number(s[3]),
                  endTime:s[4],startTime:s[5],state:s[6],winningNumbers:s[7],claimDeadline:s[8]};
       }catch(e){return;}
     }
     const r=summary;
-    const jp=parseFloat(ethers.formatEther(r.jackpot)).toFixed(4);
+    const jp=parseFloat(ethers.formatEther(r.prizePool)).toFixed(4);
     ["stat-jackpot","jc-val"].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=jp;el.classList.add("has-data");}});
     ["tick-jp","tick-jp2-b"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=jp+" OPN";});
+    // DIA LTC/USD price feed
+    const jpFloat=parseFloat(jp);
+    fetchLtcUsd().then(ltcUsd=>{
+      if(!ltcUsd)return;
+      const usdVal=(jpFloat*ltcUsd).toFixed(2);
+      // Update ticker LTC/USD
+      ["tick-ltcusd","tick-ltcusd2-b"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent="$"+ltcUsd.toFixed(2);});
+      // Update prize pool USD sub-label
+      const jusd=document.getElementById("jc-usd");
+      if(jusd)jusd.textContent="≈ $"+Number(usdVal).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})+" USD";
+    });
     const sr=document.getElementById("stat-round");if(sr){sr.textContent="#"+rid;sr.classList.add("has-data");}
     const st=document.getElementById("stat-tickets");if(st){st.textContent=Number(r.totalTickets).toLocaleString();st.classList.add("has-data");}
     ["sp-round","sp-round2"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent="#"+rid;});
@@ -1534,13 +1727,13 @@ async function refreshPublic(){
     try{renderPublicAccounting(rid,r,unique);}catch(_){}
     try{updateAIContext(rid,r,null,null,null,{6:.60,5:.20,4:.125,3:.075},unique);loadAIInsights();}catch(_){}
     const revEth=parseFloat(ethers.formatEther(r.ticketRevenue));
-    const actualJp=parseFloat(ethers.formatEther(r.jackpot));
+    const actualJp=parseFloat(ethers.formatEther(r.prizePool));
     const rolloverFromPrev=actualJp-revEth;
     const rn=document.getElementById("sc-rollover");
     if(rn&&rolloverFromPrev>0.0001){
       rn.style.display="block";
       rn.innerHTML=`↑ +${rolloverFromPrev.toFixed(4)} OPN carried in`;
-      rn.title=`Jackpot includes ${rolloverFromPrev.toFixed(4)} OPN rollover from previous round(s)`;
+      rn.title=`Prize pool includes ${rolloverFromPrev.toFixed(4)} OPN rollover from previous round(s)`;
     }else if(rn){rn.style.display="none";}
     if(!cdTimer)startCountdown();
     const totalTix=Number(r.totalTickets);
@@ -1562,9 +1755,30 @@ async function refreshPublic(){
     try{
       const currentDrawn=Number(r.state)>=1;
       const displayRid=currentDrawn?rid:(rid>1?rid-1:null);
-      if(!displayRid)return;
+      if(displayRid===null||displayRid===undefined)return;
       let displayRound=r;
-      if(displayRid!==rid)displayRound=c?await c.rounds(displayRid):await callContract("rounds",[displayRid]);
+      if(displayRid!==rid){
+        const ds=c?await c.getRoundSummary(displayRid):await callContract("getRoundSummary",[displayRid]).then(s=>({state:s[6],winningNumbers:s[7],prizePool:s[0],ticketRevenue:s[1],claimDeadline:s[8]}));
+        displayRound={
+          state:ds.state,
+          winningNumbers:ds.winningNumbers,
+          snapshotPlayerPool:ds.prizePool*8500n/10000n,
+          claimDeadline:ds.claimDeadline,
+          prizePool:ds.prizePool,
+          ticketRevenue:ds.ticketRevenue
+        };
+      } else {
+        // current round just drawn — r from getRoundSummary lacks snapshotPlayerPool, rebuild it
+        const ds=c?await c.getRoundSummary(rid):await callContract("getRoundSummary",[rid]).then(s=>({state:s[6],winningNumbers:s[7],prizePool:s[0],ticketRevenue:s[1],claimDeadline:s[8]}));
+        displayRound={
+          state:ds.state,
+          winningNumbers:ds.winningNumbers,
+          snapshotPlayerPool:ds.prizePool*8500n/10000n,
+          claimDeadline:ds.claimDeadline,
+          prizePool:ds.prizePool,
+          ticketRevenue:ds.ticketRevenue
+        };
+      }
       if(Number(displayRound.state)<1)return;
       const winNums=Array.from(displayRound.winningNumbers).map(n=>Number(n));
       for(let i=0;i<6;i++){const wb=document.getElementById("wb"+(i+1));if(wb){wb.textContent=winNums[i];wb.classList.add("revealed");}
@@ -1574,14 +1788,17 @@ async function refreshPublic(){
       const wclm=document.getElementById("winning-content-lm");if(wclm)wclm.style.display="none";
       const wrl=document.getElementById("winning-round-label");
       wrl.style.display="block";
-      wrl.innerHTML=`<span style="font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--text3);text-transform:uppercase">Round #${displayRid} · Winning Numbers</span>`;
+      const isDarkLabel=document.body.classList.contains("dark");wrl.innerHTML=`<span style="font-family:var(--mono);font-size:9px;letter-spacing:2px;color:${isDarkLabel?"#FFFFFF":"var(--text3)"};text-transform:uppercase">Round #${displayRid}</span><span style="font-family:var(--mono);font-size:9px;letter-spacing:2px;color:${isDarkLabel?"#FFD700":"var(--gold)"};text-transform:uppercase"> · Winning Numbers</span>`;
       const wrllm=document.getElementById("winning-round-label-lm");if(wrllm){wrllm.style.display="block";wrllm.innerHTML=wrl.innerHTML;}
       document.getElementById("winning-balls").style.display="flex";
       const wblms=document.getElementById("winning-balls-lm");if(wblms)wblms.style.display="flex";
-      const checkTickets=c?await c.getRoundTickets(displayRid):await callContract("getRoundTickets",[displayRid]).then(d=>d[0]).catch(()=>[]);
+      // Show 0 immediately — will update after tickets load
+      const swElEarly=document.getElementById("stat-winners");
+      if(swElEarly&&!swElEarly.classList.contains("has-data")){swElEarly.textContent="0";swElEarly.classList.add("has-data");}
+      const checkTickets=await fetchTicketsDirect(displayRid);
       const snapshotPool=parseFloat(ethers.formatEther(displayRound.snapshotPlayerPool));
       const tierPcts={6:.60,5:.20,4:.125,3:.075};
-      const tierDef=[{match:6,label:"Jackpot",sub:"Match 6",color:"var(--gold)"},{match:5,label:"2nd Prize",sub:"Match 5",color:"var(--text2)"},{match:4,label:"3rd Prize",sub:"Match 4",color:"var(--blue2)"},{match:3,label:"4th Prize",sub:"Match 3",color:"#A070E8"}];
+      const isDarkTier=document.body.classList.contains("dark");const tierDef=[{match:6,label:"Jackpot",sub:"Match 6",color:isDarkTier?"#FFD700":"#C07000"},{match:5,label:"2nd Prize",sub:"Match 5",color:isDarkTier?"#E8E8FF":"#006B5E"},{match:4,label:"3rd Prize",sub:"Match 4",color:isDarkTier?"#00CFFF":"#C44B00"},{match:3,label:"4th Prize",sub:"Match 3",color:isDarkTier?"#C080FF":"#B80033"}];
       /* Count winners per tier by TICKET (matches contract _computeTierPrizes)
          tierWinners: Map of addr→player for address display
          tierTicketCount: total tickets per tier for prize calculation */
@@ -1604,8 +1821,39 @@ async function refreshPublic(){
         /* prizeEach = tierPool / ticketCount (not walletCount) — matches contract */
         const perWin=tierTicketCount[td.match]>0?(tierPool/tierTicketCount[td.match]).toFixed(4):"—";
         const noWin=ws.length===0;
-        const addrRows=ws.map(addr=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:3px 8px;margin-top:2px;background:var(--surface2);border-radius:4px;border:1px solid var(--border)"><span style="font-family:var(--mono);font-size:9px;color:var(--text3)">${addr.slice(0,8)}…${addr.slice(-6)}</span><span style="font-family:var(--mono);font-size:9px;font-weight:700;color:${td.color}">${perWin} OPN/ticket</span></div>`).join("");
-        html+=`<div style="padding:6px 0;border-bottom:1px solid var(--border)"><div style="display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:10px"><span style="color:${td.color};font-weight:700">${td.label}</span><span style="color:var(--text3)">${td.sub}</span><span style="color:${noWin?"var(--green)":td.color};font-weight:700">${noWin?`🔄 ${tierPool.toFixed(4)} → rollover`:(tierTicketCount[td.match]+"T · "+perWin+" OPN")}</span></div>${addrRows}</div>`;
+        const SHOW_MAX=3;
+        const isDarkM=document.body.classList.contains("dark");const makeAddrRow=(addr)=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:3px 8px;margin-top:2px;border-radius:4px;border-left:2px solid ${td.color};background:${isDarkM?"var(--surface2)":"rgba(255,255,255,.5)"}"><span style="font-family:var(--mono);font-size:9px;color:${isDarkM?"var(--text2)":"#3D2800"};font-weight:600">${addr.slice(0,8)}…${addr.slice(-6)}</span><span style="font-family:var(--mono);font-size:9px;font-weight:800;color:${td.color}">${perWin}</span></div>`;
+        const tierId="tier-expand-"+td.match;
+        const visibleRows=ws.slice(0,SHOW_MAX).map(makeAddrRow).join("");
+        const hiddenRows=ws.length>SHOW_MAX?ws.slice(SHOW_MAX).map(makeAddrRow).join(""):"";
+        const expandBtn=ws.length>SHOW_MAX?`<div id="${tierId}-btn" onclick="(function(){var h=document.getElementById('${tierId}');var b=document.getElementById('${tierId}-btn');var open=h.style.display==='block';h.style.display=open?'none':'block';b.textContent=open?'+ ${ws.length-SHOW_MAX} more ▼':'▲ show less';})()" style="font-family:var(--mono);font-size:9px;color:${td.color};cursor:pointer;padding:4px 10px;margin-top:4px;border:1px solid ${td.color};border-radius:4px;display:inline-block;opacity:.85;letter-spacing:.5px;font-weight:700">+ ${ws.length-SHOW_MAX} more ▼</div>`:"";
+        const hiddenSection=ws.length>SHOW_MAX?`<div id="${tierId}" style="display:none">${hiddenRows}</div>`:"";
+        const addrRows=visibleRows+hiddenSection+expandBtn;
+        const isDarkMode=document.body.classList.contains("dark");
+        const tierBg={6:"rgba(200,150,20,.1)",5:"rgba(42,24,0,.06)",4:"rgba(0,58,176,.07)",3:"rgba(90,45,138,.07)"};
+        const tierBgDark={6:"rgba(240,180,41,.06)",5:"rgba(240,180,41,.04)",4:"rgba(0,82,255,.06)",3:"rgba(138,80,220,.06)"};
+        const rowBg=isDarkMode?tierBgDark[td.match]:tierBg[td.match];
+        const rolloverColor=isDarkMode?"#FFB800":"#003AB0";
+        const rolloverBg=isDarkMode?"rgba(255,184,0,.15)":"rgba(0,58,176,.07)";
+        const rolloverBorder=isDarkMode?"rgba(255,184,0,.5)":"rgba(0,58,176,.25)";
+        const tierIcon={6:"👑",5:"💎",4:"💎",3:"🏅"};
+        const subColor=isDarkMode?"var(--text2)":"#8B6800";
+        const borderLM=isDarkMode?"transparent":`rgba(${td.match===6?"192,112,0":td.match===5?"0,107,94":td.match===4?"196,75,0":"184,0,51"},.35)`;
+        html+=`<div style="padding:10px 12px;margin-bottom:5px;border-radius:8px;background:${rowBg};border:1px solid ${borderLM}">
+          <div style="display:flex;align-items:center;justify-content:space-between;font-family:var(--mono)">
+            <div style="display:flex;align-items:center;gap:7px">
+              ${isDarkMode?"":`<span style="font-size:14px;line-height:1">${tierIcon[td.match]}</span>`}
+              <div style="display:flex;flex-direction:column;gap:2px">
+                <span style="font-size:9px;color:${subColor};font-weight:600;letter-spacing:.5px">${td.label}</span>
+                <span style="font-size:12px;color:${td.color};font-weight:900;letter-spacing:1px;text-transform:uppercase">${td.sub.replace("Match ","MATCH ")}</span>
+              </div>
+            </div>
+            <span style="color:${noWin?rolloverColor:td.color};font-weight:800;font-size:9px;background:${noWin?rolloverBg:"transparent"};border:${noWin?"1px solid "+rolloverBorder:"none"};border-radius:4px;padding:${noWin?"3px 10px":"0"};letter-spacing:.5px">
+              ${noWin?`🏷 ${tierPool.toFixed(4)} rollover`:(tierTicketCount[td.match]+"T · "+perWin+" OPN")}
+            </span>
+          </div>
+          ${addrRows}
+        </div>`;
       }
       /* Tính tổng rollover từ các tier không có winner */
       let totalNoWinnerRollover=0;
@@ -1628,12 +1876,12 @@ async function refreshPublic(){
         const timeLeft=claimDeadline-now;
         if(timeLeft<=0){
           /* Estimated unclaimed = total prize of winners who did not claim */
-          const unclaimedEst=totalNoWinnerRollover>0?`<div style="font-size:9px;opacity:.8;margin-top:3px">↳ ${totalNoWinnerRollover.toFixed(4)} OPN (empty tiers) → next round jackpot</div>`:"";
+          const unclaimedEst=totalNoWinnerRollover>0?`<div style="font-size:9px;opacity:.8;margin-top:3px">↳ ${totalNoWinnerRollover.toFixed(4)} OPN (empty tiers) → next round prize pool</div>`:"";
           deadlineEl.innerHTML=`<div class="deadline-card expired">⏰ Claim window closed — unclaimed prizes rolled over${unclaimedEst}</div>`;
         } else {
           const d=Math.floor(timeLeft/86400),h=Math.floor((timeLeft%86400)/3600),m2=Math.floor((timeLeft%3600)/60);
           const urgent=timeLeft<86400;
-          const noWinNote=totalNoWinnerRollover>0?`<div style="font-size:9px;opacity:.8;margin-top:3px">↳ ${totalNoWinnerRollover.toFixed(4)} OPN from empty tiers will rollover at round end</div>`:"";
+          const isDark=document.body.classList.contains("dark");const noWinNote=totalNoWinnerRollover>0?`<div style="font-size:9px;margin-top:3px">↳ <span style="color:${isDark?"#FFD700":"#8B6000"};font-weight:800">${totalNoWinnerRollover.toFixed(4)} OPN</span> <span style="color:${isDark?"#FFFFFF":"#3D2800"};font-weight:600">rolls to next round</span></div>`:"";
           deadlineEl.innerHTML=`<div class="deadline-card ${urgent?"urgent":"open"}">${urgent?"⚠️":"⏰"} ${d}d ${h}h ${m2}m remaining to claim${noWinNote}</div>`;
         }
         deadlineEl.style.display="block";
@@ -1657,7 +1905,7 @@ function renderLedger(rid,r,displayRid,displayRound,tierWinners,tierTicketCount,
   if(!panel||!el)return;
 
   const rev=parseFloat(ethers.formatEther(r.ticketRevenue));
-  const jp=parseFloat(ethers.formatEther(r.jackpot));
+  const jp=parseFloat(ethers.formatEther(r.prizePool));
   const tickets=Number(r.totalTickets);
   const carriedIn=Math.max(0,jp-rev); // rollover carried in from prev round
   const playerPool=rev*0.85+carriedIn; // 85% rev + full rollover (matches snapshotPlayerPool)
@@ -1756,12 +2004,14 @@ function renderPublicAccounting(rid,r,uniquePlayers){
   const el=document.getElementById("public-ledger-content");
   if(!el)return;
   const rev=parseFloat(ethers.formatEther(r.ticketRevenue||0));
-  const jackpot=parseFloat(ethers.formatEther(r.jackpot||0));
+  const prizePoolTotal=parseFloat(ethers.formatEther(r.prizePool||0));
   const tickets=Number(r.totalTickets||0);
-  const carriedIn=Math.max(0,jackpot-rev);
-  const playerPool=rev*0.85+carriedIn;
-  const treasury=rev*0.10;
-  const rolloverOut=rev*0.05;
+  const carriedIn=Math.max(0,prizePoolTotal-rev);
+  const total=prizePoolTotal;
+  const playerPool=total*0.85;
+  const treasury=total*0.10;
+  const rolloverOut=total*0.05;
+  const prizePool=prizePoolTotal;
   const state=Number(r.state||0);
   const stateStr=state===0?"🟢 Open":state===1?"🔵 Drawing":state===2?"🟡 Claimable":"⚫ Closed";
 
@@ -1804,7 +2054,7 @@ function renderPublicAccounting(rid,r,uniquePlayers){
       <div style="font-size:13px;line-height:1;flex-shrink:0">${icon}</div>
       <div style="flex:1;min-width:0">
         <div style="font-size:6.5px;color:${statLbl};text-transform:uppercase;letter-spacing:1px;font-weight:700">${label}</div>
-        <div style="font-family:var(--mono);font-size:11px;font-weight:800;color:${valColor};line-height:1.2;margin-top:1px">${val} <span style="font-size:7.5px;font-weight:600;color:${subTxt}">OPN</span></div>
+        <div style="font-family:var(--mono);font-size:11px;font-weight:800;color:${valColor};line-height:1.2;margin-top:1px">${val} <span style="font-size:7.5px;font-weight:600;color:${subTxt}">zkLTC</span></div>
       </div>
       <div style="font-family:var(--mono);font-size:9px;font-weight:600;color:${subTxt};flex-shrink:0;text-align:right;opacity:.85">${sub}</div>
     </div>`;
@@ -1842,8 +2092,8 @@ function renderPublicAccounting(rid,r,uniquePlayers){
   html+=`<div style="display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,rgba(0,180,255,.1),rgba(0,100,255,.04));border:1.5px solid rgba(0,180,255,.55);border-radius:6px;padding:7px 10px;flex:1${isDark?';box-shadow:0 0 10px rgba(0,180,255,.2)':''}">
     <div style="font-size:13px;line-height:1;flex-shrink:0">🏆</div>
     <div style="flex:1;min-width:0">
-      <div style="font-size:6.5px;color:${statLbl};text-transform:uppercase;letter-spacing:1px;font-weight:700">Total Jackpot Pool</div>
-      <div style="font-family:var(--mono);font-size:14px;font-weight:800;color:${isDark?'#00C8FF':'#0060CC'};line-height:1.2;margin-top:1px${isDark?';text-shadow:0 0 10px rgba(0,200,255,.5)':''}">${jackpot.toFixed(4)} <span style="font-size:7.5px;font-weight:600;color:${isDark?'#00C8FF':'#0060CC'};opacity:.8">OPN</span></div>
+      <div style="font-size:6.5px;color:${statLbl};text-transform:uppercase;letter-spacing:1px;font-weight:700">Total Prize Pool</div>
+      <div style="font-family:var(--mono);font-size:14px;font-weight:800;color:${isDark?'#00C8FF':'#0060CC'};line-height:1.2;margin-top:1px${isDark?';text-shadow:0 0 10px rgba(0,200,255,.5)':''}">${prizePool.toFixed(4)} <span style="font-size:7.5px;font-weight:600;color:${isDark?'#00C8FF':'#0060CC'};opacity:.8">zkLTC</span></div>
     </div>
   </div>`;
   html+=`</div>`;
@@ -1925,7 +2175,7 @@ function openWalletModal(){
   const sub=document.getElementById("modal-sub-txt");
   if(sub)sub.innerHTML=_isMobile
     ?"Tap <b>DETECTED</b> to connect · or <b>OPEN APP</b> to launch your wallet’s in-app browser"
-    :"Ensure you are on <a href='https://chain.iopn.io/' target='_blank' style='color:var(--blue2);text-decoration:none;font-weight:700'>OPN Testnet ↗</a>";
+    :"Select your wallet · Ensure you are on <a href='https://testnet.litvm.com/' target='_blank' style='color:var(--blue2);text-decoration:none;font-weight:700'>LiteForge Testnet ↗</a>";
   buildWalletOptions();
   document.getElementById("wallet-modal").classList.add("open");
 }
@@ -2152,16 +2402,16 @@ async function refresh(){
   await refreshPublic();if(!wallet)return;
   try{
     await refreshLimit();
-    const rid=Number(await contract.currentRoundId());const s=await contract.getRoundSummary(rid);const r={state:s.state,winningNumbers:s.winningNumbers,jackpot:s.jackpot,ticketRevenue:s.ticketRevenue,totalTickets:s.totalTickets,endTime:s.endTime,startTime:s.startTime,claimDeadline:s.claimDeadline};
+    const rid=Number(await contract.currentRoundId());const s=await contract.getRoundSummary(rid);const r={state:s.state,winningNumbers:s.winningNumbers,prizePool:s.jackpot,ticketRevenue:s.ticketRevenue,totalTickets:s.totalTickets,endTime:s.endTime,startTime:s.startTime,claimDeadline:s.claimDeadline};
     await refreshHistory(rid,r);
     const drawn=Number(r.state)>=1;const displayRid=drawn?rid:(rid>1?rid-1:null);
     if(displayRid&&wallet){
       try{
         const now=Math.floor(Date.now()/1000);
-        let displayRound=r;if(displayRid!==rid){const ds=await contract.getRoundSummary(displayRid);displayRound={state:ds.state,winningNumbers:ds.winningNumbers,snapshotPlayerPool:ds.jackpot-ds.ticketRevenue*1500n/10000n,claimDeadline:ds.claimDeadline,jackpot:ds.jackpot,ticketRevenue:ds.ticketRevenue};}
+        let displayRound=r;if(displayRid!==rid){const ds=await contract.getRoundSummary(displayRid);displayRound={state:ds.state,winningNumbers:ds.winningNumbers,snapshotPlayerPool:ds.prizePool*8500n/10000n,claimDeadline:ds.claimDeadline,prizePool:ds.prizePool,ticketRevenue:ds.ticketRevenue};}
         const claimDeadline=Number(displayRound.claimDeadline);const timeLeft=claimDeadline>0?claimDeadline-now:Infinity;const isExpired=claimDeadline>0&&timeLeft<=0;
         const winNums=Array.from(displayRound.winningNumbers).map(n=>Number(n));
-        const checkTickets=await contract.getRoundTickets(displayRid);
+        const checkTickets=await fetchTicketsDirect(displayRid);
         const myTickets=checkTickets.filter(t=>t.player.toLowerCase()===wallet.toLowerCase());
 
         const myWinEl=document.getElementById("my-win-claim");
@@ -2234,17 +2484,23 @@ async function refreshHistory(rid,currentRound){
     if(!rid){rid=Number(await contract.currentRoundId());}
     if(!currentRound){const s=await contract.getRoundSummary(rid);currentRound={state:s.state,winningNumbers:s.winningNumbers};}
     const startR=Math.max(1,rid-5);const roundRange=[];for(let r=startR;r<=rid;r++)roundRange.push(r);
-    const allTickets=await Promise.all(roundRange.map(r=>contract.getRoundTickets(r).catch(()=>[])));
+    // Always invalidate current round cache so new tickets show up
+    delete _ticketsCacheLS[rid];
+    const allTickets=await Promise.all(roundRange.map(r=>fetchTicketsDirect(r).catch(()=>[])));
     const myRounds=roundRange.map((r,i)=>({r,mine:allTickets[i].filter(t=>t.player.toLowerCase()===wallet.toLowerCase()),drawn:r<rid||Number(currentRound.state)>=1})).filter(x=>x.mine.length>0);
     if(!myRounds.length){list.innerHTML='<div class="act-empty-ft">No tickets found</div>';return;}
-    const winNumsMap={};
-    await Promise.all(myRounds.filter(x=>x.drawn).map(async x=>{try{const s=await contract.getRoundSummary(x.r);if(Number(s.state)>=1)winNumsMap[x.r]=Array.from(s.winningNumbers).map(n=>Number(n));}catch(_){}}));
+    const winNumsMap={};const deadlineMap={};const now=Math.floor(Date.now()/1000);
+    await Promise.all(myRounds.filter(x=>x.drawn).map(async x=>{try{const s=await contract.getRoundSummary(x.r);if(Number(s.state)>=1){winNumsMap[x.r]=Array.from(s.winningNumbers).map(n=>Number(n));deadlineMap[x.r]=Number(s.claimDeadline);}}catch(_){}}));
+    // Hide rounds where claim window has expired (keep current open round always)
+    const filteredRounds=myRounds.filter(x=>{if(!x.drawn)return true;const dl=deadlineMap[x.r];if(!dl||dl===0)return true;return now<=dl;});
     const items=[];
-    for(const{r,mine}of myRounds){
+    for(const{r,mine}of filteredRounds){
       const winNums=winNumsMap[r]||null;const drawn=!!winNums;
       for(const t of mine){
-        const nums=t.numbers.map(n=>Number(n));let badge='<span class="badge-ft bpend">PENDING</span>',claimBtn="";
-        if(drawn){const m=nums.filter(n=>winNums.includes(n)).length;
+        const nums=t.numbers.map(n=>Number(n));
+        let badge='<span class="badge-ft bpend">PENDING</span>';let claimBtn="";
+        if(drawn){
+          const m=nums.filter(n=>winNums.includes(n)).length;
           if(m>=6)badge='<span class="badge-ft b1">JACKPOT</span>';
           else if(m===5)badge='<span class="badge-ft b2">2ND</span>';
           else if(m===4)badge='<span class="badge-ft b3">3RD</span>';
@@ -2253,12 +2509,21 @@ async function refreshHistory(rid,currentRound){
           if(m>=3){try{const claimed=await contract.hasClaimed(r,wallet);claimBtn=claimed?'<span style="font-size:9px;color:var(--text3);font-family:var(--mono)">CLAIMED</span>':`<button class="btn-claim-ft" onclick="claimReward(${r})">CLAIM</button>`;}catch(_){}}
         }
         const mb=nums.map(n=>`<div class="mball">${n}</div>`).join("");
-        items.push(`<div class="hist-item"><div style="display:flex;align-items:center;gap:8px"><span class="hist-round">Round #${r}</span><div class="mini-balls">${mb}</div></div><div style="display:flex;align-items:center;gap:6px">${badge}${claimBtn}</div></div>`);
+        const isNoMatch=drawn&&nums.filter(n=>winNums.includes(n)).length<3;
+        items.push(`<div class="hist-item${isNoMatch?' hist-item-nomatch':''}" ${isNoMatch&&_hideNoMatch?'style="display:none"':''}><div style="display:flex;align-items:center;gap:8px"><span class="hist-round">Round #${r}</span><div class="mini-balls">${mb}</div></div><div style="display:flex;align-items:center;gap:6px">${badge}${claimBtn}</div></div>`);
       }
     }
-    list.innerHTML=items.length?items.join(""):'<div class="act-empty-ft">No tickets found</div>';
+    list.innerHTML=filteredRounds.length===0?'<div class="act-empty-ft">No active tickets — all claim windows closed</div>':(items.length?items.join(""):'<div class="act-empty-ft">No tickets found</div>');
     const lm=document.getElementById("history-list-lm");if(lm)lm.innerHTML=list.innerHTML;
   }catch(e){console.error("History error:",e);list.innerHTML='<div class="act-empty-ft">Error loading history</div>';}
+}
+
+let _hideNoMatch=false;
+function toggleHideNoMatch(){
+  _hideNoMatch=!_hideNoMatch;
+  const btn=document.getElementById("btn-hide-nomatch");
+  if(btn){btn.textContent=_hideNoMatch?"SHOW ALL":"HIDE NO MATCH";btn.style.color=_hideNoMatch?"var(--green)":"var(--text3)";btn.style.borderColor=_hideNoMatch?"var(--green)":"var(--border)";}
+  document.querySelectorAll(".hist-item-nomatch").forEach(el=>{el.style.display=_hideNoMatch?"none":"";});
 }
 
 function isDuplicateTicket(numbers){
@@ -2355,7 +2620,7 @@ async function buyTicket(){
   showTxStatus("processing","Verifying on-chain...");
   let rid;
   try{
-    rid=Number(await contract.currentRoundId());const allTickets=await contract.getRoundTickets(rid);
+    rid=Number(await contract.currentRoundId());const allTickets=await fetchTicketsDirect(rid);
     const myTickets=allTickets.filter(t=>t.player.toLowerCase()===wallet.toLowerCase()).map(t=>t.numbers.map(n=>Number(n)));
     myTicketsCache.roundId=rid;myTicketsCache.tickets=myTickets;
     if(currentTab==="pick"){const sorted=[...numbers].sort((a,b)=>a-b).join(",");const dup=myTickets.some(t=>[...t].sort((a,b)=>a-b).join(",")===sorted);if(dup){hideTxStatus();btn.disabled=false;btn.textContent="Buy Ticket →";toast("⚠️ Duplicate combination!","warn");const badge=document.getElementById("ticket-badge");badge.textContent="⚠️ DUPLICATE COMBO";badge.className="t-badge dup";return;}}
@@ -2379,7 +2644,7 @@ async function buyTicket(){
         ["sp-players","stat-players","tick-pls","tick-pls2-b"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=newPl;});
       }
     }catch(_){}
-    if(rid!=null){try{const fresh=await contract.getRoundTickets(rid);myTicketsCache.roundId=rid;myTicketsCache.tickets=fresh.filter(t=>t.player.toLowerCase()===wallet.toLowerCase()).map(t=>t.numbers.map(n=>Number(n)));}catch(_){}}
+    if(rid!=null){try{const fresh=await fetchTicketsDirect(rid);myTicketsCache.roundId=rid;myTicketsCache.tickets=fresh.filter(t=>t.player.toLowerCase()===wallet.toLowerCase()).map(t=>t.numbers.map(n=>Number(n)));}catch(_){}}
     showTxStatus("success",currentTab==="pick"?"Ticket purchased! "+numbers.join(" · "):"Quick Pick purchased!");
     try{const bal=await provider.getBalance(wallet);document.getElementById("wb-bal").textContent=parseFloat(ethers.formatEther(bal)).toFixed(4)+" OPN";}catch(_){}
     setTimeout(()=>hideTxStatus(),4000);startCooldownUI(30);
@@ -2464,7 +2729,7 @@ function _computeMatchCount(ticket, winNums) {
 async function _computeTierPrizesOffChain(roundId, winNums, pool) {
   // Fetch all tickets in batches of 200 to avoid RPC timeout
   const total = Number(await contract.getRoundSummary(roundId).then(s=>s.totalTickets).catch(async()=>{
-    const tkts = await contract.getRoundTickets(roundId);
+    const tkts = await fetchTicketsDirect(roundId);
     return tkts.length;
   }));
 
@@ -2474,7 +2739,7 @@ async function _computeTierPrizesOffChain(roundId, winNums, pool) {
   // getRoundTickets returns all — fine for read (no gas), just RPC limit
   // Try full fetch first, fall back to manual batching
   try {
-    const tkts = await contract.getRoundTickets(roundId);
+    const tkts = await fetchTicketsDirect(roundId);
     allTickets = tkts.map(t => Array.from(t.numbers).map(Number));
   } catch(e) {
     console.warn("getRoundTickets failed, batching:", e.message);
@@ -2563,7 +2828,7 @@ async function claimReward(rid){
     toast("Claiming reward for Round #"+rid+"...");const tx=await contract.claimReward(rid);const receipt=await tx.wait();_invalidateCache();
     if(receipt.status===1){
       toast("🎉 Reward claimed!","success");
-      try{const rData=await contract.getRoundSummary(rid);const wNums=Array.from(rData.winningNumbers).map(Number);const myT=await contract.getRoundTickets(rid);let best=3;for(const t of myT){if(t.player.toLowerCase()!==wallet.toLowerCase())continue;const m=t.numbers.map(n=>Number(n)).filter(n=>wNums.includes(n)).length;if(m>best)best=m;}launchWinConfetti(best);}catch(_){launchWinConfetti(3);}
+      try{const rData=await contract.getRoundSummary(rid);const wNums=Array.from(rData.winningNumbers).map(Number);const myT=await fetchTicketsDirect(rid);let best=3;for(const t of myT){if(t.player.toLowerCase()!==wallet.toLowerCase())continue;const m=t.numbers.map(n=>Number(n)).filter(n=>wNums.includes(n)).length;if(m>best)best=m;}launchWinConfetti(best);}catch(_){launchWinConfetti(3);}
       if(wallet){const bal=await provider.getBalance(wallet);document.getElementById("wb-bal").textContent=parseFloat(ethers.formatEther(bal)).toFixed(4)+" OPN";}
     }else{toast("Transaction failed","error");}
   }catch(e){const msg=e?.reason||e?.message||"Claim failed";const msgL=msg.toLowerCase();if(msgL.includes("already claimed"))toast("Already claimed","error");else if(msgL.includes("claim window"))toast("Claim window closed","error");else if(msgL.includes("no prize"))toast("No prize for this round","error");else toast(msg.slice(0,80),"error");}
@@ -2667,17 +2932,18 @@ async function callAnthropicAI(prompt){
 }
 
 /* Global rollover context — updated by renderLedger */
-let _aiCtx={jackpot:"—",tickets:"—",round:"—",rolloverIn:0,rolloverOut:0,noWinnerRollover:0,nextSeed:0,carriedIn:0,tierWinners:null,claimDeadline:0};
+let _aiCtx={prizePool:"—",tickets:"—",round:"—",rolloverIn:0,rolloverOut:0,noWinnerRollover:0,nextSeed:0,carriedIn:0,tierWinners:null,claimDeadline:0};
 
 function updateAIContext(rid,r,tierWinners,tierTicketCount,snapshotPool,tierPcts,uniquePlayers){
   try{
     const rev=parseFloat(ethers.formatEther(r.ticketRevenue));
-    const jp=parseFloat(ethers.formatEther(r.jackpot));
-    const carriedIn=jp-rev;
+    const jp=parseFloat(ethers.formatEther(r.prizePool));
+    const carriedIn=Math.max(0,jp-rev);
     const rolloverOut=rev*0.05;
     const treasury=rev*0.10;
-    const carriedIn2=Math.max(0,parseFloat(ethers.formatEther(r.jackpot||0))-rev);
-    const playerPool=rev*0.85+carriedIn2;
+    const carriedIn2=Math.max(0,parseFloat(ethers.formatEther(r.prizePool||0))-rev);
+    const total2=parseFloat(ethers.formatEther(r.prizePool||0));
+    const playerPool=total2*0.85;
     let noWinnerRollover=0;
     const tierBreakdown=[];
     if(tierWinners&&tierTicketCount&&snapshotPool){
@@ -2695,7 +2961,7 @@ function updateAIContext(rid,r,tierWinners,tierTicketCount,snapshotPool,tierPcts
       });
     }
     _aiCtx={
-      jackpot:jp.toFixed(4),
+      prizePool:jp.toFixed(4),
       tickets:Number(r.totalTickets||0),
       players:uniquePlayers||0,
       round:"#"+rid,
@@ -2727,14 +2993,14 @@ function renderInsights(insights){
 }
 
 function getStaticInsights(){
-  const{jackpot,tickets,players,round,revenue,playerPool,treasury,carriedIn,rolloverOut,noWinnerRollover,nextSeed,claimDeadline,tierBreakdown}=_aiCtx;
+  const{prizePool,tickets,players,round,revenue,playerPool,treasury,carriedIn,rolloverOut,noWinnerRollover,nextSeed,claimDeadline,tierBreakdown}=_aiCtx;
   const now=Math.floor(Date.now()/1000);
   const insights=[];
 
   /* Insight 1 — Snapshot */
   const avgPerPlayer=players>0?(parseFloat(revenue)/players).toFixed(4):"—";
   if(parseFloat(carriedIn)>0.0001){
-    insights.push({title:`Round ${round} · ${tickets} Tickets · ${players} Players`,text:`Revenue: ${revenue} OPN (avg ${avgPerPlayer} OPN/player). Jackpot includes ${carriedIn} OPN rollover carried in — pool is larger than this round's ticket sales alone.`});
+    insights.push({title:`Round ${round} · ${tickets} Tickets · ${players} Players`,text:`Revenue: ${revenue} OPN (avg ${avgPerPlayer} OPN/player). Prize pool includes ${carriedIn} OPN rollover carried in — pool is larger than this round's ticket sales alone.`});
   } else {
     insights.push({title:`Round ${round} · ${tickets} Tickets · ${players} Players`,text:`Revenue: ${revenue} OPN (avg ${avgPerPlayer} OPN/player). Player pool: ${playerPool} OPN · Treasury: ${treasury} OPN · Fresh round, no prior rollover.`});
   }
@@ -2748,28 +3014,30 @@ function getStaticInsights(){
     } else {
       insights.push({title:"All Tiers Won — Clean Round",text:`Every prize tier had at least one winning ticket. Only 5% fixed rollover (${rolloverOut} OPN) carries into next round. Next round seeds at ${nextSeed} OPN.`});
     }
+  } else if(parseFloat(carriedIn)>0.0001){
+    insights.push({title:`🔄 Rollover Active — +${carriedIn} OPN Carried In`,text:`This round's prize pool includes ${carriedIn} OPN rolled over from the previous round. Current prize pool: ${prizePool} OPN (85% rev + rollover). Draw hasn't happened yet — tier breakdown available after draw.`});
   } else {
-    insights.push({title:"5% Fixed Rollover → Next Round",text:`${rolloverOut} OPN (5% of revenue) automatically seeds next round's jackpot — ensuring jackpot never starts at zero.`});
+    insights.push({title:"5% Fixed Rollover → Next Round",text:`${rolloverOut} OPN (5% of revenue) automatically seeds next round's prize pool — ensuring the pool never starts at zero.`});
   }
 
   /* Insight 3 — Claim deadline */
   if(claimDeadline>0){
     const left=claimDeadline-now;
     if(left>0&&left<86400*2){
-      insights.push({title:"⚠️ Claim Window Closing Soon",text:`Only ${Math.floor(left/3600)}h left to claim rewards. Unclaimed prizes roll over to next jackpot — claim now before the window closes.`});
+      insights.push({title:"⚠️ Claim Window Closing Soon",text:`Only ${Math.floor(left/3600)}h left to claim rewards. Unclaimed prizes roll over to next round's prize pool — claim now before the window closes.`});
     } else if(left<=0){
-      insights.push({title:"Claim Window Closed",text:`Unclaimed prizes from this round rolled into current jackpot. ${noWinnerRollover} OPN from empty tiers + unclaimed prizes now boost next round.`});
+      insights.push({title:"Claim Window Closed",text:`Unclaimed prizes from this round rolled into the next round's prize pool. ${noWinnerRollover} OPN from empty tiers + any unclaimed winner prizes now boost the next round.`});
     } else {
-      insights.push({title:`Claim Window Open — ${Math.floor(left/86400)}d Remaining`,text:`Winners have ${Math.floor(left/86400)} days to claim. Unclaimed prizes automatically roll into next round's jackpot at deadline.`});
+      insights.push({title:`Claim Window Open — ${Math.floor(left/86400)}d Remaining`,text:`Winners have ${Math.floor(left/86400)} days to claim. Unclaimed prizes automatically roll into next round's prize pool at deadline.`});
     }
   } else {
     insights.push({title:"Quick Pick Edge",text:"Algorithm picks avoid human-pattern bias (sequences, dates, lucky numbers), reducing split-prize probability across tiers."});
   }
 
   /* Insight 4 — Strategy */
-  const jp=parseFloat(jackpot);
+  const jp=parseFloat(prizePool);
   if(jp>0.1){
-    insights.push({title:`High Value Pool ${jackpot} OPN — Max Coverage`,text:`Large jackpot attracts more players — use all 3 tickets per wallet for maximum tier-hit probability. Each ticket is an independent draw across all 4 prize tiers.`});
+    insights.push({title:`High Value Pool ${prizePool} OPN — Max Coverage`,text:`Large prize pool attracts more players — use all 3 tickets per wallet for maximum tier-hit probability. Each ticket is an independent draw across all 4 prize tiers.`});
   } else {
     insights.push({title:"Round Strategy — Spread Your Numbers",text:`${tickets} tickets sold · ${players} players. Avoid sequences and birthdays — spread picks across 1–45 range for unique combinations and lower split-prize risk.`});
   }
@@ -2781,7 +3049,7 @@ async function loadAIInsights(){
   const body=document.getElementById("ai-body");if(!body)return;
   if(!AI_PROXY_URL){renderInsights(getStaticInsights());return;}
   try{
-    const{jackpot,tickets,players,round,revenue,playerPool,treasury,carriedIn,rolloverOut,noWinnerRollover,nextSeed,claimDeadline,tierBreakdown}=_aiCtx;
+    const{prizePool,tickets,players,round,revenue,playerPool,treasury,carriedIn,rolloverOut,noWinnerRollover,nextSeed,claimDeadline,tierBreakdown}=_aiCtx;
     const now=Math.floor(Date.now()/1000);
     const claimLeft=claimDeadline>0?Math.max(0,claimDeadline-now):null;
     const tierText=tierBreakdown&&tierBreakdown.length>0
@@ -2910,6 +3178,7 @@ async function admAcceptOwnership(){if(!contract)return;try{admLog("acceptOwners
 
 /* BOOT */
 refreshPublic();startPublicRefresh();startCountdown();
+
 setTimeout(loadAIInsights,2500);setInterval(loadAIInsights,300000);
 </script>
 
