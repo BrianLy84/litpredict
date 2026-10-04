@@ -2708,10 +2708,14 @@ async function buyTicket(){
   showTxStatus("processing","Verifying on-chain...");
   let rid;
   try{
-    rid=Number(await contract.currentRoundId());const allTickets=await fetchTicketsDirect(rid);
+    rid=Number(await contract.currentRoundId());delete _ticketsCacheLS[rid]; /* always read fresh at buy time (tickets may have been bought from another device) */ const allTickets=await fetchTicketsDirect(rid);
     const myTickets=allTickets.filter(t=>t.player.toLowerCase()===wallet.toLowerCase()).map(t=>t.numbers.map(n=>Number(n)));
     myTicketsCache.roundId=rid;myTicketsCache.tickets=myTickets;
-    if(currentTab==="pick"){const sorted=[...numbers].sort((a,b)=>a-b).join(",");const dup=myTickets.some(t=>[...t].sort((a,b)=>a-b).join(",")===sorted);if(dup){hideTxStatus();toast("⚠️ Duplicate combination!","warn");const badge=document.getElementById("ticket-badge");badge.textContent="⚠️ DUPLICATE COMBO";badge.className="t-badge dup";btn.disabled=true;return;}}
+    {const sorted=[...numbers].sort((a,b)=>a-b).join(",");const dup=myTickets.some(t=>[...t].sort((a,b)=>a-b).join(",")===sorted);
+      if(dup){hideTxStatus();
+        if(currentTab==="pick"){toast("⚠️ Duplicate combination!","warn");const badge=document.getElementById("ticket-badge");badge.textContent="⚠️ DUPLICATE COMBO";badge.className="t-badge dup";btn.disabled=true;}
+        else{toast("⚠️ Duplicate — re-rolling","warn");await refreshLimit().catch(()=>{});reroll();}
+        return;}}
   }catch(e){hideTxStatus();toast("Network error","error");await refreshLimit().catch(()=>{});return;}
   try{
     btn.textContent="Waiting...";showTxStatus("processing","Waiting for wallet...");
