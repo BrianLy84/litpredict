@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-<title>OPNBillionaire — Terminal</title>
-<meta name="description" content="OPNBillionaire — Weekly On-Chain Lottery on OPN Chain (IOPn)."/>
-<meta property="og:title" content="OPNBillionaire — On-Chain OPN Lottery"/>
-<meta property="og:description" content="Fully on-chain lottery on OPN Chain. Buy tickets, win big. 85% of revenue goes to players."/>
+<title>LitBillionaire — Terminal</title>
+<meta name="description" content="LitBillionaire — Weekly On-Chain Lottery on DogeOS Chikyū Testnet."/>
+<meta property="og:title" content="LitBillionaire — On-Chain DOGE Lottery"/>
+<meta property="og:description" content="Fully on-chain lottery on DogeOS Chikyū Testnet. Buy tickets, win big. 85% of revenue goes to players."/>
 <meta property="og:image" content="https://i.postimg.cc/8cZ6rz50/logo-png.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
@@ -14,8 +14,8 @@
   
 <meta property="og:url" content="https://litlottery.xyz"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="OPNBillionaire — On-Chain OPN Lottery"/>
-<meta name="twitter:description" content="Fully on-chain lottery on OPN Chain. Buy tickets, win big."/>
+<meta name="twitter:title" content="LitBillionaire — On-Chain DOGE Lottery"/>
+<meta name="twitter:description" content="Fully on-chain lottery on DogeOS Chikyū Testnet. Buy tickets, win big."/>
 <meta name="twitter:image" content="https://i.postimg.cc/8cZ6rz50/logo-png.png"/>
 <meta name="theme-color" content="#0052FF"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
@@ -809,7 +809,7 @@ body.dark .ticker-wrap{background:var(--surface2);border-color:transparent}
 body.dark .ticker-outer::after{display:none}
 body.dark .ticker-outer{border:none}
 body.dark .fair-play-wrap::after,body.dark .summary-breakdown-wrap::after{content:"";position:absolute;inset:-1px;border-radius:7px;background:conic-gradient(from var(--angle,0deg),#00E87A,#7B00FF,#C8E000,#5500FF,#00E87A);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:1px;opacity:.8;pointer-events:none;z-index:2;animation:borderRotate 4s linear infinite}
-body:not(.dark) .fair-play-wrap{background:none;padding:0}
+body:not(.dark) .fair-play-wrap{background:none;padding:1px;border-radius:7px;position:relative;overflow:hidden}body:not(.dark) .fair-play-wrap::before{content:"";position:absolute;inset:0;border-radius:7px;padding:1.5px;background:repeating-linear-gradient(90deg,#C8860A 0px,#C8860A 8px,#1A0800 8px,#1A0800 16px);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:2}
 body:not(.dark) .fp-num{background:#F0B429!important;color:#2A1400!important}
 body.dark .fp-num{background:rgba(0,82,255,.1)!important;color:var(--blue2)!important}
 body.dark .snap-box::after{content:"";position:absolute;inset:-1px;border-radius:6px;background:conic-gradient(from var(--angle),#00E87A,#7B00FF,#C8E000,#5500FF,#00E87A);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:1px;opacity:.7;animation:borderRotate 4s linear infinite;pointer-events:none;z-index:2}
@@ -870,6 +870,7 @@ body.dark .ticker-outer::before{content:"";position:absolute;inset:-1px;border-r
 
 /* stat cards */
 body.dark .sc-lbl{color:#C8E000}
+body.dark .bp-label,body.dark .bp-val{color:#00E87A;text-shadow:0 0 8px rgba(0,232,122,.6)}
 body.dark .sc-val{color:#fff}
 body.dark .sc-val.has-data{color:#FFD87A!important;-webkit-text-fill-color:#FFD87A!important;background:none!important;font-weight:700;font-family:var(--sans)}
 body.dark .jc-val.has-data{color:#D4940A;-webkit-text-fill-color:#D4940A;animation:darkGoldPulse 2.5s ease-in-out infinite}
@@ -955,6 +956,15 @@ body.dark .modal-div-ft::before,body.dark .modal-div-ft::after{background:#2A2A2
 body.dark .modal-div-ft span{color:#606060}
 body.dark .show-more-btn-ft{border-color:#333;color:#A0A0A0}
 body.dark .show-more-btn-ft:hover{background:#222;color:#fff}
+/* dark mode: "not installed" wallets were triple-dimmed (opacity .35 + inline dim colors) — raise contrast */
+body.dark .wallet-opt-ft.disabled{opacity:.85;border-color:#3A3A3A}
+body.dark .wallet-opt-ft.disabled .wo-icon-ft{opacity:1!important;border-color:#444}
+body.dark .wallet-opt-ft.disabled .wo-name-ft{color:#D8D8D8!important}
+body.dark .wallet-opt-ft.disabled .wo-desc-ft{color:#A8A8A8}
+body.dark .wallet-opt-ft.disabled .wo-badge-ft.notfound{color:#B8B8B8;background:rgba(255,255,255,.08);border-color:#4A4A4A}
+body.dark .modal-div-ft span{color:#A0A0A0}
+body.dark .modal-div-ft::before,body.dark .modal-div-ft::after{background:#3A3A3A}
+body.dark .show-more-btn-ft{border-color:#4A4A4A;color:#C8C8C8}
 
 /* admin */
 body.dark .adm-head{border-bottom-color:#2A2A2A;background:#1A1A1A}
@@ -1031,13 +1041,13 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
   <div class="tb-left">
     <div class="tb-logo"><img src="data:image/png;base64,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" alt="LitBillionaire"/></div>
     <div>
-      <div class="tb-name"><span class="gold">OPNBillionaire</span></div>
+      <div class="tb-name"><span class="gold">LITBillionaire</span></div>
       <div class="tb-sub">On-Chain Lottery Terminal</div>
       <div class="tagline-sub" style="font-family:var(--mono);font-size:8px;font-weight:800;letter-spacing:1.5px;color:#A07810;text-transform:uppercase;margin-top:5px">Where fortunes are made on-chain</div>
     </div>
     <div class="tb-pills">
       <div class="tb-pill pill-live"><span class="live-dot"></span>LIVE</div>
-      <div class="tb-pill pill-chain">IOPn · OPN Chain</div>
+      <div class="tb-pill pill-chain">DogeOS · Chikyū</div>
     </div>
   </div>
   <div class="tb-right" style="display:flex;align-items:center;gap:8px;flex-shrink:0">
@@ -1051,28 +1061,34 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
 <div class="ticker-wrap" style="margin-bottom:0">
   <div class="ticker-shim"></div>
   <div class="ticker-inner">
-    <div class="tick-item"><span class="tick-lbl">JACKPOT</span>&nbsp;<span class="tick-val gold" id="tick-jp">— OPN</span></div>
-    <div class="tick-item"><span class="tick-lbl">LTC/USD</span>&nbsp;<span class="tick-val green" id="tick-ltcusd">$—</span></div>
+    <div class="tick-item"><span class="tick-lbl">JACKPOT</span>&nbsp;<span class="tick-val gold" id="tick-jp">— DOGE</span></div>
+    <div class="tick-item"><span class="tick-lbl">DOGE/USD</span>&nbsp;<span class="tick-val green" id="tick-ltcusd">$—</span></div>
     <div class="tick-item"><span class="tick-lbl">ROUND</span>&nbsp;<span class="tick-val" id="tick-rnd">#—</span></div>
     <div class="tick-item"><span class="tick-lbl">TICKETS</span>&nbsp;<span class="tick-val" id="tick-tix">—</span></div>
     <div class="tick-item"><span class="tick-lbl">PLAYERS</span>&nbsp;<span class="tick-val" id="tick-pls">—</span></div>
     <div class="tick-item"><span class="tick-lbl">DRAW</span>&nbsp;<span class="tick-val green">FRI 13:00 UTC</span></div>
-    <div class="tick-item"><span class="tick-lbl">MATCH 6</span>&nbsp;<span class="tick-val gold">60% POOL</span></div>
-    <div class="tick-item"><span class="tick-lbl">MATCH 5</span>&nbsp;<span class="tick-val">20% POOL</span></div>
-    <div class="tick-item"><span class="tick-lbl">TICKET</span>&nbsp;<span class="tick-val">0.001 OPN</span></div>
-    <div class="tick-item"><span class="tick-lbl">TREASURY</span>&nbsp;<span class="tick-val">10% AUTO</span></div>
-    <div class="tick-item"><span class="tick-lbl">ROLLOVER</span>&nbsp;<span class="tick-val">5% SEED</span></div>
-    <div class="tick-item"><span class="tick-lbl">JACKPOT</span>&nbsp;<span class="tick-val gold" id="tick-jp2-b">— OPN</span></div>
-    <div class="tick-item"><span class="tick-lbl">LTC/USD</span>&nbsp;<span class="tick-val green" id="tick-ltcusd2-b">$—</span></div>
+    <div class="tick-item"><span class="tick-lbl">MATCH 6</span>&nbsp;<span class="tick-val gold">51%</span></div>
+    <div class="tick-item"><span class="tick-lbl">MATCH 5</span>&nbsp;<span class="tick-val">17%</span></div>
+    <div class="tick-item"><span class="tick-lbl">MATCH 4</span>&nbsp;<span class="tick-val">10.6%</span></div>
+    <div class="tick-item"><span class="tick-lbl">MATCH 3</span>&nbsp;<span class="tick-val">6.4%</span></div>
+    <div class="tick-item"><span class="tick-lbl">TICKET</span>&nbsp;<span class="tick-val">1 DOGE</span></div>
+    <div class="tick-item"><span class="tick-lbl">PLAYERS POOL</span>&nbsp;<span class="tick-val">85%</span></div>
+    <div class="tick-item"><span class="tick-lbl">ROLLOVER</span>&nbsp;<span class="tick-val">5%</span></div>
+    <div class="tick-item"><span class="tick-lbl">TREASURY</span>&nbsp;<span class="tick-val">10%</span></div>
+    <div class="tick-item"><span class="tick-lbl">JACKPOT</span>&nbsp;<span class="tick-val gold" id="tick-jp2-b">— DOGE</span></div>
+    <div class="tick-item"><span class="tick-lbl">DOGE/USD</span>&nbsp;<span class="tick-val green" id="tick-ltcusd2-b">$—</span></div>
     <div class="tick-item"><span class="tick-lbl">ROUND</span>&nbsp;<span class="tick-val" id="tick-rnd2-b">#—</span></div>
     <div class="tick-item"><span class="tick-lbl">TICKETS</span>&nbsp;<span class="tick-val" id="tick-tix2-b">—</span></div>
     <div class="tick-item"><span class="tick-lbl">PLAYERS</span>&nbsp;<span class="tick-val" id="tick-pls2-b">—</span></div>
     <div class="tick-item"><span class="tick-lbl">DRAW</span>&nbsp;<span class="tick-val green">FRI 13:00 UTC</span></div>
-    <div class="tick-item"><span class="tick-lbl">MATCH 6</span>&nbsp;<span class="tick-val gold">60% POOL</span></div>
-    <div class="tick-item"><span class="tick-lbl">MATCH 5</span>&nbsp;<span class="tick-val">20% POOL</span></div>
-    <div class="tick-item"><span class="tick-lbl">TICKET</span>&nbsp;<span class="tick-val">0.001 OPN</span></div>
-    <div class="tick-item"><span class="tick-lbl">TREASURY</span>&nbsp;<span class="tick-val">10% AUTO</span></div>
-    <div class="tick-item"><span class="tick-lbl">ROLLOVER</span>&nbsp;<span class="tick-val">5% SEED</span></div>
+    <div class="tick-item"><span class="tick-lbl">MATCH 6</span>&nbsp;<span class="tick-val gold">51%</span></div>
+    <div class="tick-item"><span class="tick-lbl">MATCH 5</span>&nbsp;<span class="tick-val">17%</span></div>
+    <div class="tick-item"><span class="tick-lbl">MATCH 4</span>&nbsp;<span class="tick-val">10.6%</span></div>
+    <div class="tick-item"><span class="tick-lbl">MATCH 3</span>&nbsp;<span class="tick-val">6.4%</span></div>
+    <div class="tick-item"><span class="tick-lbl">TICKET</span>&nbsp;<span class="tick-val">1 DOGE</span></div>
+    <div class="tick-item"><span class="tick-lbl">PLAYERS POOL</span>&nbsp;<span class="tick-val">85%</span></div>
+    <div class="tick-item"><span class="tick-lbl">ROLLOVER</span>&nbsp;<span class="tick-val">5%</span></div>
+    <div class="tick-item"><span class="tick-lbl">TREASURY</span>&nbsp;<span class="tick-val">10%</span></div>
   </div>
 </div>
 
@@ -1084,7 +1100,7 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
       <div class="wb-avatar" id="wb-av">◈</div>
       <div>
         <div class="wb-addr" id="wb-addr">Not connected</div>
-        <div class="wb-bal" id="wb-bal">— OPN</div>
+        <div class="wb-bal" id="wb-bal">— DOGE</div>
         <div class="wb-hint" id="wb-hint" style="display:none">MAX 3 TICKETS · 30S COOLDOWN · RESETS EACH ROUND</div>
       </div>
     </div>
@@ -1136,9 +1152,16 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
     <div class="sc-unit">this round</div>
   </div>
   <div class="stat-card gold">
-    <div class="sc-lbl">🎯 Total Winners</div>
+    <div class="sc-lbl">📊 Last Draw · <span id="stat-last-round" style="font-weight:700">—</span></div>
     <div class="sc-val" id="stat-winners">—</div>
-    <div class="sc-unit" id="stat-winners-unit">last draw</div>
+    <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:nowrap">
+      <span class="sc-unit" id="stat-winners-unit" style="margin-top:0">winners</span>
+      <span id="stat-bestpayout" style="font-size:10px;font-weight:700;letter-spacing:.5px;display:none;align-items:center;gap:3px">
+        <span style="opacity:.4">·</span>
+        <span class="bp-label" style="font-weight:800;letter-spacing:.5px">Best Payout</span>
+        <span id="stat-bestpayout-val" class="bp-val"></span>
+      </span>
+    </div>
   </div>
 </div>
 
@@ -1148,7 +1171,7 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
   <div style="flex:1;min-width:0">
   <div class="jc-lbl"><span style="font-size:18px;line-height:1">🏆</span> Current Prize Pool</div>
   <div class="jc-val" id="jc-val">—</div>
-  <div class="jc-unit">OPN · OPN Testnet</div>
+  <div class="jc-unit">DOGE · DogeOS Chikyū Testnet</div>
   <div class="jc-unit" id="jc-usd" style="font-size:11px;color:var(--green);font-weight:700;min-height:14px"></div>
   <div class="jc-bar-wrap"><div class="jc-bar" id="jc-bar" style="width:0%"></div></div>
   <div class="jc-note">Round progress · Next draw <span>Friday 13:00 UTC</span></div>
@@ -1283,9 +1306,9 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
 
 <!-- BUY PANEL -->
 <div class="buy-panel accent-cyan">
-  <div class="section-head">Buy Ticket · 0.001 OPN each</div>
+  <div class="section-head">Buy Ticket · 1 DOGE each</div>
   <div style="margin-bottom:12px;font-size:10px;font-family:var(--mono)">
-    <span style="color:var(--text);font-family:var(--mono);font-size:10px">🔐 Fully on-chain · <a href="https://testnet.iopn.tech/address/0x630F3d14a11736808dA13649966361F5637e0672" target="_blank" style="color:var(--blue2);text-decoration:none;font-weight:700">Contract</a> · <a href="https://testnet.iopn.tech/address/0x630F3d14a11736808dA13649966361F5637e0672" target="_blank" style="color:var(--blue2);text-decoration:none;font-family:var(--mono)">0x630F...0672</a></span>
+    <span style="color:var(--text);font-family:var(--mono);font-size:10px">🔐 Fully on-chain · <a href="https://dogeos-testnet.l2scan.co/address/0x2F2d8CC51f6333b9818993d7d3AF94640b0845a5" target="_blank" style="color:var(--blue2);text-decoration:none;font-weight:700">Contract</a> · <a href="https://dogeos-testnet.l2scan.co/address/0x2F2d8CC51f6333b9818993d7d3AF94640b0845a5" target="_blank" style="color:var(--blue2);text-decoration:none;font-family:var(--mono)">0x2F2d...45a5</a></span>
   </div>
 
   <!-- Fair Play -->
@@ -1356,7 +1379,7 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
 
   <div class="ticket-meta">
     <span class="t-badge neutral" id="ticket-badge" onclick="if(this.textContent.trim()==='CONNECT WALLET')openWalletModal()" style="cursor:pointer">CONNECT WALLET</span>
-    <span class="t-price"><span class="t-price-ticket">TICKET</span>: <span>0.001 OPN</span></span>
+    <span class="t-price"><span class="t-price-ticket">TICKET</span>: <span>1 DOGE</span></span>
   </div>
 
   <div class="tx-status" id="tx-status">
@@ -1421,7 +1444,7 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
 </div>
 </div><!-- /main-grid -->
 
-<footer><p>LitBillionaire Terminal &nbsp;·&nbsp; LiteForge Testnet &nbsp;·&nbsp; <a href="https://litvm.com" target="_blank">LitVM ↗</a> &nbsp;·&nbsp; <a href="https://x.com/litlotteryxyz" target="_blank" rel="noopener" class="footer-x"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 18 18"><rect width="18" height="18" rx="4" fill="#000"/><path d="M10.18 8.34L13.64 4h-.97L9.75 7.76 7.4 4H4.5l3.63 5.28L4.5 14h.97l3.17-3.68L11.1 14H14L10.18 8.34zm-1.12 1.3l-.37-.52L5.8 4.66h1.26l2.36 3.38.37.52 3.07 4.4h-1.26L9.06 9.64z" fill="#fff"/></svg></a></p></footer>
+<footer><p>LitBillionaire Terminal &nbsp;·&nbsp; DogeOS Chikyū Testnet &nbsp;·&nbsp; <a href="https://dogeos.com" target="_blank">DogeOS ↗</a> &nbsp;·&nbsp; <a href="https://dogeos-testnet.l2scan.co/address/0x2F2d8CC51f6333b9818993d7d3AF94640b0845a5" target="_blank" rel="noopener">Contract ↗</a> &nbsp;·&nbsp; <a href="https://x.com/litlotteryxyz" target="_blank" rel="noopener" class="footer-x"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 18 18"><rect width="18" height="18" rx="4" fill="#000"/><path d="M10.18 8.34L13.64 4h-.97L9.75 7.76 7.4 4H4.5l3.63 5.28L4.5 14h.97l3.17-3.68L11.1 14H14L10.18 8.34zm-1.12 1.3l-.37-.52L5.8 4.66h1.26l2.36 3.38.37.52 3.07 4.4h-1.26L9.06 9.64z" fill="#fff"/></svg></a></p></footer>
 
 </div><!-- /wrap -->
 
@@ -1466,6 +1489,7 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
       <div class="wo-info-ft"><div class="wo-name-ft">WalletConnect</div><div class="wo-desc-ft">QR code · 300+ wallets</div></div>
       <span class="wo-badge-ft notfound">SCAN QR</span>
     </div>
+    <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);text-align:center;font-size:11px;color:var(--text2)">💧 Need test DOGE? <a href="https://faucet.testnet.dogeos.com" target="_blank" rel="noopener" style="color:var(--blue2);text-decoration:none;font-weight:700">Get it from the faucet ↗</a></div>
   </div>
 </div>
 
@@ -1477,12 +1501,21 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
       <button class="adm-close" onclick="closeAdminPanel()">✕</button>
     </div>
     <div class="adm-body">
+      <div class="adm-section" id="adm-draw-summary" style="display:none">
+        <div class="adm-sec-title">📊 Last Draw Summary</div>
+        <div class="adm-info-row"><span class="adm-lbl">Round</span><span class="adm-val" id="adm-ds-round">—</span></div>
+        <div class="adm-info-row"><span class="adm-lbl">Tickets Sold</span><span class="adm-val" id="adm-ds-tickets">—</span></div>
+        <div class="adm-info-row"><span class="adm-lbl">Unique Players</span><span class="adm-val" id="adm-ds-players">—</span></div>
+        <div class="adm-info-row"><span class="adm-lbl">Revenue</span><span class="adm-val" id="adm-ds-revenue">—</span></div>
+      </div>
       <div class="adm-section">
         <div class="adm-sec-title">Round Status</div>
         <div class="adm-info-row"><span class="adm-lbl">Round</span><span class="adm-val" id="adm-round">—</span></div>
         <div class="adm-info-row"><span class="adm-lbl">State</span><span class="adm-val" id="adm-state">—</span></div>
         <div class="adm-info-row"><span class="adm-lbl">Draw Time</span><span class="adm-val" id="adm-drawtime">—</span></div>
         <div class="adm-info-row"><span class="adm-lbl">Upkeep Ready</span><span class="adm-val" id="adm-upkeep">—</span></div>
+        <div class="adm-info-row"><span class="adm-lbl">Tickets Sold</span><span class="adm-val" id="adm-tickets">—</span></div>
+        <div class="adm-info-row"><span class="adm-lbl">Unique Players</span><span class="adm-val" id="adm-players">—</span></div>
         <div class="adm-info-row"><span class="adm-lbl">Locked Funds</span><span class="adm-val" id="adm-locked">—</span></div>
         <div class="adm-info-row"><span class="adm-lbl">Free Balance</span><span class="adm-val" id="adm-free">—</span></div>
         <div class="adm-info-row"><span class="adm-lbl">Treasury</span><span class="adm-val" id="adm-treasury">—</span></div>
@@ -1526,8 +1559,9 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
 <div id="toast"></div>
 
 <script>
-const CONTRACT_ADDRESS="0x630F3d14a11736808dA13649966361F5637e0672";
-const TICKET_BOUGHT_TOPIC="0x5825b714aca8e2542b07071bc79c3adb436949c0a2cfcdac8ff3172a9900309f";
+const TICKET_PRICE_STR="1"; // DOGE per ticket — MUST equal TICKET_PRICE in the contract
+const CONTRACT_ADDRESS="0x2F2d8CC51f6333b9818993d7d3AF94640b0845a5"; // DogeOS Chikyu Testnet deployment
+const TICKET_BOUGHT_TOPIC="0xdbaaf4c87ce30816c961a81d110622a3227ede77953d4383d514ff88ab2e0fd3";
 // _rpcId already declared above
 
 function fetchWithTimeout(url,options,ms){
@@ -1540,7 +1574,7 @@ async function smartRpcRequest(method,params,timeoutMs=12000){
   const eth=window.ethereum;
   if(eth){try{const r=await Promise.race([eth.request({method,params}),new Promise((_,rej)=>setTimeout(()=>rej(new Error("wallet timeout")),timeoutMs))]);if(r!==undefined&&r!==null)return r;}catch(e){}}
   try{
-    const res=await fetchWithTimeout("https://testnet-rpc.iopn.tech",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:_rpcId++,method,params})},timeoutMs);
+    const res=await fetchWithTimeout("https://rpc.testnet.dogeos.com/",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({jsonrpc:"2.0",id:_rpcId++,method,params})},timeoutMs);
     const json=await res.json();
     if(json.result!==undefined)return json.result;
   }catch(e){}
@@ -1553,7 +1587,7 @@ async function getBlockNumber(){
 }
 
 // LocalStorage persistent ticket cache
-const LS_TICKETS_KEY="lb_tickets_v2";
+const LS_TICKETS_KEY="lb_tickets_v2_"+CONTRACT_ADDRESS.toLowerCase(); // keyed per contract: a redeploy/other chain never reuses stale tickets
 const _ticketsCacheLS={};
 (function(){try{const raw=localStorage.getItem(LS_TICKETS_KEY);if(raw){const p=JSON.parse(raw);for(const[rid,val]of Object.entries(p)){_ticketsCacheLS[rid]={tickets:val.tickets||[],lastBlock:val.lastBlock||0};}}}catch(e){}})();
 
@@ -1568,7 +1602,7 @@ async function fetchTicketsDirect(roundId){
   }
   // Fetch from contract
   try{
-    const c=contract||new ethers.Contract(CONTRACT_ADDRESS,ABI,new ethers.JsonRpcProvider("https://testnet-rpc.iopn.tech"));
+    const c=contract||new ethers.Contract(CONTRACT_ADDRESS,ABI,new ethers.JsonRpcProvider("https://rpc.testnet.dogeos.com/"));
     const raw=await c.getRoundTickets(rid);
     const tickets=Array.from(raw).map(t=>({player:t.player,numbers:Array.from(t.numbers).map(n=>Number(n)),isCustom:t.isCustom}));
     // Cache to localStorage — past rounds are static
@@ -1581,9 +1615,9 @@ async function fetchTicketsDirect(roundId){
     return [];
   }
 }
-const CHAIN_ID="0x3D8";
-const NETWORK={chainId:CHAIN_ID,chainName:"OPN Testnet",nativeCurrency:{name:"OPN",symbol:"OPN",decimals:18},rpcUrls:["https://testnet-rpc.iopn.tech"],blockExplorerUrls:["https://testnet.iopn.tech"]};
-const ABI=["function buyCustomTicket(uint256[6] calldata numbers) external payable","function buyQuickPickTicket() external payable","function checkUpkeep() external view returns (bool)","function performUpkeep() external","function forceUpkeep() external","function finalizeRound(uint256 roundId) external","function claimReward(uint256 roundId) external","function getRoundSummary(uint256 roundId) external view returns (uint256 jackpot,uint256 ticketRevenue,uint256 totalTickets,uint256 uniquePlayers,uint256 endTime,uint256 startTime,uint8 state,uint256[6] winningNumbers,uint256 claimDeadline)","function getRecentTickets(uint256 roundId,uint256 count) external view returns (tuple(address player,uint256[6] numbers)[])","function currentRoundId() external view returns (uint256)","function getRoundTickets(uint256 roundId) external view returns (tuple(address player,uint256[6] numbers)[])","function getTicketsRemaining(address player) external view returns (uint256)","function hasClaimed(uint256 roundId,address player) external view returns (bool)","function lastPurchaseTime(address player) external view returns (uint256)","function uniquePlayerCount(uint256 roundId) external view returns (uint256)","function owner() external view returns (address)","function pendingOwner() external view returns (address)","function treasuryWallet() external view returns (address)","function lockedFunds() external view returns (uint256)","function emergencyWithdraw() external","function transferOwnership(address newOwner) external","function acceptOwnership() external","function setTreasuryWallet(address wallet) external","function tierPrizePerWinner(uint256 roundId,uint256 matchCount) external view returns (uint256)","function previewPrize(uint256 roundId,address player) external view returns (uint256)","function submitTierPrizes(uint256 roundId,uint256[4] calldata prizePerWinner,uint256[4] calldata winnerCounts) external","function getLtcUsdPrice() external pure returns (uint128,uint128)","function nextDrawTime() external view returns (uint256)","function getPlayerTickets(uint256 roundId,address player) external view returns (uint256[])"];
+const CHAIN_ID="0x5fdaf3"; // DogeOS Chikyū Testnet = 6281971
+const NETWORK={chainId:CHAIN_ID,chainName:"DogeOS Chikyū Testnet",nativeCurrency:{name:"Dogecoin",symbol:"DOGE",decimals:18},rpcUrls:["https://rpc.testnet.dogeos.com/"],blockExplorerUrls:["https://dogeos-testnet.l2scan.co"]};
+const ABI=["function buyCustomTicket(uint256[6] calldata numbers) external payable","function buyQuickPickTicket() external payable","function checkUpkeep() external view returns (bool)","function performUpkeep() external","function forceUpkeep() external","function finalizeRound(uint256 roundId) external","function claimReward(uint256 roundId) external","function getRoundSummary(uint256 roundId) external view returns (uint256 jackpot,uint256 ticketRevenue,uint256 totalTickets,uint256 uniquePlayers,uint256 endTime,uint256 startTime,uint8 state,uint256[6] winningNumbers,uint256 claimDeadline)","function getRecentTickets(uint256 roundId,uint256 count) external view returns (tuple(address player,uint256[6] numbers)[])","function currentRoundId() external view returns (uint256)","function getRoundTickets(uint256 roundId) external view returns (tuple(address player,uint256[6] numbers)[])","function getTicketsRemaining(address player) external view returns (uint256)","function hasClaimed(uint256 roundId,address player) external view returns (bool)","function lastPurchaseTime(address player) external view returns (uint256)","function uniquePlayerCount(uint256 roundId) external view returns (uint256)","function owner() external view returns (address)","function pendingOwner() external view returns (address)","function treasuryWallet() external view returns (address)","function lockedFunds() external view returns (uint256)","function emergencyWithdraw() external","function transferOwnership(address newOwner) external","function acceptOwnership() external","function setTreasuryWallet(address wallet) external","function tierPrizePerWinner(uint256 roundId,uint256 matchCount) external view returns (uint256)","function previewPrize(uint256 roundId,address player) external view returns (uint256)","function submitTierPrizes(uint256 roundId,uint256[4] calldata prizePerWinner,uint256[4] calldata winnerCounts) external","function nextDrawTime() external view returns (uint256)","function getPlayerTickets(uint256 roundId,address player) external view returns (uint256[])"];
 
 let provider,signer,contract,wallet=null;
 let roundEndTime=0,roundDuration=604800;
@@ -1593,24 +1627,19 @@ let lastKnownRem=3,myTicketsCache={roundId:null,tickets:[]};
 let _drawCheckDone=false,_cooldownTimer=null;
 // Track the exact rawProvider instance used so removeListener works correctly
 let _activeRawProvider=null;
-const RPC_URLS=["https://testnet-rpc.iopn.tech"];
+const RPC_URLS=["https://rpc.testnet.dogeos.com/"];
 let _rpcId=1;
 const _iface=new ethers.Interface(ABI);
 
-/* ── DIA Oracle (LTC/USD live price feed) ───────────────── */
-const DIA_LTC_FEED="0x45dDa5d881BD2C917976CCfde74fFd6f6412da29";
-const DIA_ABI=["function latestRoundData() view returns (uint80,int256,uint256,uint256,uint80)"];
-let _ltcUsdCache={price:null,ts:0};
+/* ── DOGE/USD price (off-chain: no DIA feed on DogeOS) ───── */
+let _ltcUsdCache={price:null,ts:0}; // name kept so existing callers keep working
 async function fetchLtcUsd(){
   const now=Date.now();
   if(_ltcUsdCache.price&&now-_ltcUsdCache.ts<120000)return _ltcUsdCache.price;
   try{
-    const p=provider||new ethers.JsonRpcProvider(RPC_URLS[0]);
-    const feed=new ethers.Contract(DIA_LTC_FEED,DIA_ABI,p);
-    const [,price,,,]=await feed.latestRoundData();
-    const raw=price<0n?-price:price;
-    // DIA on LitVM uses 18 decimals (not standard 8)
-    const usd=Number(raw/10000000000n)/1e8;
+    const r=await fetchWithTimeout("https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd",{},8000);
+    const usd=(await r.json())?.dogecoin?.usd;
+    if(!usd)throw new Error("no price");
     _ltcUsdCache={price:usd,ts:now};
     return usd;
   }catch(e){return _ltcUsdCache.price||null;}
@@ -1701,14 +1730,14 @@ async function refreshPublic(){
     const r=summary;
     const jp=parseFloat(ethers.formatEther(r.prizePool)).toFixed(4);
     ["stat-jackpot","jc-val"].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=jp;el.classList.add("has-data");}});
-    ["tick-jp","tick-jp2-b"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=jp+" OPN";});
+    ["tick-jp","tick-jp2-b"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=jp+" DOGE";});
     // DIA LTC/USD price feed
     const jpFloat=parseFloat(jp);
     fetchLtcUsd().then(ltcUsd=>{
       if(!ltcUsd)return;
       const usdVal=(jpFloat*ltcUsd).toFixed(2);
       // Update ticker LTC/USD
-      ["tick-ltcusd","tick-ltcusd2-b"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent="$"+ltcUsd.toFixed(2);});
+      ["tick-ltcusd","tick-ltcusd2-b"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent="$"+ltcUsd.toFixed(4);});
       // Update prize pool USD sub-label
       const jusd=document.getElementById("jc-usd");
       if(jusd)jusd.textContent="≈ $"+Number(usdVal).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})+" USD";
@@ -1732,8 +1761,8 @@ async function refreshPublic(){
     const rn=document.getElementById("sc-rollover");
     if(rn&&rolloverFromPrev>0.0001){
       rn.style.display="block";
-      rn.innerHTML=`↑ +${rolloverFromPrev.toFixed(4)} OPN carried in`;
-      rn.title=`Prize pool includes ${rolloverFromPrev.toFixed(4)} OPN rollover from previous round(s)`;
+      rn.innerHTML=`↑ +${rolloverFromPrev.toFixed(4)} DOGE carried in`;
+      rn.title=`Prize pool includes ${rolloverFromPrev.toFixed(4)} DOGE rollover from previous round(s)`;
     }else if(rn){rn.style.display="none";}
     if(!cdTimer)startCountdown();
     const totalTix=Number(r.totalTickets);
@@ -1762,9 +1791,9 @@ async function refreshPublic(){
         displayRound={
           state:ds.state,
           winningNumbers:ds.winningNumbers,
-          snapshotPlayerPool:ds.prizePool*8500n/10000n,
+          snapshotPlayerPool:((ds.prizePool??ds.jackpot)-ds.ticketRevenue*1500n/10000n),
           claimDeadline:ds.claimDeadline,
-          prizePool:ds.prizePool,
+          prizePool:(ds.prizePool??ds.jackpot),
           ticketRevenue:ds.ticketRevenue
         };
       } else {
@@ -1773,9 +1802,9 @@ async function refreshPublic(){
         displayRound={
           state:ds.state,
           winningNumbers:ds.winningNumbers,
-          snapshotPlayerPool:ds.prizePool*8500n/10000n,
+          snapshotPlayerPool:((ds.prizePool??ds.jackpot)-ds.ticketRevenue*1500n/10000n),
           claimDeadline:ds.claimDeadline,
-          prizePool:ds.prizePool,
+          prizePool:(ds.prizePool??ds.jackpot),
           ticketRevenue:ds.ticketRevenue
         };
       }
@@ -1849,7 +1878,7 @@ async function refreshPublic(){
               </div>
             </div>
             <span style="color:${noWin?rolloverColor:td.color};font-weight:800;font-size:9px;background:${noWin?rolloverBg:"transparent"};border:${noWin?"1px solid "+rolloverBorder:"none"};border-radius:4px;padding:${noWin?"3px 10px":"0"};letter-spacing:.5px">
-              ${noWin?`🏷 ${tierPool.toFixed(4)} rollover`:(tierTicketCount[td.match]+"T · "+perWin+" OPN")}
+              ${noWin?`🏷 ${tierPool.toFixed(4)} rollover`:(tierTicketCount[td.match]+"T · "+perWin+" DOGE")}
             </span>
           </div>
           ${addrRows}
@@ -1863,7 +1892,30 @@ async function refreshPublic(){
       // Tính total unique winners từ tất cả tiers
       const totalWinners=[3,4,5,6].reduce((acc,m)=>acc+tierWinners[m].size,0);
       const swEl=document.getElementById("stat-winners");
-      if(swEl){swEl.textContent=totalWinners>0?totalWinners.toLocaleString():"0";swEl.classList.add("has-data");}
+      if(swEl){swEl.textContent=totalWinners>0?totalWinners.toLocaleString():"0";swEl.classList.add("has-data");}const lrEl=document.getElementById("stat-last-round");if(lrEl)lrEl.textContent="Round #"+displayRid;
+
+      // Best Payout = highest (prizePerTicket / ticketPrice) across winning tiers
+      const TICKET_PRICE=parseFloat(TICKET_PRICE_STR);
+      let bestMultiplier=0;
+      for(const td of tierDef){
+        const m=td.match;
+        if(tierTicketCount[m]>0 && tierWinners[m].size>0){
+          const tierPool=snapshotPool*tierPcts[m];
+          const prizeEach=tierPool/tierTicketCount[m];
+          const multiplier=prizeEach/TICKET_PRICE;
+          if(multiplier>bestMultiplier)bestMultiplier=multiplier;
+        }
+      }
+      const bpEl=document.getElementById("stat-bestpayout");
+      const bpVal=document.getElementById("stat-bestpayout-val");
+      if(bpEl&&bpVal){
+        if(bestMultiplier>0){
+          bpVal.textContent=bestMultiplier.toFixed(1)+"×";
+          bpEl.style.display="inline-flex";
+        } else {
+          bpEl.style.display="none";
+        }
+      }
       tiersEl.innerHTML=html;tiersEl.style.display="block";
       const tiersElLm=document.getElementById("prize-tiers-lm");if(tiersElLm){tiersElLm.innerHTML=html;tiersElLm.style.display="block";}
 
@@ -1876,12 +1928,12 @@ async function refreshPublic(){
         const timeLeft=claimDeadline-now;
         if(timeLeft<=0){
           /* Estimated unclaimed = total prize of winners who did not claim */
-          const unclaimedEst=totalNoWinnerRollover>0?`<div style="font-size:9px;opacity:.8;margin-top:3px">↳ ${totalNoWinnerRollover.toFixed(4)} OPN (empty tiers) → next round prize pool</div>`:"";
+          const unclaimedEst=totalNoWinnerRollover>0?`<div style="font-size:9px;opacity:.8;margin-top:3px">↳ ${totalNoWinnerRollover.toFixed(4)} DOGE (empty tiers) → next round prize pool</div>`:"";
           deadlineEl.innerHTML=`<div class="deadline-card expired">⏰ Claim window closed — unclaimed prizes rolled over${unclaimedEst}</div>`;
         } else {
           const d=Math.floor(timeLeft/86400),h=Math.floor((timeLeft%86400)/3600),m2=Math.floor((timeLeft%3600)/60);
           const urgent=timeLeft<86400;
-          const isDark=document.body.classList.contains("dark");const noWinNote=totalNoWinnerRollover>0?`<div style="font-size:9px;margin-top:3px">↳ <span style="color:${isDark?"#FFD700":"#8B6000"};font-weight:800">${totalNoWinnerRollover.toFixed(4)} OPN</span> <span style="color:${isDark?"#FFFFFF":"#3D2800"};font-weight:600">rolls to next round</span></div>`:"";
+          const isDark=document.body.classList.contains("dark");const noWinNote=totalNoWinnerRollover>0?`<div style="font-size:9px;margin-top:3px">↳ <span style="color:${isDark?"#FFD700":"#8B6000"};font-weight:800">${totalNoWinnerRollover.toFixed(4)} DOGE</span> <span style="color:${isDark?"#FFFFFF":"#3D2800"};font-weight:600">rolls to next round</span></div>`:"";
           deadlineEl.innerHTML=`<div class="deadline-card ${urgent?"urgent":"open"}">${urgent?"⚠️":"⏰"} ${d}d ${h}h ${m2}m remaining to claim${noWinNote}</div>`;
         }
         deadlineEl.style.display="block";
@@ -1929,35 +1981,35 @@ function renderLedger(rid,r,displayRid,displayRound,tierWinners,tierTicketCount,
   /* Snapshot block — tickets + players + revenue */
   const snapshotTickets=Number(r.totalTickets||0);
   const snapshotRevenue=rev;
-  const pricePerTicket=0.001;
+  const pricePerTicket=parseFloat(TICKET_PRICE_STR);
 
   html+=`<div style="background:var(--surface2);border:1px solid var(--blue2);border-radius:5px;padding:6px 8px;margin-bottom:6px">`;
   html+=`<div style="color:var(--blue2);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;font-weight:700">Snapshot</div>`;
   html+=`<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;text-align:center">`;
   html+=`<div><div style="font-family:var(--mono);font-size:14px;font-weight:800;color:var(--gold)">${snapshotTickets}</div><div style="font-size:8px;color:var(--blue2);letter-spacing:1px;text-transform:uppercase;font-weight:700">Tickets</div></div>`;
   html+=`<div><div style="font-family:var(--mono);font-size:14px;font-weight:800;color:var(--gold)">${uniquePlayers||"—"}</div><div style="font-size:8px;color:var(--blue2);letter-spacing:1px;text-transform:uppercase;font-weight:700">Players</div></div>`;
-  html+=`<div><div style="font-family:var(--mono);font-size:14px;font-weight:800;color:var(--gold)">${snapshotRevenue.toFixed(4)}</div><div style="font-size:8px;color:var(--blue2);letter-spacing:1px;text-transform:uppercase;font-weight:700">OPN Rev</div></div>`;
+  html+=`<div><div style="font-family:var(--mono);font-size:14px;font-weight:800;color:var(--gold)">${snapshotRevenue.toFixed(4)}</div><div style="font-size:8px;color:var(--blue2);letter-spacing:1px;text-transform:uppercase;font-weight:700">DOGE Rev</div></div>`;
   html+=`</div></div>`;
 
   /* Revenue breakdown */
-  html+=row("Revenue",rev.toFixed(4)+" OPN",`(${tickets} × ${pricePerTicket} OPN)`);
+  html+=row("Revenue",rev.toFixed(4)+" DOGE",`(${tickets} × ${pricePerTicket} DOGE)`);
   html+=sep;
 
   /* Allocations */
-  html+=row("→ Player Pool",playerPool.toFixed(4)+" OPN","(85%)","var(--blue2)");
-  html+=row("→ Treasury",treasury.toFixed(4)+" OPN","(10%)","var(--text2)");
-  html+=row("→ Rollover out",rolloverOut.toFixed(4)+" OPN","(5%)","var(--gold)");
+  html+=row("→ Player Pool",playerPool.toFixed(4)+" DOGE","(85%)","var(--blue2)");
+  html+=row("→ Treasury",treasury.toFixed(4)+" DOGE","(10%)","var(--text2)");
+  html+=row("→ Rollover out",rolloverOut.toFixed(4)+" DOGE","(5%)","var(--gold)");
   html+=sep;
 
   /* Carried in from prev round */
   if(carriedIn>0.0001){
-    html+=row("Carried in","+"+carriedIn.toFixed(4)+" OPN",`(from R#${rid-1})`,"var(--green)");
+    html+=row("Carried in","+"+carriedIn.toFixed(4)+" DOGE",`(from R#${rid-1})`,"var(--green)");
     html+=sep;
   }
 
   /* Prize pool */
   const prizePool=drawn?snapshotPool:playerPool+Math.max(0,carriedIn);
-  html+=row("Prize Pool",prizePool.toFixed(4)+" OPN","","var(--gold)");
+  html+=row("Prize Pool",prizePool.toFixed(4)+" DOGE","","var(--gold)");
 
   /* Tier breakdown — only after draw */
   if(drawn&&displayRound&&Number(displayRound.state)>=1){
@@ -1977,7 +2029,7 @@ function renderLedger(rid,r,displayRid,displayRound,tierWinners,tierTicketCount,
         :`<span style="color:${td.color}">${tCount}T · ${perWin} each</span>`;
       html+=`<div style="display:flex;justify-content:space-between;padding:2px 0 2px 8px;font-size:9px">
         <span style="color:var(--text3)">${td.label} <span style="opacity:.6">(${td.pct})</span></span>
-        <span style="color:${td.color};font-weight:700">${pool} OPN &nbsp;${status}</span>
+        <span style="color:${td.color};font-weight:700">${pool} DOGE &nbsp;${status}</span>
       </div>`;
     }
     html+=sep;
@@ -1987,7 +2039,7 @@ function renderLedger(rid,r,displayRid,displayRound,tierWinners,tierTicketCount,
       return acc+(empty?snapshotPool*tierPcts[td.match]:0);
     },0);
     const nextSeed=rolloverOut+noWinRollover;
-    html+=row("Next round seed",nextSeed.toFixed(4)+" OPN","","var(--green)");
+    html+=row("Next round seed",nextSeed.toFixed(4)+" DOGE","","var(--green)");
   }else{
     html+=`<div style="color:var(--text3);font-size:9px;padding:4px 0;opacity:.7">— Tier breakdown after draw —</div>`;
   }
@@ -2054,7 +2106,7 @@ function renderPublicAccounting(rid,r,uniquePlayers){
       <div style="font-size:13px;line-height:1;flex-shrink:0">${icon}</div>
       <div style="flex:1;min-width:0">
         <div style="font-size:6.5px;color:${statLbl};text-transform:uppercase;letter-spacing:1px;font-weight:700">${label}</div>
-        <div style="font-family:var(--mono);font-size:11px;font-weight:800;color:${valColor};line-height:1.2;margin-top:1px">${val} <span style="font-size:7.5px;font-weight:600;color:${subTxt}">zkLTC</span></div>
+        <div style="font-family:var(--mono);font-size:11px;font-weight:800;color:${valColor};line-height:1.2;margin-top:1px">${val} <span style="font-size:7.5px;font-weight:600;color:${subTxt}">DOGE</span></div>
       </div>
       <div style="font-family:var(--mono);font-size:9px;font-weight:600;color:${subTxt};flex-shrink:0;text-align:right;opacity:.85">${sub}</div>
     </div>`;
@@ -2079,7 +2131,7 @@ function renderPublicAccounting(rid,r,uniquePlayers){
     </div>
     <div style="background:rgba(240,180,41,.08);border:1px solid rgba(240,180,41,${borderMult});border-radius:6px;padding:5px 3px">
       <div style="font-family:var(--mono);font-size:11px;font-weight:800;color:${revColor};line-height:1">${rev.toFixed(3)}</div>
-      <div style="font-size:6.5px;color:${statLbl};letter-spacing:1px;text-transform:uppercase;margin-top:2px;font-weight:700">OPN Rev</div>
+      <div style="font-size:6.5px;color:${statLbl};letter-spacing:1px;text-transform:uppercase;margin-top:2px;font-weight:700">DOGE Rev</div>
     </div>
   </div>`;
 
@@ -2093,7 +2145,7 @@ function renderPublicAccounting(rid,r,uniquePlayers){
     <div style="font-size:13px;line-height:1;flex-shrink:0">🏆</div>
     <div style="flex:1;min-width:0">
       <div style="font-size:6.5px;color:${statLbl};text-transform:uppercase;letter-spacing:1px;font-weight:700">Total Prize Pool</div>
-      <div style="font-family:var(--mono);font-size:14px;font-weight:800;color:${isDark?'#00C8FF':'#0060CC'};line-height:1.2;margin-top:1px${isDark?';text-shadow:0 0 10px rgba(0,200,255,.5)':''}">${prizePool.toFixed(4)} <span style="font-size:7.5px;font-weight:600;color:${isDark?'#00C8FF':'#0060CC'};opacity:.8">zkLTC</span></div>
+      <div style="font-family:var(--mono);font-size:14px;font-weight:800;color:${isDark?'#00C8FF':'#0060CC'};line-height:1.2;margin-top:1px${isDark?';text-shadow:0 0 10px rgba(0,200,255,.5)':''}">${prizePool.toFixed(4)} <span style="font-size:7.5px;font-weight:600;color:${isDark?'#00C8FF':'#0060CC'};opacity:.8">DOGE</span></div>
     </div>
   </div>`;
   html+=`</div>`;
@@ -2175,7 +2227,7 @@ function openWalletModal(){
   const sub=document.getElementById("modal-sub-txt");
   if(sub)sub.innerHTML=_isMobile
     ?"Tap <b>DETECTED</b> to connect · or <b>OPEN APP</b> to launch your wallet’s in-app browser"
-    :"Select your wallet · Ensure you are on <a href='https://testnet.litvm.com/' target='_blank' style='color:var(--blue2);text-decoration:none;font-weight:700'>LiteForge Testnet ↗</a>";
+    :"Select your wallet · Ensure you are on <a href='https://portal.testnet.dogeos.com' target='_blank' style='color:var(--blue2);text-decoration:none;font-weight:700'>DogeOS Chikyū Testnet ↗</a>";
   buildWalletOptions();
   document.getElementById("wallet-modal").classList.add("open");
 }
@@ -2191,7 +2243,7 @@ function buildWalletOptions(){
   if(detected.length){
     detected.forEach(w=>{html+=`<div class="wallet-opt-ft" onclick="connectWithWallet('${w.id}')"><div class="wo-icon-ft" style="background:${w.iconBg}">${w.icon}</div><div class="wo-info-ft"><div class="wo-name-ft">${w.name}</div><div class="wo-desc-ft">${w.desc}</div></div><span class="wo-badge-ft detected">DETECTED</span></div>`;});
   } else {
-    html+=`<div style="font-size:10px;color:var(--text3);font-family:var(--mono);text-align:center;padding:8px 0">No wallets detected in this browser.</div>`;
+    html+=`<div style="font-size:10px;color:var(--text2);font-family:var(--mono);text-align:center;padding:8px 0">No wallets detected in this browser.</div>`;
   }
   const mobileLinks=notDetected.filter(w=>_isMobile&&w.deepLink);
   if(mobileLinks.length){
@@ -2269,7 +2321,7 @@ async function connectWithWallet(walletId){
     document.getElementById("wb-addr").innerHTML=`<b>${short}</b> <span style="font-size:9px;color:var(--text3);font-family:var(--mono)">${wDef.name}</span>`;
     document.getElementById("wb-av").textContent=wDef.icon;
     const bal=await provider.getBalance(wallet);
-    document.getElementById("wb-bal").textContent=parseFloat(ethers.formatEther(bal)).toFixed(4)+" OPN";
+    document.getElementById("wb-bal").textContent=parseFloat(ethers.formatEther(bal)).toFixed(4)+" DOGE";
     const be=document.getElementById("btn-enter");be.classList.add("connected");be.textContent="Connected";
     document.getElementById("btn-connect").style.display="none";
     document.getElementById("btn-disconnect").style.display="block";
@@ -2376,7 +2428,7 @@ function disconnectWallet(){
   if(_cooldownTimer){clearInterval(_cooldownTimer);_cooldownTimer=null;}
   if(_autoDrawTimer){clearInterval(_autoDrawTimer);_autoDrawTimer=null;}
   startPublicRefresh();
-  document.getElementById("wb-addr").textContent="Not connected";document.getElementById("wb-bal").textContent="— OPN";document.getElementById("wb-av").textContent="◈";
+  document.getElementById("wb-addr").textContent="Not connected";document.getElementById("wb-bal").textContent="— DOGE";document.getElementById("wb-av").textContent="◈";
   const be=document.getElementById("btn-enter");be.classList.remove("connected");be.textContent="Enter Lottery";
   document.getElementById("btn-connect").style.display="block";document.getElementById("btn-disconnect").style.display="none";
   document.getElementById("btn-admin").style.display="none";document.getElementById("wb-hint").classList.remove("show");
@@ -2408,7 +2460,7 @@ async function refresh(){
     if(displayRid&&wallet){
       try{
         const now=Math.floor(Date.now()/1000);
-        let displayRound=r;if(displayRid!==rid){const ds=await contract.getRoundSummary(displayRid);displayRound={state:ds.state,winningNumbers:ds.winningNumbers,snapshotPlayerPool:ds.prizePool*8500n/10000n,claimDeadline:ds.claimDeadline,prizePool:ds.prizePool,ticketRevenue:ds.ticketRevenue};}
+        let displayRound=r;if(displayRid!==rid){const ds=await contract.getRoundSummary(displayRid);displayRound={state:ds.state,winningNumbers:ds.winningNumbers,snapshotPlayerPool:((ds.prizePool??ds.jackpot)-ds.ticketRevenue*1500n/10000n),claimDeadline:ds.claimDeadline,prizePool:(ds.prizePool??ds.jackpot),ticketRevenue:ds.ticketRevenue};}
         const claimDeadline=Number(displayRound.claimDeadline);const timeLeft=claimDeadline>0?claimDeadline-now:Infinity;const isExpired=claimDeadline>0&&timeLeft<=0;
         const winNums=Array.from(displayRound.winningNumbers).map(n=>Number(n));
         const checkTickets=await fetchTicketsDirect(displayRid);
@@ -2446,32 +2498,67 @@ async function refresh(){
 
         if(hasPrize||myWinDetails.length>0){
           const claimed=await contract.hasClaimed(displayRid,wallet);
-          const detailRows=myWinDetails.map(d=>`<div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-top:2px">${tierNames[d.m]} · ${d.prize.toFixed(4)} OPN · [${d.nums.join(" ")}]</div>`).join("");
+          const detailRows=myWinDetails.map(d=>`<div style="font-family:var(--mono);font-size:9px;color:var(--text3);margin-top:2px">${tierNames[d.m]} · ${d.prize.toFixed(4)} DOGE · [${d.nums.join(" ")}]</div>`).join("");
           if(claimed){
-            myWinEl.innerHTML=`<div class="claim-box-ft"><div class="cb-prize">✅ Claimed · ${totalMyPrize.toFixed(4)} OPN</div>${detailRows}</div>`;
+            myWinEl.innerHTML=`<div class="claim-box-ft"><div class="cb-prize">✅ Claimed · ${(totalMyPrize>0?totalMyPrize:myWinDetails.reduce((x,d)=>x+d.prize,0)).toFixed(4)} DOGE</div>${detailRows}</div>`;
           } else if(isExpired){
-            myWinEl.innerHTML=`<div class="claim-box-ft"><div class="cb-prize">⛔ Expired · ${totalMyPrize.toFixed(4)} OPN rolled over</div>${detailRows}</div>`;
+            myWinEl.innerHTML=`<div class="claim-box-ft"><div class="cb-prize">⛔ Expired · ${(totalMyPrize>0?totalMyPrize:myWinDetails.reduce((x,d)=>x+d.prize,0)).toFixed(4)} DOGE rolled over</div>${detailRows}</div>`;
           } else {
             const winKey=`win_celebrated_${displayRid}_${wallet}`;
-            if(!sessionStorage.getItem(winKey)){sessionStorage.setItem(winKey,"1");launchWinConfetti(myWinDetails.length?myWinDetails[0].m:3);setTimeout(()=>toast(`${myWinDetails.length>1?"🎉 Multiple Prizes":tierNames[myWinDetails[0]?.m||3]} — ${totalMyPrize.toFixed(4)} OPN waiting!`,"success"),400);}
-            myWinEl.innerHTML=`<div class="claim-box-ft"><div class="cb-prize">${myWinDetails.length>1?"🎉 Multiple Prizes":tierNames[myWinDetails[0]?.m||3]}</div><div class="cb-amt">${totalMyPrize.toFixed(4)} OPN</div>${detailRows}${timeLeft<86400?'<div class="cb-warn">⚠️ Less than 24h to claim!</div>':""}<button class="btn-buy" style="font-size:12px;padding:8px;letter-spacing:1px" onclick="claimReward(${displayRid})">Claim Reward →</button></div>`;
+            if(!sessionStorage.getItem(winKey)){sessionStorage.setItem(winKey,"1");launchWinConfetti(myWinDetails.length?myWinDetails[0].m:3);setTimeout(()=>toast(`${myWinDetails.length>1?"🎉 Multiple Prizes":tierNames[myWinDetails[0]?.m||3]} — ${totalMyPrize.toFixed(4)} DOGE waiting!`,"success"),400);}
+            myWinEl.innerHTML=`<div class="claim-box-ft"><div class="cb-prize">${myWinDetails.length>1?"🎉 Multiple Prizes":tierNames[myWinDetails[0]?.m||3]}</div><div class="cb-amt">${totalMyPrize.toFixed(4)} DOGE</div>${detailRows}${timeLeft<86400?'<div class="cb-warn">⚠️ Less than 24h to claim!</div>':""}<button class="btn-buy" style="font-size:12px;padding:8px;letter-spacing:1px" onclick="claimReward(${displayRid})">Claim Reward →</button></div>`;
           }
           myWinEl.style.display="block";
         } else {myWinEl.style.display="none";}
       }catch(_){}
     }
-    try{const isOwner=await checkIsOwner();if(isOwner&&rid>1){const prevRound=await contract.getRoundSummary(rid-1);const now=Math.floor(Date.now()/1000);if(Number(prevRound.state)===2&&Number(prevRound.claimDeadline)>0&&now>Number(prevRound.claimDeadline))document.getElementById("btn-finalize").style.display="block";}}catch(_){}
+    try{
+  const isOwner=await checkIsOwner();
+  if(isOwner){
+    const now=Math.floor(Date.now()/1000);
+    const btnFin=document.getElementById("btn-finalize");
+    // Check current round first
+    const curRound=await contract.getRoundSummary(rid);
+    if(Number(curRound.state)===2&&Number(curRound.claimDeadline)>0&&now>Number(curRound.claimDeadline)){
+      btnFin.style.display="block";
+    } else if(rid>1){
+      // Fallback: check previous round
+      const prevRound=await contract.getRoundSummary(rid-1);
+      if(Number(prevRound.state)===2&&Number(prevRound.claimDeadline)>0&&now>Number(prevRound.claimDeadline)){
+        btnFin.style.display="block";
+      } else {
+        btnFin.style.display="none";
+      }
+    } else {
+      btnFin.style.display="none";
+    }
+  }
+}catch(_){}
   }catch(e){console.error(e);}
 }
 
 async function refreshLimit(){
   if(!contract||!wallet)return;
   try{
-    const rem=Number(await contract.getTicketsRemaining(wallet));lastKnownRem=rem;const used=3-rem;
+    const rid=Number(await contract.currentRoundId());
+    const [rem,summary,nextDraw]=await Promise.all([contract.getTicketsRemaining(wallet),contract.getRoundSummary(rid),contract.nextDrawTime()]);
+    const remN=Number(rem);lastKnownRem=remN;const used=3-remN;
+    const roundState=Number(summary.state);
+    const now=Math.floor(Date.now()/1000);
+    const drawPassed=Number(nextDraw)>0&&now>=Number(nextDraw);
     const badge=document.getElementById("ticket-badge");const btn=document.getElementById("btn-buy");
     updateTicketProgress(used);
-    if(rem===0){badge.textContent="3/3 USED · NEXT ROUND";badge.className="t-badge full";btn.disabled=true;btn.textContent="Limit reached";}
-    else if(used>0){badge.textContent=used+"/3 USED · "+rem+" LEFT";badge.className="t-badge partial";btn.disabled=false;btn.textContent="Buy Ticket →";}
+    /* Draw time passed OR round not open — disable buy */
+    if(roundState!==0||drawPassed){
+      btn.disabled=true;
+      if(roundState===1){btn.textContent="Drawing in progress...";badge.textContent="🔵 DRAWING";badge.className="t-badge full";}
+      else if(roundState===2){btn.textContent="Claim period — buy disabled";badge.textContent="🟡 CLAIM PERIOD";badge.className="t-badge full";}
+      else if(drawPassed){btn.textContent="⏳ Awaiting draw...";badge.textContent="⏳ DRAW PENDING";badge.className="t-badge full";}
+      else{btn.textContent="Round closed";badge.textContent="🔴 CLOSED";badge.className="t-badge full";}
+      return;
+    }
+    if(remN===0){badge.textContent="3/3 USED · NEXT ROUND";badge.className="t-badge full";btn.disabled=true;btn.textContent="Limit reached";}
+    else if(used>0){badge.textContent=used+"/3 USED · "+remN+" LEFT";badge.className="t-badge partial";btn.disabled=false;btn.textContent="Buy Ticket →";}
     else{badge.textContent="3 SLOTS AVAILABLE";badge.className="t-badge open";btn.disabled=false;btn.textContent="Buy Ticket →";}
   }catch(e){console.error(e);}
 }
@@ -2597,6 +2684,7 @@ function onNumberInput(){
   const v=[1,2,3,4,5,6].map(i=>parseInt(document.getElementById("n"+i).value));
   if(v.some(n=>isNaN(n)||n<1||n>45))return;if(new Set(v).size<6)return;
   const badge=document.getElementById("ticket-badge");const btn=document.getElementById("btn-buy");
+  if(btn.disabled&&(badge.className.includes("full")||badge.textContent.includes("DRAW")||badge.textContent.includes("CLAIM")||badge.textContent.includes("PENDING")))return;
   if(isDuplicateTicket(v)){badge.textContent="⚠️ DUPLICATE COMBO";badge.className="t-badge dup";btn.disabled=true;}
   else{btn.disabled=(lastKnownRem<=0);const rem=lastKnownRem,used=3-rem;if(rem<=0){badge.textContent="3/3 USED";badge.className="t-badge full";}else if(used>0){badge.textContent=used+"/3 USED · "+rem+" LEFT";badge.className="t-badge partial";}else{badge.textContent="3 SLOTS AVAILABLE";badge.className="t-badge open";}}
 }
@@ -2623,13 +2711,23 @@ async function buyTicket(){
     rid=Number(await contract.currentRoundId());const allTickets=await fetchTicketsDirect(rid);
     const myTickets=allTickets.filter(t=>t.player.toLowerCase()===wallet.toLowerCase()).map(t=>t.numbers.map(n=>Number(n)));
     myTicketsCache.roundId=rid;myTicketsCache.tickets=myTickets;
-    if(currentTab==="pick"){const sorted=[...numbers].sort((a,b)=>a-b).join(",");const dup=myTickets.some(t=>[...t].sort((a,b)=>a-b).join(",")===sorted);if(dup){hideTxStatus();btn.disabled=false;btn.textContent="Buy Ticket →";toast("⚠️ Duplicate combination!","warn");const badge=document.getElementById("ticket-badge");badge.textContent="⚠️ DUPLICATE COMBO";badge.className="t-badge dup";return;}}
-  }catch(e){hideTxStatus();btn.disabled=false;btn.textContent="Buy Ticket →";toast("Network error","error");return;}
+    if(currentTab==="pick"){const sorted=[...numbers].sort((a,b)=>a-b).join(",");const dup=myTickets.some(t=>[...t].sort((a,b)=>a-b).join(",")===sorted);if(dup){hideTxStatus();toast("⚠️ Duplicate combination!","warn");const badge=document.getElementById("ticket-badge");badge.textContent="⚠️ DUPLICATE COMBO";badge.className="t-badge dup";btn.disabled=true;return;}}
+  }catch(e){hideTxStatus();toast("Network error","error");await refreshLimit().catch(()=>{});return;}
   try{
     btn.textContent="Waiting...";showTxStatus("processing","Waiting for wallet...");
-    const price=ethers.parseEther("0.001");let tx;
-    if(currentTab==="pick")tx=await contract.buyCustomTicket(numbers,{value:price});
-    else tx=await contract.buyQuickPickTicket({value:price});
+    const price=ethers.parseEther(TICKET_PRICE_STR);let tx;
+    if(currentTab==="pick"){
+      tx=await contract.buyCustomTicket(numbers,{value:price});
+    } else {
+      /* Use displayed Quick Pick numbers — send as buyCustomTicket to match what user sees */
+      const qpNums=[];
+      for(let i=1;i<=6;i++){const el=document.getElementById("rb"+i);if(el)qpNums.push(Number(el.textContent));}
+      if(qpNums.length===6&&qpNums.every(n=>n>=1&&n<=45)){
+        tx=await contract.buyCustomTicket(qpNums,{value:price});
+      } else {
+        tx=await contract.buyQuickPickTicket({value:price});
+      }
+    }
     showTxStatus("processing","Confirming on-chain...");await tx.wait();_invalidateCache();
     /* Optimistic update: bump counters immediately, no lag */
     try{
@@ -2646,7 +2744,7 @@ async function buyTicket(){
     }catch(_){}
     if(rid!=null){try{const fresh=await fetchTicketsDirect(rid);myTicketsCache.roundId=rid;myTicketsCache.tickets=fresh.filter(t=>t.player.toLowerCase()===wallet.toLowerCase()).map(t=>t.numbers.map(n=>Number(n)));}catch(_){}}
     showTxStatus("success",currentTab==="pick"?"Ticket purchased! "+numbers.join(" · "):"Quick Pick purchased!");
-    try{const bal=await provider.getBalance(wallet);document.getElementById("wb-bal").textContent=parseFloat(ethers.formatEther(bal)).toFixed(4)+" OPN";}catch(_){}
+    try{const bal=await provider.getBalance(wallet);document.getElementById("wb-bal").textContent=parseFloat(ethers.formatEther(bal)).toFixed(4)+" DOGE";}catch(_){}
     setTimeout(()=>hideTxStatus(),4000);startCooldownUI(30);
     const reminder=document.getElementById("claim-reminder");if(reminder)reminder.classList.add("show");
     await refresh();
@@ -2655,7 +2753,7 @@ async function buyTicket(){
     if(errMsg.includes("user rejected")||errMsg.includes("User denied"))showTxStatus("error","Transaction cancelled");
     else showTxStatus("error",errMsg.slice(0,80));
     setTimeout(()=>hideTxStatus(),5000);
-    try{await refreshLimit();}catch(_){btn.disabled=false;btn.textContent="Buy Ticket →";}
+    try{await refreshLimit();}catch(_){/* keep button state as-is if refreshLimit fails */}
   }
 }
 
@@ -2663,14 +2761,15 @@ function startCooldownUI(seconds){
   const btn=document.getElementById("btn-buy");if(!btn)return;
   if(_cooldownTimer){clearInterval(_cooldownTimer);_cooldownTimer=null;}
   let remaining=seconds;btn.disabled=true;btn.textContent=`⏳ Cooldown ${remaining}s`;
-  _cooldownTimer=setInterval(()=>{remaining--;if(remaining<=0){clearInterval(_cooldownTimer);_cooldownTimer=null;btn.disabled=(lastKnownRem<=0);btn.textContent=lastKnownRem<=0?"Limit reached":"Buy Ticket →";}else{btn.textContent=`⏳ Cooldown ${remaining}s`;}},1000);
+  _cooldownTimer=setInterval(()=>{remaining--;if(remaining<=0){clearInterval(_cooldownTimer);_cooldownTimer=null;refreshLimit().catch(()=>{/* keep locked if refreshLimit fails */});}else{btn.textContent=`⏳ Cooldown ${remaining}s`;}},1000);
 }
 
 async function finalizeRoundAdmin(){
   if(!contract)return;const isOwner=await checkIsOwner();if(!isOwner){toast("Only owner","error");return;}
   try{
     const rid=Number(await contract.currentRoundId());let targetRid=null;const now=Math.floor(Date.now()/1000);
-    for(let r=rid-1;r>=Math.max(1,rid-10);r--){try{const rd=await contract.getRoundSummary(r);if(Number(rd.state)===2&&Number(rd.claimDeadline)>0&&now>Number(rd.claimDeadline)){targetRid=r;break;}}catch(_){}}
+    /* Check current round first, then walk back */
+    for(let r=rid;r>=Math.max(1,rid-10);r--){try{const rd=await contract.getRoundSummary(r);if(Number(rd.state)===2&&Number(rd.claimDeadline)>0&&now>Number(rd.claimDeadline)){targetRid=r;break;}}catch(_){}}
     if(targetRid===null){toast("No round ready to finalize","warn");return;}
     toast("Finalizing round #"+targetRid+"...");const tx=await contract.finalizeRound(targetRid);await tx.wait();
     toast("Round #"+targetRid+" finalized! ✅","success");document.getElementById("btn-finalize").style.display="none";await refresh();
@@ -2679,6 +2778,11 @@ async function finalizeRoundAdmin(){
 
 async function checkIsOwner(){try{const ownerAddr=await contract.owner();return wallet&&ownerAddr.toLowerCase()===wallet.toLowerCase();}catch(_){return false;}}
 
+/* Draw gas: V2 contract loops over every ticket on-chain (~20k gas/ticket + ~450k fixed). Estimate, +25% margin. */
+async function _drawGas(){
+  try{const g=await contract.forceUpkeep.estimateGas();return g*125n/100n;}
+  catch(_){return 6000000n;}
+}
 async function drawNumbers(){
   if(!contract)return;const isOwner=await checkIsOwner();if(!isOwner){toast("Only owner","error");document.getElementById("btn-draw").style.display="none";return;}
   const btn=document.getElementById("btn-draw");btn.disabled=true;btn.textContent="Step 1/2: Drawing...";
@@ -2688,10 +2792,10 @@ async function drawNumbers(){
     if(!upkeepReady){toast("⏳ Draw not ready yet","warn");btn.disabled=false;btn.textContent="⏰ Trigger Normal Draw";return;}
     toast("Step 1: Picking winning numbers...");
     let tx1;
-    try{tx1=await contract.performUpkeep({gasLimit:BigInt(800000)});}
+    try{tx1=await contract.performUpkeep({gasLimit:await _drawGas()});}
     catch(eSend){
       // fallback: some providers need .send()
-      tx1=await contract.performUpkeep.send({gasLimit:BigInt(800000)});
+      tx1=await contract.performUpkeep.send({gasLimit:await _drawGas()});
     }
     const r1=await tx1.wait();
     if(r1.status===0)throw new Error("performUpkeep reverted");
@@ -2782,8 +2886,8 @@ async function forceDrawNumbers(){
     // ── Step 1: forceUpkeep() — cheap tx, just picks winning numbers ──
     toast("⚡ Step 1: Triggering draw...", "warn");
     let tx1;
-    try{tx1=await contract.forceUpkeep({gasLimit:BigInt(800000)});}
-    catch(eSend){tx1=await contract.forceUpkeep.send({gasLimit:BigInt(800000)});}
+    try{tx1=await contract.forceUpkeep({gasLimit:await _drawGas()});}
+    catch(eSend){tx1=await contract.forceUpkeep.send({gasLimit:await _drawGas()});}
     const r1 = await tx1.wait();
     if(r1.status===0) throw new Error("forceUpkeep reverted");
     toast("Step 1 done! Computing winners...", "");
@@ -2806,6 +2910,7 @@ async function forceDrawNumbers(){
 
     toast("Draw complete! ✅","success");
     btn.style.display="none";document.getElementById("btn-draw").style.display="none";
+    await populateDrawSummary(roundId, winNums, winnerCounts);
     await refresh();
   }catch(e){
     console.error("[forceDraw] ERROR:",JSON.stringify(e,Object.getOwnPropertyNames(e)));
@@ -2829,7 +2934,7 @@ async function claimReward(rid){
     if(receipt.status===1){
       toast("🎉 Reward claimed!","success");
       try{const rData=await contract.getRoundSummary(rid);const wNums=Array.from(rData.winningNumbers).map(Number);const myT=await fetchTicketsDirect(rid);let best=3;for(const t of myT){if(t.player.toLowerCase()!==wallet.toLowerCase())continue;const m=t.numbers.map(n=>Number(n)).filter(n=>wNums.includes(n)).length;if(m>best)best=m;}launchWinConfetti(best);}catch(_){launchWinConfetti(3);}
-      if(wallet){const bal=await provider.getBalance(wallet);document.getElementById("wb-bal").textContent=parseFloat(ethers.formatEther(bal)).toFixed(4)+" OPN";}
+      if(wallet){const bal=await provider.getBalance(wallet);document.getElementById("wb-bal").textContent=parseFloat(ethers.formatEther(bal)).toFixed(4)+" DOGE";}
     }else{toast("Transaction failed","error");}
   }catch(e){const msg=e?.reason||e?.message||"Claim failed";const msgL=msg.toLowerCase();if(msgL.includes("already claimed"))toast("Already claimed","error");else if(msgL.includes("claim window"))toast("Claim window closed","error");else if(msgL.includes("no prize"))toast("No prize for this round","error");else toast(msg.slice(0,80),"error");}
   finally{await refresh();}
@@ -3000,9 +3105,9 @@ function getStaticInsights(){
   /* Insight 1 — Snapshot */
   const avgPerPlayer=players>0?(parseFloat(revenue)/players).toFixed(4):"—";
   if(parseFloat(carriedIn)>0.0001){
-    insights.push({title:`Round ${round} · ${tickets} Tickets · ${players} Players`,text:`Revenue: ${revenue} OPN (avg ${avgPerPlayer} OPN/player). Prize pool includes ${carriedIn} OPN rollover carried in — pool is larger than this round's ticket sales alone.`});
+    insights.push({title:`Round ${round} · ${tickets} Tickets · ${players} Players`,text:`Revenue: ${revenue} DOGE (avg ${avgPerPlayer} DOGE/player). Prize pool includes ${carriedIn} DOGE rollover carried in — pool is larger than this round's ticket sales alone.`});
   } else {
-    insights.push({title:`Round ${round} · ${tickets} Tickets · ${players} Players`,text:`Revenue: ${revenue} OPN (avg ${avgPerPlayer} OPN/player). Player pool: ${playerPool} OPN · Treasury: ${treasury} OPN · Fresh round, no prior rollover.`});
+    insights.push({title:`Round ${round} · ${tickets} Tickets · ${players} Players`,text:`Revenue: ${revenue} DOGE (avg ${avgPerPlayer} DOGE/player). Player pool: ${playerPool} DOGE · Treasury: ${treasury} DOGE · Fresh round, no prior rollover.`});
   }
 
   /* Insight 2 — Tier breakdown + rollover */
@@ -3010,14 +3115,14 @@ function getStaticInsights(){
     const rolloverTiers=tierBreakdown.filter(t=>t.status.includes("rollover")).map(t=>t.tier).join(", ");
     const winTiers=tierBreakdown.filter(t=>!t.status.includes("rollover"));
     if(rolloverTiers){
-      insights.push({title:`${rolloverTiers} → Rollover ${noWinnerRollover} OPN`,text:`No winner in ${rolloverTiers} tier(s) — ${noWinnerRollover} OPN rolls into next round. Combined with 5% fixed (${rolloverOut} OPN), next round seeds at minimum ${nextSeed} OPN.`});
+      insights.push({title:`${rolloverTiers} → Rollover ${noWinnerRollover} DOGE`,text:`No winner in ${rolloverTiers} tier(s) — ${noWinnerRollover} DOGE rolls into next round. Combined with 5% fixed (${rolloverOut} DOGE), next round seeds at minimum ${nextSeed} DOGE.`});
     } else {
-      insights.push({title:"All Tiers Won — Clean Round",text:`Every prize tier had at least one winning ticket. Only 5% fixed rollover (${rolloverOut} OPN) carries into next round. Next round seeds at ${nextSeed} OPN.`});
+      insights.push({title:"All Tiers Won — Clean Round",text:`Every prize tier had at least one winning ticket. Only 5% fixed rollover (${rolloverOut} DOGE) carries into next round. Next round seeds at ${nextSeed} DOGE.`});
     }
   } else if(parseFloat(carriedIn)>0.0001){
-    insights.push({title:`🔄 Rollover Active — +${carriedIn} OPN Carried In`,text:`This round's prize pool includes ${carriedIn} OPN rolled over from the previous round. Current prize pool: ${prizePool} OPN (85% rev + rollover). Draw hasn't happened yet — tier breakdown available after draw.`});
+    insights.push({title:`🔄 Rollover Active — +${carriedIn} DOGE Carried In`,text:`This round's prize pool includes ${carriedIn} DOGE rolled over from the previous round. Current prize pool: ${prizePool} DOGE (85% rev + rollover). Draw hasn't happened yet — tier breakdown available after draw.`});
   } else {
-    insights.push({title:"5% Fixed Rollover → Next Round",text:`${rolloverOut} OPN (5% of revenue) automatically seeds next round's prize pool — ensuring the pool never starts at zero.`});
+    insights.push({title:"5% Fixed Rollover → Next Round",text:`${rolloverOut} DOGE (5% of revenue) automatically seeds next round's prize pool — ensuring the pool never starts at zero.`});
   }
 
   /* Insight 3 — Claim deadline */
@@ -3026,7 +3131,7 @@ function getStaticInsights(){
     if(left>0&&left<86400*2){
       insights.push({title:"⚠️ Claim Window Closing Soon",text:`Only ${Math.floor(left/3600)}h left to claim rewards. Unclaimed prizes roll over to next round's prize pool — claim now before the window closes.`});
     } else if(left<=0){
-      insights.push({title:"Claim Window Closed",text:`Unclaimed prizes from this round rolled into the next round's prize pool. ${noWinnerRollover} OPN from empty tiers + any unclaimed winner prizes now boost the next round.`});
+      insights.push({title:"Claim Window Closed",text:`Unclaimed prizes from this round rolled into the next round's prize pool. ${noWinnerRollover} DOGE from empty tiers + any unclaimed winner prizes now boost the next round.`});
     } else {
       insights.push({title:`Claim Window Open — ${Math.floor(left/86400)}d Remaining`,text:`Winners have ${Math.floor(left/86400)} days to claim. Unclaimed prizes automatically roll into next round's prize pool at deadline.`});
     }
@@ -3037,7 +3142,7 @@ function getStaticInsights(){
   /* Insight 4 — Strategy */
   const jp=parseFloat(prizePool);
   if(jp>0.1){
-    insights.push({title:`High Value Pool ${prizePool} OPN — Max Coverage`,text:`Large prize pool attracts more players — use all 3 tickets per wallet for maximum tier-hit probability. Each ticket is an independent draw across all 4 prize tiers.`});
+    insights.push({title:`High Value Pool ${prizePool} DOGE — Max Coverage`,text:`Large prize pool attracts more players — use all 3 tickets per wallet for maximum tier-hit probability. Each ticket is an independent draw across all 4 prize tiers.`});
   } else {
     insights.push({title:"Round Strategy — Spread Your Numbers",text:`${tickets} tickets sold · ${players} players. Avoid sequences and birthdays — spread picks across 1–45 range for unique combinations and lower split-prize risk.`});
   }
@@ -3053,25 +3158,25 @@ async function loadAIInsights(){
     const now=Math.floor(Date.now()/1000);
     const claimLeft=claimDeadline>0?Math.max(0,claimDeadline-now):null;
     const tierText=tierBreakdown&&tierBreakdown.length>0
-      ?tierBreakdown.map(t=>`  - ${t.tier}: pool=${t.pool} OPN, ${t.status}`).join("\n")
+      ?tierBreakdown.map(t=>`  - ${t.tier}: pool=${t.pool} DOGE, ${t.status}`).join("\n")
       :"  - Not yet drawn";
-    const prompt=`You are a lottery analyst for OPNBillionaire, an on-chain lottery on OPN Chain (IOPn).
+    const prompt=`You are a lottery analyst for LitBillionaire, an on-chain lottery on DogeOS Chikyū Testnet.
 
 Round Snapshot:
 - Round: ${round}
 - Tickets sold: ${tickets} · Unique players: ${players}
-- Revenue: ${revenue} OPN
-- Player pool (85%): ${playerPool} OPN
-- Treasury (10%): ${treasury} OPN
-- Rollover carried in: ${carriedIn} OPN
-- Fixed rollover out (5%): ${rolloverOut} OPN
+- Revenue: ${revenue} DOGE
+- Player pool (85%): ${playerPool} DOGE
+- Treasury (10%): ${treasury} DOGE
+- Rollover carried in: ${carriedIn} DOGE
+- Fixed rollover out (5%): ${rolloverOut} DOGE
 
 Prize Tier Results:
 ${tierText}
 
 Rollover to next round:
-- From empty tiers: ${noWinnerRollover} OPN
-- Next round minimum seed: ${nextSeed} OPN
+- From empty tiers: ${noWinnerRollover} DOGE
+- Next round minimum seed: ${nextSeed} DOGE
 - Claim window remaining: ${claimLeft!==null?Math.floor(claimLeft/3600)+"h":"N/A"}
 
 Write 4 short, specific insights covering: snapshot analysis, rollover mechanics, tier results, and player strategy.
@@ -3100,9 +3205,20 @@ async function admLoadData(){
     document.getElementById("adm-state").textContent=states[Number(r.state)]||"Unknown";
     document.getElementById("adm-drawtime").textContent=new Date(Number(r.endTime)*1000).toLocaleString();
     const upEl=document.getElementById("adm-upkeep");upEl.textContent=upkeep?"✅ READY":"⏳ No";upEl.style.color=upkeep?"var(--green)":"var(--text3)";
-    document.getElementById("adm-locked").textContent=parseFloat(ethers.formatEther(locked)).toFixed(4)+" OPN";
+    /* Tickets & Players for current round */
+    try{
+      const tickets=await fetchTicketsDirect(Number(rid));
+      const ticketCount=tickets.length;
+      const uniquePlayers=new Set(tickets.map(t=>t.player.toLowerCase())).size;
+      document.getElementById("adm-tickets").textContent=ticketCount+" tickets";
+      document.getElementById("adm-players").textContent=uniquePlayers+" wallets";
+    }catch(_){
+      document.getElementById("adm-tickets").textContent="—";
+      document.getElementById("adm-players").textContent="—";
+    }
+    document.getElementById("adm-locked").textContent=parseFloat(ethers.formatEther(locked)).toFixed(4)+" DOGE";
     const free=Math.max(0,parseFloat(ethers.formatEther(bal))-parseFloat(ethers.formatEther(locked)));
-    document.getElementById("adm-free").textContent=free.toFixed(4)+" OPN";
+    document.getElementById("adm-free").textContent=free.toFixed(4)+" DOGE";
     const tShort=treasuryAddr.slice(0,10)+"…"+treasuryAddr.slice(-6);
     document.getElementById("adm-treasury").textContent=tShort;
     const pOwner=pendingAddr!==ethers.ZeroAddress?pendingAddr:"None";
@@ -3115,6 +3231,24 @@ async function admLoadData(){
     if(finRids.length>0){finSt.textContent="Round(s) "+finRids.join(", ")+" ready";finSt.style.color="var(--green)";finBtn.disabled=false;finBtn.style.opacity="1";finBtn.dataset.rounds=JSON.stringify(finRids);}
     else{finSt.textContent="No rounds to finalize";finSt.style.color="var(--text3)";finBtn.disabled=true;finBtn.style.opacity=".4";}
   }catch(e){admLog("Error: "+e.message,"err");}
+}
+
+async function populateDrawSummary(roundId, winNums, winnerCounts){
+  try{
+    const rid = Number(roundId);
+    const summary = await contract.getRoundSummary(rid);
+    const tickets = await fetchTicketsDirect(rid);
+    const ticketCount = tickets.length;
+    const uniquePlayers = new Set(tickets.map(t=>t.player.toLowerCase())).size;
+    const revenue = parseFloat(ethers.formatEther(summary.ticketRevenue)).toFixed(4);
+    const totalWinners = winnerCounts.reduce((a,b)=>a+Number(b),0);
+
+    document.getElementById("adm-ds-round").textContent = "#" + rid;
+    document.getElementById("adm-ds-tickets").textContent = ticketCount + " tickets";
+    document.getElementById("adm-ds-players").textContent = uniquePlayers + " wallets";
+    document.getElementById("adm-ds-revenue").textContent = revenue + " DOGE";
+    document.getElementById("adm-draw-summary").style.display = "block";
+  }catch(e){console.warn("populateDrawSummary:", e);}
 }
 
 function admLog(msg,type="info"){
@@ -3130,8 +3264,8 @@ async function admPerformDraw(){if(!contract)return;const btn=document.getElemen
   if(!upkeepReady){admLog("⏳ Not ready yet","warn");toast("Upkeep not ready","warn");btn.disabled=false;btn.textContent="⏰ Normal Draw — performUpkeep()";return;}
   admLog("performUpkeep()...","info");
   let tx;
-  try{tx=await contract.performUpkeep({gasLimit:BigInt(800000)});}
-  catch(eSend){tx=await contract.performUpkeep.send({gasLimit:BigInt(800000)});}
+  try{tx=await contract.performUpkeep({gasLimit:await _drawGas()});}
+  catch(eSend){tx=await contract.performUpkeep.send({gasLimit:await _drawGas()});}
   await tx.wait();admLog("✅ Step 1 done","ok");
   btn.textContent="Step 2/2: Submitting prizes...";
   admLog("Computing winners off-chain...","info");
@@ -3143,7 +3277,7 @@ async function admPerformDraw(){if(!contract)return;const btn=document.getElemen
   admLog("submitTierPrizes()...","info");
   const tx2=await contract.submitTierPrizes(roundId,prizePerWinner,winnerCounts,{gasLimit:BigInt(500000)});
   await tx2.wait();
-  admLog("✅ Draw complete!","ok");toast("Draw complete!","success");await refresh();admLoadData();
+  admLog("✅ Draw complete!","ok");toast("Draw complete!","success");try{const rid2=Number(await contract.currentRoundId())-1;const rd2=await contract.getRoundSummary(rid2);const wn=Array.from(rd2.winningNumbers).map(Number);await populateDrawSummary(rid2,wn,[0,0,0,0]);}catch(_){}await refresh();admLoadData();
 }catch(e){
   const msg=e?.reason||e?.data?.message||e?.message||"Unknown error";
   admLog("Error: "+msg,"err");toast(msg.slice(0,80),"error");
@@ -3151,8 +3285,8 @@ async function admPerformDraw(){if(!contract)return;const btn=document.getElemen
 async function admForceDraw(){if(!contract)return;if(!confirm("⚡ Force draw bypasses scheduled time. Confirm?"))return;const btn=document.getElementById("adm-btn-force");btn.disabled=true;btn.textContent="Step 1/2: Drawing...";try{
   admLog("forceUpkeep()...","warn");
   let tx;
-  try{tx=await contract.forceUpkeep({gasLimit:BigInt(800000)});}
-  catch(eSend){tx=await contract.forceUpkeep.send({gasLimit:BigInt(800000)});}
+  try{tx=await contract.forceUpkeep({gasLimit:await _drawGas()});}
+  catch(eSend){tx=await contract.forceUpkeep.send({gasLimit:await _drawGas()});}
   await tx.wait();admLog("✅ Step 1 done","ok");
   btn.textContent="Step 2/2: Submitting prizes...";
   admLog("Computing winners off-chain...","info");
@@ -3164,7 +3298,7 @@ async function admForceDraw(){if(!contract)return;if(!confirm("⚡ Force draw by
   admLog("submitTierPrizes()...","info");
   const tx2=await contract.submitTierPrizes(roundId,prizePerWinner,winnerCounts,{gasLimit:BigInt(500000)});
   await tx2.wait();
-  admLog("✅ Force draw complete!","ok");toast("Force draw complete!","success");await refresh();admLoadData();
+  admLog("✅ Force draw complete!","ok");toast("Force draw complete!","success");try{const rid2=Number(await contract.currentRoundId())-1;const rd2=await contract.getRoundSummary(rid2);const wn=Array.from(rd2.winningNumbers).map(Number);await populateDrawSummary(rid2,wn,[0,0,0,0]);}catch(_){}await refresh();admLoadData();
 }catch(e){
   console.error("[adm-force] FULL ERROR:",JSON.stringify(e,Object.getOwnPropertyNames(e)));
   const msg=e?.reason||e?.data?.message||e?.error?.message||e?.message||"Unknown error";
