@@ -1030,6 +1030,44 @@ body.dark footer a:hover{-webkit-text-fill-color:#FFD700}
 body.dark .footer-x svg rect{fill:#E0E0E0}
 body.dark .footer-x svg path{fill:#000}
 body.dark .footer-x{opacity:1;filter:brightness(1.4)}
+
+/* ===== DESIGN LAYER: graphite + indigo (actions) + gold (prize only) ===== */
+:root{--bg:#F6F7F9;--surface:#fff;--surface2:#F1F3F6;--surface3:#E7EAF0;--border:#E1E5EB;--border2:#C9D0DA;
+--blue:#5B4BDB;--blue2:#5B4BDB;--blue3:#7C6CFF;--cyan:#5B4BDB;--gold:#B7791F;--gold2:#D69E2E;--green:#0E9F6E;--green2:#0E9F6E;--red:#DC3E4F;--orange:#B7791F;
+--text:#0F1218;--text2:#4A5463;--text3:#7A8494;--mono:"IBM Plex Mono",ui-monospace,monospace;--sans:"IBM Plex Sans",system-ui,sans-serif;--ac:#5B4BDB;--acfg:#fff;--r:14px}
+body.dark{--bg:#0A0B0E;--surface:#111318;--surface2:#171A21;--surface3:#1F232C;--border:#242934;--border2:#343B4A;
+--blue:#8B7CFF;--blue2:#8B7CFF;--blue3:#A89CFF;--cyan:#8B7CFF;--gold:#F5B94A;--gold2:#FFD27A;--green:#34D399;--green2:#34D399;--red:#F87171;--orange:#F5B94A;
+--text:#EEF0F4;--text2:#A3ACBA;--text3:#6F7888;--ac:#8B7CFF;--acfg:#0A0B0E}
+body,body.dark{background:var(--bg)!important;color:var(--text);font-size:14px;-webkit-font-smoothing:antialiased}
+*{text-shadow:none!important}
+/* surfaces: flat, 1px border, no glow or gradient frames */
+.stat-card,.panel,.split-panel,.jackpot-card,.countdown-card,.deadline-card,.buy-panel,.wallet-bar,.accounting-above,.claim-reminder,.hist-item,.prize-strip,.social-bar,.ticker-wrap,
+body.dark .stat-card,body.dark .panel,body.dark .split-panel,body.dark .jackpot-card,body.dark .countdown-card,body.dark .deadline-card,body.dark .buy-panel,body.dark .wallet-bar,body.dark .accounting-above,body.dark .claim-reminder,body.dark .hist-item,body.dark .prize-strip,body.dark .social-bar,body.dark .ticker-wrap{
+background:var(--surface)!important;border:1px solid var(--border)!important;border-radius:var(--r)!important;box-shadow:none!important;backdrop-filter:none!important}
+.stat-card::before,.stat-card::after,.panel::before,.panel::after,.split-panel::before,.split-panel::after,.jackpot-card::before,.jackpot-card::after,.buy-panel::before,.buy-panel::after,.wallet-bar::before,.wallet-bar::after,.ticker-wrap::before,.ticker-wrap::after{display:none!important}
+.hist-item,.ps-item{background:var(--surface2)!important;border-radius:10px!important}
+/* type: sans for words, mono only for numbers; no micro-caps */
+.jc-lbl,.sc-lbl,.cd-lbl,.section-head,.tick-lbl,.ball-lbl,.wb-hint,.tb-sub,.tier-match,.jc-note,.cd-sub,.sc-unit{font-family:var(--sans)!important;text-transform:none!important;letter-spacing:0!important;font-weight:500!important;color:var(--text2)!important}
+.jc-lbl,.sc-lbl,.cd-lbl{font-size:13px!important}.section-head{font-size:15px!important;font-weight:600!important;color:var(--text)!important}
+.jc-val{font-family:var(--mono)!important;font-size:clamp(46px,7vw,72px)!important;font-weight:600!important;letter-spacing:-.03em!important;color:var(--gold)!important;line-height:1.05}
+.sc-val{font-family:var(--mono)!important;font-size:28px!important;font-weight:600!important;color:var(--text)!important}
+.cd-num{font-family:var(--mono)!important;font-size:30px!important;font-weight:600!important;color:var(--text)!important;background:var(--surface2)!important;border:1px solid var(--border)!important;border-radius:10px!important;box-shadow:none!important}
+.tb-name{font-family:var(--sans)!important;font-weight:700!important;letter-spacing:.01em!important;color:var(--text)!important;background:none!important;-webkit-text-fill-color:currentColor!important}
+.tier-name{color:var(--text)!important}.tier-pct{color:var(--gold)!important;font-family:var(--mono)!important}
+.tick-val{color:var(--text)!important}.tick-val.gold{color:var(--gold)!important}.jc-unit,.ai-lbl{color:var(--text2)!important}
+.pill-chain,.tb-pills>*{background:var(--surface2)!important;border:1px solid var(--border)!important;color:var(--text2)!important;border-radius:999px!important;box-shadow:none!important}
+.tb-time{background:var(--surface2)!important;border:1px solid var(--border)!important;color:var(--text2)!important;border-radius:10px!important;box-shadow:none!important}
+/* one primary action colour */
+.btn-buy,.btn-connect,.np-btn,.btn-hero,.tab-btn.on,body.dark .btn-buy,body.dark .btn-connect,body.dark .np-btn,body.dark .tab-btn.on{background:var(--ac)!important;color:var(--acfg)!important;border:0!important;border-radius:10px!important;box-shadow:none!important;font:600 14px var(--sans)!important;letter-spacing:0!important;text-transform:none!important}
+.btn-buy:disabled,.btn-connect:disabled{background:var(--surface3)!important;color:var(--text3)!important}
+.btn-enter,.btn-disc,body.dark .btn-enter,body.dark .btn-disc{background:transparent!important;color:var(--text)!important;border:1px solid var(--border2)!important;border-radius:10px!important;box-shadow:none!important;font:600 13px var(--sans)!important;letter-spacing:0!important;text-transform:none!important}
+.tab-btn{border-radius:8px!important;background:var(--surface2)!important;color:var(--text2)!important;border:1px solid var(--border)!important}
+.btn-hero{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:13px 24px;cursor:pointer}.btn-hero:hover{filter:brightness(1.08)}
+.ball,.qp-num{background:var(--surface2)!important;border:1px solid var(--border2)!important;color:var(--text)!important;box-shadow:none!important;font-family:var(--mono)!important}
+.ai-board-wrap{display:none!important}
+.modal-box{background:var(--surface)!important;border:1px solid var(--border2)!important;border-radius:16px!important;box-shadow:0 24px 60px rgba(0,0,0,.35)!important}
+.wallet-opt-ft{background:var(--surface2)!important;border:1px solid var(--border)!important;border-radius:12px!important}.wallet-opt-ft:hover{border-color:var(--ac)!important}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
 </head>
@@ -1173,6 +1211,7 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
   <div class="jc-val" id="jc-val">—</div>
   <div class="jc-unit">DOGE · DogeOS Chikyū Testnet</div>
   <div class="jc-unit" id="jc-usd" style="font-size:11px;color:var(--green);font-weight:700;min-height:14px"></div>
+  <button class="btn-hero" onclick="heroCta()">Buy a ticket →</button>
   <div class="jc-bar-wrap"><div class="jc-bar" id="jc-bar" style="width:0%"></div></div>
   <div class="jc-note">Round progress · Next draw <span>Friday 13:00 UTC</span></div>
   <!-- AI LED board embedded in jackpot card -->
@@ -1218,7 +1257,7 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
       </div>
       <div style="display:flex;align-items:center;gap:8px">
         <div style="width:28px;height:28px;border-radius:6px;background:rgba(0,82,255,.08);border:1px solid rgba(0,82,255,.3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">⏳</div>
-        <div style="font-family:var(--mono);font-size:9px;color:var(--text);line-height:1.5;font-weight:600">Unclaimed after <span style="color:var(--blue2);font-weight:800">7 days</span> → auto rollover to next round</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--text);line-height:1.5;font-weight:600">Unclaimed after <span style="color:var(--blue2);font-weight:800">7 days</span> → rolls over to next round</div>
       </div>
       <div style="display:flex;align-items:center;gap:8px">
         <div style="width:28px;height:28px;border-radius:6px;background:rgba(0,82,255,.08);border:1px solid rgba(0,82,255,.3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">📈</div>
@@ -1326,7 +1365,7 @@ body.dark .footer-x{opacity:1;filter:brightness(1.4)}
       </div>
       <div style="display:flex;align-items:center;gap:8px">
         <span class="fp-num" style="font-size:8px;font-weight:800;border-radius:4px;padding:2px 6px;min-width:20px;text-align:center;flex-shrink:0;letter-spacing:.5px">03</span>
-        <span style="font-size:9px;color:var(--text);font-weight:600">Fully on-chain randomness · <b style="color:var(--green)">no admin can alter outcomes</b></span>
+        <span style="font-size:9px;color:var(--text);font-weight:600">Draw run by the operator · numbers from on-chain block data (<b style="color:var(--gold)">testnet</b>)</span>
       </div>
       <div style="display:flex;align-items:center;gap:8px">
         <span class="fp-num" style="font-size:8px;font-weight:800;border-radius:4px;padding:2px 6px;min-width:20px;text-align:center;flex-shrink:0;letter-spacing:.5px">04</span>
@@ -2223,6 +2262,7 @@ const WALLETS=[
     getProvider:()=>window.ethereum}
 ];
 
+function heroCta(){try{if(typeof wallet!=='undefined'&&wallet){document.querySelector('.buy-panel').scrollIntoView({behavior:'smooth',block:'center'});}else{openWalletModal();}}catch(e){openWalletModal();}}
 function openWalletModal(){
   const sub=document.getElementById("modal-sub-txt");
   if(sub)sub.innerHTML=_isMobile
